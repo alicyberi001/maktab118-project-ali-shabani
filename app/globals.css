@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.custom-pagination .swiper-pagination-bullet {
+  @apply w-4 h-4 bg-gray-400 rounded-full transition-all;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-blue-500 w-5 h-5 scale-125;
+}

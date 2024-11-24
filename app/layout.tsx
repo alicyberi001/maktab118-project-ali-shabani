@@ -5,6 +5,8 @@ import { Poppins } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
+
+
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
 //   variable: "--font-geist-sans",
@@ -26,6 +28,8 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
+const myFont = localFont({ src: './fonts/KalamehWebFaNum-Regular.woff2' })
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${myFont.className} antialiased`}>
         <div className="min-h-screen bg-[#D4D9D5]">
           <Navbar />
           {children}
