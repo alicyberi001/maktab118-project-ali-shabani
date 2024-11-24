@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -13,8 +15,6 @@ import { Poppins } from "next/font/google";
 //   variable: "--font-geist-mono",
 //   weight: "100 900",
 // });
-
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,10 +33,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.className} antialiased`}>
+        <div className="min-h-screen bg-[#D4D9D5]">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
