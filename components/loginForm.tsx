@@ -156,7 +156,7 @@ export default function LoginForm() {
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            اکانت ندارید؟
+            حساب ندارید؟
             <a
               href="#"
               className="font-semibold leading-6 text-[#ffffffd2] hover:text-[#dedede] hover:underline mx-2"
