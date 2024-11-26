@@ -14,7 +14,7 @@ export default function SignupForm() {
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-2xl font-bold leading-3 tracking-tight text-white">
-            اطلاعات اکانت خود را وارد کنید
+            اطلاعات حساب خود را وارد کنید
           </h2>
         </div>
 
@@ -45,7 +45,7 @@ export default function SignupForm() {
                     />
                   </div>
                 </div>
-                <div>
+                <div className="flex-grow">
                   <label
                     htmlFor="name"
                     className="block text-sm font-medium leading-6 text-gray-900"
@@ -254,7 +254,7 @@ export default function SignupForm() {
           <p className="mt-4 text-center text-sm text-gray-500">
             حساب دارید؟
             <a
-              href="#"
+              href="/login"
               className="font-semibold leading-6 text-[#ffffffd2] hover:text-[#dedede] hover:underline mx-2"
             >
               ورود

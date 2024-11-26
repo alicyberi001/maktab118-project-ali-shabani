@@ -158,7 +158,7 @@ export default function LoginForm() {
           <p className="mt-10 text-center text-sm text-gray-500">
             حساب ندارید؟
             <a
-              href="#"
+              href="/signup"
               className="font-semibold leading-6 text-[#ffffffd2] hover:text-[#dedede] hover:underline mx-2"
             >
               ثبت نام
