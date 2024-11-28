@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -25,10 +24,11 @@ export default function STORELayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#D4D9D5]">
+    <div className="min-h-screen bg-zinc-50">
       <Navbar />
       {children}
       <Footer />
     </div>
   );
 }
+// bg-[#f6f6f6]

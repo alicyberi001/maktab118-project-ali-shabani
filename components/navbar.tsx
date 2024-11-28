@@ -10,9 +10,9 @@ const Navbar: React.FC = () => {
   // };
 
   return (
-    <nav dir="rtl" className="w-full py-[10px] bg-transparent backdrop-blur-md flex justify-between items-center px-8 border-b-2 border-black/25 box-border ">
+    <nav dir="rtl" className="w-full py-[10px] bg-white backdrop-blur-md flex justify-between items-center px-8 border-b-2 border-black/10 box-border ">
       <div className="flex gap-2 items-center">
-        <img className="w-56 h-16" src="./logo1b.svg" alt="logo2" />
+        <img className="w-44 h-12" src="./logo1b.svg" alt="logo2" />
       </div>
       <div className="flex gap-[1px]">
         <a

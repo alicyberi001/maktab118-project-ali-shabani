@@ -10,6 +10,8 @@ import {
   ServerIcon,
   SignalIcon,
   XMarkIcon,
+  ArrowLeftStartOnRectangleIcon,
+  FunnelIcon
 } from "@heroicons/react/24/outline";
 import {
   Bars3Icon,
@@ -17,17 +19,28 @@ import {
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+import Image from "next/image";
 
 const navigation = [
-  { name: "سفارش ها", href: "/admin_panel/orders", icon: FolderIcon, current: false },
-  { name: "مدیریت کالا", href: "/admin_panel/product_manager", icon: SignalIcon, current: false },
+  {
+    name: "سفارش ها",
+    href: "/admin_panel/orders",
+    icon: FolderIcon,
+    current: false,
+  },
+  {
+    name: "مدیریت کالا",
+    href: "/admin_panel/product_manager",
+    icon: FunnelIcon,
+    current: false,
+  },
   {
     name: "مدیریت موجودی و قیمت ها",
     href: "/admin_panel/price_manager",
     icon: ChartBarSquareIcon,
     current: false,
   },
-  { name: "خروج", href: "#", icon: Cog6ToothIcon, current: false },
+  { name: "خروج", href: "#", icon: ArrowLeftStartOnRectangleIcon, current: false },
 ];
 
 function classNames(...classes) {
@@ -96,7 +109,13 @@ export default function AdminLayout() {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#202A30] px-6 ring-1 ring-white/10">
                     <div className="flex h-16 shrink-0 items-center">
-                      <img className="" src="./logo1.svg" alt="Your Companyy" />
+                      <Image
+                        className=""
+                        src="/logo1.svg"
+                        alt="Your Company"
+                        width={200}
+                        height={45}
+                      />
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -128,10 +147,12 @@ export default function AdminLayout() {
                             href="#"
                             className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
                           >
-                            <img
-                              className="h-8 w-8 rounded-full bg-gray-800"
-                              src="./a"
-                              alt="aaa"
+                            <Image
+                              className=""
+                              src=""
+                              alt="Your Company"
+                              width={200}
+                              height={45}
                             />
                             <span className="sr-only">Your profile</span>
                             <span aria-hidden="true">Tim Cook</span>
@@ -146,14 +167,16 @@ export default function AdminLayout() {
           </Dialog>
         </Transition.Root>
         {/* Static sidebar for desktop */}
-        <div className="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+        <div className="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-80 xl:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#202A30] px-6 ring-1 ring-white/5">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#202A30] px-6 my-3 mx-3 ring-1 ring-white/5 pt-5 rounded-3xl">
             <div className="flex h-16 shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="../public/logo1b.svg"
+              <Image
+                className=""
+                src="/logo1.svg"
                 alt="Your Company"
+                width={200}
+                height={45}
               />
             </div>
             <nav className="flex flex-1 flex-col">
@@ -192,7 +215,7 @@ export default function AdminLayout() {
                       alt="aaa"
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true">علی شعبانی ثانی</span>
                   </a>
                 </li>
               </ul>
@@ -200,19 +223,16 @@ export default function AdminLayout() {
           </div>
         </div>
 
-        <div className="">
-          {/* Sticky search header */}
-          {/* <div className="xl:fixed top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-[#202A30] px-4 shadow-sm sm:px-6 lg:px-8 w-full"> */}
-            <button
-              type="button"
-              className="-m-2.5 p-2.5 text-white xl:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <Bars3Icon className="h-5 w-5" aria-hidden="true" />
-            </button>
-          {/* </div> */}
-        </div>
+        {/* Sticky search header */}
+        {/* <div className="xl:fixed top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-[#202A30] px-4 shadow-sm sm:px-6 lg:px-8 w-full"> */}
+        <button
+          type="button"
+          className="absolute top-1 p-2.5 text-white xl:hidden"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <span className="sr-only">Open sidebar</span>
+          <Bars3Icon className="h-5 w-5 text-black" aria-hidden="true" />
+        </button>
       </div>
     </>
   );

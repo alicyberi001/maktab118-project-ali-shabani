@@ -1,3 +1,5 @@
+import ButtonGroups from "@/components/(adminPanel)/button_groups";
+
 function Orders() {
   const orders = [
     {
@@ -23,6 +25,7 @@ function Orders() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96  xl:mr-96 mx-auto rounded-3xl relative">
+      <ButtonGroups/>
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت سفارش ها
       </span>

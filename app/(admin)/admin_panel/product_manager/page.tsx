@@ -62,8 +62,14 @@ function Orders() {
                 <td className="px-6 py-4">{el.totalPrice}</td>
                 <td className="px-6 py-4">{el.data}</td>
                 <td className="px-6 py-4">
-                  <button className="text-red-600">حذف</button>
-                  <button className="text-cyan-600">ویرایش</button>
+                  <div className="flex gap-3">
+                    <button className="text-sm text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-gray-900">
+                      حذف
+                    </button>
+                    <button className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900">
+                      ویرایش
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
