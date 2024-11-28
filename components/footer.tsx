@@ -37,11 +37,11 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-center gap-3">
           <img src="./logo1.svg" alt="logo1" className="w-36" />
           <div className="flex gap-2">
-            <img src="./github.svg" alt="" className="w-5" />
-            <img src="./linkedin.svg" alt="" className="w-5" />
-            <img src="./telegram.svg" alt="" className="w-5" />
-            <img src="./x1.svg" alt="" className="w-5" />
-            <img src="./instagram.png" alt="" className="w-5" />
+            <img src="./github.svg" alt="" className="w-4" />
+            <img src="./linkedin.svg" alt="" className="w-4" />
+            <img src="./telegram.svg" alt="" className="w-4" />
+            <img src="./x1.svg" alt="" className="w-4" />
+            <img src="./instagram.png" alt="" className="w-4" />
           </div>
         </div>
       </div>
