@@ -24,18 +24,4 @@ const LoginPage: React.FC = () => {
 
 export default LoginPage;
 
-{
-  /* <div className="flex flex-1 justify-end items-center">
-        <div className="w-1/3">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="h-screen"
-          >
-            <source src="./motion.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div> */
-}
+
