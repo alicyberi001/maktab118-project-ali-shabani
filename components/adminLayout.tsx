@@ -42,7 +42,7 @@ const navigation = [
   },
   { name: "خروج", href: "#", icon: ArrowLeftStartOnRectangleIcon, current: false },
 ];
-
+ 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }

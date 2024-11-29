@@ -61,7 +61,7 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
         <div className="w-[40%] h-full bg-slate-400">
-          <div>
+          <div className="flex">
             <HeartIcon className="w-5"/>
             <BellAlertIcon className="w-5"/>
             <ScaleIcon className="w-5"/>
