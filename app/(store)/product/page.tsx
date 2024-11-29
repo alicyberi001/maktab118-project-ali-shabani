@@ -8,7 +8,7 @@ import {
   BuildingStorefrontIcon,
   InboxStackIcon,
   Cog6ToothIcon,
-  CheckBadgeIcon
+  CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 
 const ProductPage: React.FC = () => {
@@ -71,10 +71,10 @@ const ProductPage: React.FC = () => {
               </span>
             </div>
             <div className="w-full h-1/2 flex items-center justify-between">
-              <span className="flex gap-3 items-center w-fit h-[80%] border border-gray-700 text-gray-700 text-xs px-3 py-1  rounded-lg">
+              <button className="flex gap-3 items-center w-fit h-[80%] border border-gray-700 text-gray-700 text-xs px-3 py-1  rounded-lg hover:bg-gray-700 hover:text-white">
                 <span>بیمه می خواهم</span>
-                <PlusIcon className="w-4 text-gray-800" />
-              </span>
+                <PlusIcon className="w-4" />
+              </button>
               <span className="flex items-end gap-2">
                 <del className="text-xs text-gray-500">560,000</del>
                 <span className="text-sm text-blue-950">420,000 تومان</span>
@@ -84,33 +84,58 @@ const ProductPage: React.FC = () => {
           <div className="flex flex-col w-full h-fit gap-1 bg-blue-50 text-gray-700 border border-gray-200 rounded-md px-4 py-3">
             <div className="flex flex-col gap-2 border-b-2 border-white pb-2">
               <span className="flex gap-2 ">
-                <BuildingStorefrontIcon className="w-5"/>
+                <BuildingStorefrontIcon className="w-5" />
                 <span className="text-sm text-slate-900">تکنوسرویس</span>
               </span>
               <span className="flex gap-2">
-                <InboxStackIcon className="w-4 mr-0.5"/>
-                <span className="text-xs text-slate-700">موجود در انبار تکنوسرویس ( ارسال فوری )</span>
+                <InboxStackIcon className="w-4 mr-0.5" />
+                <span className="text-xs text-slate-700">
+                  موجود در انبار تکنوسرویس ( ارسال فوری )
+                </span>
               </span>
             </div>
             <div className="flex items-center gap-2 border-b-2 border-white py-2">
-              <Cog6ToothIcon className="w-5"/>
+              <Cog6ToothIcon className="w-5" />
               <span className="text-xs text-slate-700">ارزیابی عملکرد:</span>
               <span className="text-xs text-slate-900">عالی</span>
             </div>
             <div className="flex gap-2 items-center py-2">
               <CheckBadgeIcon className="w-5" />
-              <span className="text-xs text-slate-700" >18 ماه گارانتی شرکتی</span>
+              <span className="text-xs text-slate-700">
+                18 ماه گارانتی شرکتی
+              </span>
             </div>
           </div>
           <div className="w-full h-20 rounded-lg flex flex-col gap-2 items-end">
-            <div className="w-fit text-sm px-4 py-1 bg-blue-600 rounded-full">800,000 تومان تخفیف خرید زودهنگام</div>
-            <div className="text-gray-900 text-lg font-semibold">14,590,000 تومان</div>
+            <div className="w-fit text-sm px-4 py-1 bg-blue-600 rounded-full">
+              800,000 تومان تخفیف خرید زودهنگام
+            </div>
+            <div className="text-gray-900 text-lg font-semibold">
+              14,590,000 تومان
+            </div>
           </div>
           <button className="w-full h-14 bg-[#202A30] rounded-lg">
             افزودن به سبد خرید
           </button>
         </div>
-        <div className="w-full h-52 bg-orange-500 rounded-2xl"></div>
+        <div className="w-full h-44 flex flex-col border border-gray-300 shadow-xl text-slate-800 rounded-2xl px-4 py-3">
+          <div className="flex justify-between px-4 py-3">
+            <div className="flex flex-col gap-3">
+              <span>ارسال امروز</span>
+              <a className="flex items-center text-cyan-600">
+                <span className="text-sm ">توضیحات بیشتر</span>
+                <ChevronLeftIcon className="w-4" />
+              </a>
+            </div>
+            <img src="/delivery_today.svg" alt="delivery" />
+          </div>
+          <div className="flex justify-between mt-auto items-center px-4 py-3 bg-blue-100 rounded-xl">
+            <span className="">
+              <span className="text-sm">تحویل حضوری رایگان</span>
+            </span>
+            <ChevronLeftIcon className="w-4" />
+          </div>
+        </div>
       </section>
     </article>
   );
