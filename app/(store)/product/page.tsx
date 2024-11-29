@@ -9,6 +9,11 @@ import {
   InboxStackIcon,
   Cog6ToothIcon,
   CheckBadgeIcon,
+  HeartIcon,
+  BellAlertIcon,
+  ScaleIcon,
+  ChatBubbleBottomCenterTextIcon,
+  ShareIcon
 } from "@heroicons/react/24/outline";
 
 const ProductPage: React.FC = () => {
@@ -55,7 +60,16 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="w-[40%] h-full bg-slate-400">2</div>
+        <div className="w-[40%] h-full bg-slate-400">
+          <div>
+            <HeartIcon className="w-5"/>
+            <BellAlertIcon className="w-5"/>
+            <ScaleIcon className="w-5"/>
+            <ChatBubbleBottomCenterTextIcon className="w-5"/>
+            <ShareIcon className="w-5"/>
+          </div>
+          <div></div>
+        </div>
       </section>
       <section className="flex flex-col gap-6 w-[380px] ">
         <div className="w-full flex flex-col gap-5 border border-gray-300 shadow-xl rounded-2xl px-5 py-4">
