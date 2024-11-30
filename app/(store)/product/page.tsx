@@ -13,7 +13,7 @@ import {
   BellAlertIcon,
   ScaleIcon,
   ChatBubbleBottomCenterTextIcon,
-  ShareIcon
+  ShareIcon,
 } from "@heroicons/react/24/outline";
 
 const ProductPage: React.FC = () => {
@@ -61,18 +61,28 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
         <div className="w-[40%] h-full bg-slate-400">
-          <div className="flex">
-            <HeartIcon className="w-5"/>
-            <BellAlertIcon className="w-5"/>
-            <ScaleIcon className="w-5"/>
-            <ChatBubbleBottomCenterTextIcon className="w-5"/>
-            <ShareIcon className="w-5"/>
+          <div className="flex justify-center gap-5 w-full">
+            <span className="p-2 bg-slate-500 rounded-lg">
+              <HeartIcon className="w-5" />
+            </span>
+            <span className="p-2 bg-slate-500 rounded-lg">
+              <BellAlertIcon className="w-5" />
+            </span>
+            <span className="p-2 bg-slate-500 rounded-lg">
+              <ScaleIcon className="w-5" />
+            </span>
+            <span className="p-2 bg-slate-500 rounded-lg">
+              <ChatBubbleBottomCenterTextIcon className="w-5" />
+            </span>
+            <span className="p-2 bg-slate-500 rounded-lg">
+              <ShareIcon className="w-5" />
+            </span>
           </div>
           <div></div>
         </div>
       </section>
       <section className="flex flex-col gap-6 w-[380px] ">
-        <div className="w-full flex flex-col gap-5 border border-gray-300 shadow-xl rounded-2xl px-5 py-4">
+        <aside className="w-full flex flex-col gap-5 border bg-white border-gray-300 shadow-xl rounded-2xl px-5 py-4">
           <div className="w-full h-[100px] flex flex-col gap-1 text-gray-700 border border-gray-200 rounded-md shadow-md px-3 py-2">
             <div className=" w-full h-1/2 flex items-center justify-between">
               <span className="flex gap-2 items-center text-sm">
@@ -131,8 +141,8 @@ const ProductPage: React.FC = () => {
           <button className="w-full h-14 bg-[#202A30] rounded-lg">
             افزودن به سبد خرید
           </button>
-        </div>
-        <div className="w-full h-44 flex flex-col border border-gray-300 shadow-xl text-slate-800 rounded-2xl px-4 py-3">
+        </aside>
+        <aside className="w-full h-44 flex flex-col bg-white border border-gray-300 shadow-xl text-slate-800 rounded-2xl px-4 py-3">
           <div className="flex justify-between px-4 py-3">
             <div className="flex flex-col gap-3">
               <span>ارسال امروز</span>
@@ -149,7 +159,7 @@ const ProductPage: React.FC = () => {
             </span>
             <ChevronLeftIcon className="w-4" />
           </div>
-        </div>
+        </aside>
       </section>
     </article>
   );
