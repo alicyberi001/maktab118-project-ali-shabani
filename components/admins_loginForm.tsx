@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { auth_admin_login } from "@/api/adminLogin.service";
+import { IAuth_admin_login, IAuth_admin_login_Res } from "@/types/auth.api";
+import { redirect } from "next/navigation";
 
 const validationSchema = z.object({
-  email: z
-    .string()
-    .nonempty("ایمیل یا نام کاربری الزامی است")
-    .email("ایمیل نامعتبر است"),
+  username: z.string(),
   password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
   rememberMe: z.boolean().optional(),
 });
@@ -24,8 +24,15 @@ const AdminLoginForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log("فرم ارسال شد:", data);
+  const onSubmit = async ({ username, password }: IAuth_admin_login) => {
+    const authRes = await auth_admin_login({ username, password });
+    console.log(authRes);
+    const { accessToken, refreshToken } = authRes.token;
+    sessionStorage.setItem("accessToken", accessToken);
+    sessionStorage.setItem("refreshToken", refreshToken);
+    setTimeout(() => {
+      redirect("/admin_panel/orders");
+    }, 2000); // Redirect after 2 seconds
   };
 
   return (
@@ -44,7 +51,7 @@ const AdminLoginForm = () => {
           >
             <div>
               <label
-                htmlFor="email"
+                htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
                 dir="rtl"
               >
@@ -52,13 +59,15 @@ const AdminLoginForm = () => {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  type="email"
-                  {...register("email")}
+                  id="username"
+                  type="username"
+                  {...register("username")}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#202A30] sm:text-sm sm:leading-6"
                 />
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+                {errors.username && (
+                  <p className="mt-2 text-sm text-red-600">
+                    {errors.username.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -79,7 +88,9 @@ const AdminLoginForm = () => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#202A30] sm:text-sm sm:leading-6"
                 />
                 {errors.password && (
-                  <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
+                  <p className="mt-2 text-sm text-red-600">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
             </div>
