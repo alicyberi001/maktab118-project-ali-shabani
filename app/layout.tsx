@@ -4,6 +4,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { Toaster } from 'react-hot-toast';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -35,7 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${myFont.className} antialiased`}>{children}</body>
+      <body className={`${myFont.className} antialiased`}>
+        <Toaster position="top-center" reverseOrder={false} />
+        {children}
+      </body>
     </html>
   );
 }

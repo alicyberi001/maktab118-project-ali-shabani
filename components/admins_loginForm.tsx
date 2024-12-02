@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { auth_admin_login } from "@/api/adminLogin.service";
 import { IAuth_admin_login, IAuth_admin_login_Res } from "@/types/auth.api";
 import { redirect } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { AxiosError } from "axios";
 
 const validationSchema = z.object({
   username: z.string(),
@@ -25,14 +27,18 @@ const AdminLoginForm = () => {
   });
 
   const onSubmit = async ({ username, password }: IAuth_admin_login) => {
-    const authRes = await auth_admin_login({ username, password });
-    console.log(authRes);
-    const { accessToken, refreshToken } = authRes.token;
-    sessionStorage.setItem("accessToken", accessToken);
-    sessionStorage.setItem("refreshToken", refreshToken);
-    setTimeout(() => {
-      redirect("/admin_panel/orders");
-    }, 2000); // Redirect after 2 seconds
+    try {
+      const authRes = await auth_admin_login({ username, password });
+      console.log(authRes);
+      const { accessToken, refreshToken } = authRes.token;
+      sessionStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("refreshToken", refreshToken);
+      setTimeout(() => {
+        redirect("/admin_panel/orders");
+      }, 2000); // Redirect after 2 seconds
+    } catch (error: any) {
+      toast.error(error);
+    }
   };
 
   return (
