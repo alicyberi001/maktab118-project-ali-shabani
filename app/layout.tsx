@@ -4,18 +4,8 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +19,8 @@ const poppins = Poppins({
 
 const myFont = localFont({ src: "./fonts/KalamehWebFaNum-Regular.woff2" });
 
+// const queryClient = new QueryClient();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,8 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${myFont.className} antialiased`}>
-        <Toaster position="top-center" reverseOrder={false} />
-        {children}
+
+          <Toaster position="top-center" reverseOrder={false} />
+          {children}
+
       </body>
     </html>
   );

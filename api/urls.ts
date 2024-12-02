@@ -5,6 +5,6 @@ export const urls = {
     },
   },
   product: {
-    
+    getAll: "/products"
   }
 };

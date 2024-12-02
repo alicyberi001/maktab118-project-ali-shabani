@@ -1,4 +1,14 @@
+// "use client";
+
+import { fetchProductsList } from "@/api/product.service";
+import { IProduct } from "@/types/product.api";
+import { useEffect, useState } from "react";
+
 function Orders() {
+  const [data, setData] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const orders = [
     {
       user: "سفارش ها",
@@ -25,6 +35,28 @@ function Orders() {
       details: "بررسی سفارش",
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchProductsList({ page: 1, limit: 6 });
+        if (!response) {
+          throw new Error("Failed to fetch data");
+        }
+        setData(response.data.products);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="w-2/3 bg-slate-600 h-96  xl:mr-96 mx-auto rounded-3xl relative">
