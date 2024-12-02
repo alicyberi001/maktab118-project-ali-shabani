@@ -9,7 +9,7 @@ interface IParams {
 
 type fetchProductsListType = (_: IParams) => Promise<IProductRes>;
 export const fetchProductsList: fetchProductsListType = async (params) => {
-  const response = await client.post(urls.product.getAll, {
+  const response = await client.get(urls.product.getAll, {
     params: { page: params?.page || 1, limit: params?.limit || 6 },
   });
   return response.data;

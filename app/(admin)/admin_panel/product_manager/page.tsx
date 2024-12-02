@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import { fetchProductsList } from "@/api/product.service";
 import { IProduct } from "@/types/product.api";
@@ -9,32 +9,32 @@ function Orders() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const orders = [
-    {
-      user: "سفارش ها",
-      totalPrice: "30000t",
-      data: "test123",
-      details: "بررسی سفارش",
-    },
-    {
-      user: "مدیریت کالا",
-      totalPrice: "50000t",
-      data: "test123",
-      details: "بررسی سفارش",
-    },
-    {
-      user: "مدیریت موجودی و قیمت ها",
-      totalPrice: "6000t",
-      data: "test123",
-      details: "بررسی سفارش",
-    },
-    {
-      user: "خروج",
-      totalPrice: "700000t",
-      data: "test123",
-      details: "بررسی سفارش",
-    },
-  ];
+  // const orders = [
+  //   {
+  //     user: "سفارش ها",
+  //     totalPrice: "30000t",
+  //     data: "test123",
+  //     details: "بررسی سفارش",
+  //   },
+  //   {
+  //     user: "مدیریت کالا",
+  //     totalPrice: "50000t",
+  //     data: "test123",
+  //     details: "بررسی سفارش",
+  //   },
+  //   {
+  //     user: "مدیریت موجودی و قیمت ها",
+  //     totalPrice: "6000t",
+  //     data: "test123",
+  //     details: "بررسی سفارش",
+  //   },
+  //   {
+  //     user: "خروج",
+  //     totalPrice: "700000t",
+  //     data: "test123",
+  //     details: "بررسی سفارش",
+  //   },
+  // ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,16 +83,16 @@ function Orders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((el) => (
+            {data.map((el) => (
               <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th
+                <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {el.user}
-                </th>
-                <td className="px-6 py-4">{el.totalPrice}</td>
-                <td className="px-6 py-4">{el.data}</td>
+                  <img className="w-12 rounded-lg aspect-square" src={`http://localhost:8000/images/products/images/${el.images[0]}`} alt={el.name} />
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{el.name}</td>
+                <td className="px-6 py-4">{el.subcategory}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-3">
                     <button className="text-sm text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-gray-900">
