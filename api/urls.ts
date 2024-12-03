@@ -1,10 +1,13 @@
 export const urls = {
   auth: {
     admin: {
-        login: "/auth/login"
+      login: "/auth/login",
     },
   },
   product: {
-    getAll: "/products"
-  }
+    getAll: "/products",
+  },
+  orders: {
+    getAll: "/orders",
+  },
 };
