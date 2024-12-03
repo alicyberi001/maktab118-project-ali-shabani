@@ -9,61 +9,13 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
+} from "@tanstack/react-query";
 
 function Orders() {
-  const [data, setData] = useState<IProduct[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // const orders = [
-  //   {
-  //     user: "سفارش ها",
-  //     totalPrice: "30000t",
-  //     data: "test123",
-  //     details: "بررسی سفارش",
-  //   },
-  //   {
-  //     user: "مدیریت کالا",
-  //     totalPrice: "50000t",
-  //     data: "test123",
-  //     details: "بررسی سفارش",
-  //   },
-  //   {
-  //     user: "مدیریت موجودی و قیمت ها",
-  //     totalPrice: "6000t",
-  //     data: "test123",
-  //     details: "بررسی سفارش",
-  //   },
-  //   {
-  //     user: "خروج",
-  //     totalPrice: "700000t",
-  //     data: "test123",
-  //     details: "بررسی سفارش",
-  //   },
-  // ];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetchProductsList({ page: 1, limit: 6 });
-        if (!response) {
-          throw new Error("Failed to fetch data");
-        }
-        setData(response.data.products);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const response = useQuery({
+    queryKey: ["products"],
+    queryFn: () => fetchProductsList({ page: 1, limit: 6 }),
+  });
 
   return (
     <div className="w-2/3 bg-slate-600 h-96  xl:mr-96 mx-auto rounded-3xl relative">
@@ -90,13 +42,17 @@ function Orders() {
             </tr>
           </thead>
           <tbody>
-            {data.map((el) => (
+            {response.data?.data.products.map((el) => (
               <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <img className="w-12 rounded-lg aspect-square" src={`http://localhost:8000/images/products/images/${el.images[0]}`} alt={el.name} />
+                  <img
+                    className="w-12 rounded-lg aspect-square"
+                    src={`http://localhost:8000/images/products/images/${el.images[0]}`}
+                    alt={el.name}
+                  />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{el.name}</td>
                 <td className="px-6 py-4">{el.subcategory}</td>
