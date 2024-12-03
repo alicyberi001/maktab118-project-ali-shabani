@@ -215,7 +215,7 @@ export default function AdminLayout() {
                       alt="aaa"
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">علی شعبانی ثانی</span>
+                    <span aria-hidden="true">ادمین:‌ علی شعبانی</span>
                   </a>
                 </li>
               </ul>
