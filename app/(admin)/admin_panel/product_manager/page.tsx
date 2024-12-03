@@ -3,6 +3,13 @@
 import { fetchProductsList } from "@/api/product.service";
 import { IProduct } from "@/types/product.api";
 import { useEffect, useState } from "react";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 function Orders() {
   const [data, setData] = useState<IProduct[]>([]);
