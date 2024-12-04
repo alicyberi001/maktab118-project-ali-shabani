@@ -33,9 +33,35 @@ const slides = [
 
 export default function Home() {
   return (
-    <div className="bg-[#D4D9D5]">
+    <div className="bg-[#f8f8f8]">
       <Navbar />
       <ImageSlider slides={slides} />;
+      <div className="flex gap-20 justify-center text-gray-900 my-10">
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src="/asus lap.webp"
+            alt="appleLap"
+            className="w-56 aspect-square rounded-3xl"
+          />
+          <span className="font-semibold text-lg">لپ تاپ ایسوس</span>
+        </div>
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src="/apple lap.webp"
+            alt="appleLap"
+            className="w-56 aspect-square rounded-3xl"
+          />
+          <span className="font-semibold text-lg">لپ تاپ اپل</span>
+        </div>
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src="/lenovo lap.webp"
+            alt="appleLap"
+            className="w-56 aspect-square rounded-3xl"
+          />
+          <span className="font-semibold text-lg">لپ تاپ لنوو</span>
+        </div>
+      </div>
       <Footer />
     </div>
   );

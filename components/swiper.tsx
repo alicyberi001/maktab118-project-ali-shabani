@@ -21,7 +21,7 @@ interface ImageSliderProps {
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto py-14">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation={{
@@ -29,7 +29,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
           prevEl: ".custom-prev",
         }}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         className="h-[600px]"
       >
@@ -59,7 +59,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
                       خرید
                     </button>
                   </div>
-                  <a href="#" className="px-6">اطلاعات بیشتر</a>
+                  <a href="#" className="px-6 text-white">اطلاعات بیشتر</a>
                 </div>
               </div>
             </div>

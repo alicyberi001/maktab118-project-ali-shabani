@@ -18,7 +18,7 @@ import {
 
 const ProductPage: React.FC = () => {
   return (
-    <article dir="rtl" className="flex gap-6 justify-center mt-4 ">
+    <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
       <section className="w-[70%] flex gap-3 rounded-2xl border border-gray-300 shadow-sm py-7 px-9">
         <div className="flex-grow h-full  flex flex-col gap-4">
           <p className="text-gray-950 text-lg font-semibold">

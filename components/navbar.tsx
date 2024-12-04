@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       dir="rtl"
-      className="w-full py-[10px] bg-white backdrop-blur-md flex justify-between items-center px-8 border-b-2 border-black/10 box-border "
+      className="w-full py-[10px] fixed z-10 bg-white flex justify-between items-center px-8 border-b-2 border-black/10 box-border "
     >
       <div className="flex gap-8 items-center">
         <a href="/">

@@ -11,7 +11,7 @@ import {
   SignalIcon,
   XMarkIcon,
   ArrowLeftStartOnRectangleIcon,
-  FunnelIcon
+  FunnelIcon,
 } from "@heroicons/react/24/outline";
 import {
   Bars3Icon,
@@ -40,10 +40,15 @@ const navigation = [
     icon: ChartBarSquareIcon,
     current: false,
   },
-  { name: "خروج", href: "#", icon: ArrowLeftStartOnRectangleIcon, current: false },
+  {
+    name: "خروج",
+    href: "/admins_login",
+    icon: ArrowLeftStartOnRectangleIcon,
+    current: false,
+  },
 ];
- 
-function classNames(...classes) {
+
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
