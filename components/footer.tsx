@@ -2,7 +2,7 @@
 
 const Footer: React.FC = () => {
   return (
-    <div className="bg-[#202A30] h-80 flex flex-col items-center pt-7 gap-7">
+    <div className="bg-[#202A30] h-80 flex flex-col items-center pt-7 gap-7 text-white">
       <div className="flex gap-16 items-center">
         <div dir="rtl" className="flex gap-14">
           <div className="flex flex-col gap-3 text-sm">

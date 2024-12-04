@@ -328,7 +328,7 @@ import { fetchProductsList } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-function Orders() {
+function ProductPage() {
   const [page, setPage] = useState(1);
   const limit = 6;
 
@@ -449,4 +449,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default ProductPage;
