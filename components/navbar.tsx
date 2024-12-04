@@ -4,22 +4,18 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Navbar: React.FC = () => {
-  // const router = useRouter();
-
-  // const navigate = (href: string) => {
-  //   router.push(href);
-  // };
+  
 
   return (
     <nav
       dir="rtl"
-      className="w-full py-[10px] fixed z-10 bg-white flex justify-between items-center px-8 border-b-2 border-black/10 box-border "
+      className="w-full py-[10px] fixed z-10 bg-white flex justify-between items-center px-8 border-b-2 border-black/10 box-border mobile:px-4"
     >
-      <div className="flex gap-8 items-center">
+      <div className="flex gap-8 items-center mobile:gap-0">
         <a href="/">
-          <img className="w-44" src="./logo1b.svg" alt="logo2" />
+          <img className="w-44 mobile:w-32" src="./logo1b.svg" alt="logo2" />
         </a>
-        <div className="relative">
+        <div className="relative mobile:hidden">
           <input
             placeholder="محصول یا برند خود را جستجو کنید"
             className="w-96 bg-slate-200 rounded-md h-12 px-4 py-2 pr-11 border-0 text-sm text-gray-800 placeholder:text-slate-400"

@@ -2,31 +2,31 @@
 
 const Footer: React.FC = () => {
   return (
-    <div className="bg-[#202A30] h-80 flex flex-col items-center pt-16 gap-7 text-white">
-      <div className="flex gap-16 items-center">
-        <div dir="rtl" className="flex gap-14">
-          <div className="flex flex-col gap-3 text-sm">
+    <div className="bg-[#202A30] flex flex-col items-center pt-16 pb-8 gap-7 text-white">
+      <div className="flex gap-16 items-center mobile:flex-col">
+        <div dir="rtl" className="flex gap-14 mobile:flex-col">
+          <div className="flex flex-col gap-3 text-sm mobile:items-center">
             <span className="mb-2 font-semibold">پرفروش ترین محصولات</span>
             <a href="#">آیفون ۱۳</a>
             <a href="#">گوشی اس ۲۴</a>
             <a href="#">شیاومی</a>
             <a href="#">ساعت هوشمند</a>
           </div>
-          <div className="flex flex-col gap-3 text-sm">
+          <div className="flex flex-col gap-3 text-sm mobile:items-center">
             <span className="mb-2 font-semibold">پس از خرید</span>
             <a href="#">تضمین رجیستری</a>
             <a href="#">رویه بازگرداندن کالا</a>
             <a href="#">رهگیری سفارش</a>
             <a href="#">سوالات متدوال</a>
           </div>
-          <div className="flex flex-col gap-3 text-sm">
+          <div className="flex flex-col gap-3 text-sm mobile:items-center">
             <span className="mb-2 font-semibold">قوانین و مقررات</span>
             <a href="#">قوانین و خط مشی</a>
             <a href="#">حریم خصوصی کاربران</a>
             <a href="#">ارزیابی مشتریان</a>
             <a href="#">چرا تکنو سرویس</a>
           </div>
-          <div className="flex flex-col gap-3 text-sm">
+          <div className="flex flex-col gap-3 text-sm mobile:items-center">
             <span className="mb-2 font-semibold">درباره ما</span>
             <a href="#">تکنو سرویس در یک نگاه</a>
             <a href="#">اهداف و تعهدات ما</a>

@@ -1,6 +1,7 @@
 "use client"
 
 import { fetchProductsList } from "@/api/product.service";
+import { fetchUsersList } from "@/api/users.service";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -11,8 +12,15 @@ function PriceManage() {
     queryFn: () => fetchProductsList({ page: 1, limit: 6 }),
   });
 
+
+  const users = useQuery({
+    queryKey: ["users"],
+    queryFn: () => fetchUsersList(),
+  });
+
+
   return (
-    <div className="w-2/3 bg-slate-600 h-96  xl:mr-96 mx-auto rounded-3xl relative">
+    <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت موجودی و قیمت ها
       </span>

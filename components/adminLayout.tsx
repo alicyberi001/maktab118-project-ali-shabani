@@ -172,7 +172,7 @@ export default function AdminLayout() {
           </Dialog>
         </Transition.Root>
         {/* Static sidebar for desktop */}
-        <div className="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-80 xl:flex-col">
+        <div className="fixed inset-y-0 z-50 flex w-80 flex-col mobile:hidden">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#202A30] px-6 my-3 mx-3 ring-1 ring-white/5 pt-5 rounded-3xl">
             <div className="flex h-16 shrink-0 items-center">

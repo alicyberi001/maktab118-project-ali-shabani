@@ -30,7 +30,7 @@ function ProductPage() {
   const pagination = generatePagination(page, totalPages);
 
   return (
-    <div className="w-2/3 bg-slate-600 h-auto xl:mr-96 mx-auto rounded-3xl relative">
+    <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>
@@ -87,7 +87,7 @@ function ProductPage() {
       </div>
 
       {/* کامپوننت صفحه‌بندی */}
-      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-11 left-1/2 -translate-x-1/2">
+      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-11 left-1/2 -translate-x-1/2 mobile:-bottom-20">
         {/* دکمه قبلی */}
         <button
           disabled={page === 1}

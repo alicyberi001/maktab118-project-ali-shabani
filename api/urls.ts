@@ -10,4 +10,7 @@ export const urls = {
   orders: {
     getAll: "/orders",
   },
+  users: {
+    getAll: "/users",
+  },
 };

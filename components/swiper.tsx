@@ -31,7 +31,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
-        className="h-[600px]"
+        className=""
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="relative">
@@ -40,26 +40,26 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               <img
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-full object-cover h-[600px]"
+                className="w-full object-cover h-[600px] mobile:h-[270px]"
               />
 
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-end">
                 <div
                   dir="rtl"
-                  className="flex flex-col items-start pr-16 gap-5"
+                  className="flex flex-col items-start pr-16 gap-5 mobile:gap-2 mobile:pr-5"
                 >
-                  <p className="text-white text-5xl  font-bold text-center px-4">
+                  <p className="text-white text-5xl font-bold text-center px-4 mobile:text-2xl">
                     {slide.caption}
                   </p>
                   <div className="flex items-center">
-                    <p className="text-white text-lg  font-semibold text-center px-6">
+                    <p className="text-white text-lg font-semibold text-center px-6 mobile:pr-6 mobile:pl-2 mobile:text-xs">
                       {slide.caption2}
                     </p>
-                    <button className="px-4 py-1 text-sm text-white border border-white rounded-full hover:bg-white hover:text-black">
+                    <button className="px-4 py-1 text-sm text-white border border-white rounded-full hover:bg-white hover:text-black mobile:text-xs mobile:px-2 mobile:py-1">
                       خرید
                     </button>
                   </div>
-                  <a href="#" className="px-6 text-white">اطلاعات بیشتر</a>
+                  <a href="#" className="px-6 text-white mobile:text-[10px]">اطلاعات بیشتر</a>
                 </div>
               </div>
             </div>
@@ -70,44 +70,6 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
   );
 };
 
-// interface Iiamge {
-//   url: string;
-//   title: string;
-// }
-
-// type ImageSliderProps = {
-//   images: Iiamge[];
-// };
-
-// const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
-//   return (
-//     <div className="w-full mx-auto">
-//       <Swiper
-//         modules={[Navigation, Pagination, Autoplay, Scrollbar]}
-//         navigation={{
-//           nextEl: ".custom-next",
-//           prevEl: ".custom-prev",
-//         }}
-//         pagination={{ clickable: true }}
-//         autoplay={{ delay: 3000 }}
-//         loop={true}
-//         className=""
-//       >
-//         {images.map((el, index) => (
-//           <SwiperSlide key={index}>
-//             <div className="relative">
-//               <div className="w-full bg-gradient-to-l from-slate-950/80 from-25% to-transparent to-85% h-full absolute right-0"></div>
-//               <img
-//                 src={el.url}
-//                 alt={`Slide ${index + 1}`}
-//                 className="w-full h-[600px] object-cover"
-//               />
-//             </div>
-//           </SwiperSlide>
-//         ))}
-//       </Swiper>
-//     </div>
-//   );
-// };
+  
 
 export default ImageSlider;

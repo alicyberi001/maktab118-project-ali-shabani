@@ -21,6 +21,7 @@
     "@tanstack/react-query": "^5.61.0",
     "AppTheme": "link:C:/Program Files/Git/shared-theme/AppTheme",
     "axios": "^1.7.7",
+    "jalaali-js": "^1.2.7",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
@@ -32,6 +33,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/jalaali-js": "^1.1.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

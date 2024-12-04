@@ -13,6 +13,26 @@ export default {
         foreground: "var(--foreground)",
       },
     },
+    container : {
+      center : true,
+      padding : {
+      DEFAULT : "1rem",
+      lg : "0.625rem"
+      }
+      },
+    screens: {
+			desktop: { max: "1279px" },
+			// => @media (max-width: 1279px) { ... }
+
+			tablet2: { max: "1023px" },
+			// => @media (max-width: 1023px) { ... }
+
+			tablet: { max: "767px" },
+			// => @media (max-width: 767px) { ... }
+
+			mobile: { max: "639px" },
+			// => @media (max-width: 639px) { ... }
+		},
   },
   plugins: [require('@tailwindcss/forms')],
 } satisfies Config;

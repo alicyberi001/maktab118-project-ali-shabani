@@ -2,6 +2,7 @@
 
 import { fetchOrdersList } from "@/api/orders.service";
 import { useQuery } from "@tanstack/react-query";
+import { toJalaali } from 'jalaali-js';
 import { useState } from "react";
 
 function Orders() {
@@ -10,6 +11,12 @@ function Orders() {
     queryKey: ["orders"],
     queryFn: () => fetchOrdersList(),
   });
+
+  const formattedDate = (date: string): string => {
+    const gregorianDate: any = new Date(date);
+    const jalaaliDate: any = toJalaali(gregorianDate.getFullYear(), gregorianDate.getMonth() + 1, gregorianDate.getDate());
+    return `${jalaaliDate.jy}/${jalaaliDate.jm}/${jalaaliDate.jd}`;
+    };
 
   if (isLoading) return;
   if (isError) return;
@@ -24,8 +31,8 @@ function Orders() {
         );
 
   return (
-    <div className="w-2/3 bg-slate-600 h-96 xl:mr-96 mx-auto rounded-3xl relative">
-      <div className="inline-flex rounded-md shadow-sm absolute -top-11 left-0">
+    <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
+      <div className="inline-flex rounded-md shadow-sm absolute -top-11 left-0 mobile:-top-14">
         <button
           onClick={() => setFilter("all")}
           className={`px-4 py-2 text-sm font-medium ${
@@ -57,7 +64,7 @@ function Orders() {
           تحویل شده
         </button>
       </div>
-      <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
+      <span className="text-[#202A30] text-2xl font-semibold absolute -top-11 mobile:-top-24">
         مدیریت سفارش ها
       </span>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -91,7 +98,7 @@ function Orders() {
                   {el.user}
                 </th>
                 <td className="px-6 py-4">{el.totalPrice}</td>
-                <td className="px-6 py-4">{el.deliveryDate}</td>
+                <td className="px-6 py-4">{formattedDate(el.deliveryDate)}</td>
                 <td className="px-6 py-4">
                   <a
                     href="#"
