@@ -34,5 +34,7 @@ export default {
 			// => @media (max-width: 639px) { ... }
 		},
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'),
+    require('tailwind-scrollbar')
+  ],
 } satisfies Config;
