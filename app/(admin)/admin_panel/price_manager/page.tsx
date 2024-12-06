@@ -1,7 +1,7 @@
 "use client"
 
 import { fetchProductsList } from "@/api/product.service";
-import { fetchUsersList } from "@/api/users.service";
+import { fetchUserByIdList, fetchUsersList } from "@/api/users.service";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -14,8 +14,8 @@ function PriceManage() {
 
 
   const users = useQuery({
-    queryKey: ["users"],
-    queryFn: () => fetchUsersList(),
+    queryKey: ["user"],
+    queryFn: () => fetchUserByIdList("67421b000ac89e34f1d7a9ce"),
   });
 
 
@@ -26,7 +26,7 @@ function PriceManage() {
       </span>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-b-xl">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>

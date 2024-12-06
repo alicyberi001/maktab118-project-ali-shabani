@@ -41,15 +41,15 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="flex min-h-full flex-1 flex-col justify-center py-12 px-8">
+      <div className="mx-auto w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-2xl font-bold text-white">
           اطلاعات حساب خود را وارد کنید
         </h2>
       </div>
 
-      <div className="mt-7 sm:mx-auto w-[700px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <div className="mt-7 mx-auto w-[700px]">
+        <div className="bg-white px-6 py-12 shadow rounded-lg">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex justify-end gap-2">
               <div className="flex-grow">

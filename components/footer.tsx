@@ -2,7 +2,7 @@
 
 const Footer: React.FC = () => {
   return (
-    <div className="bg-[#202A30] flex flex-col items-center pt-16 pb-8 gap-7 text-white rounded-t-[150px]">
+    <div className="bg-[#202A30] flex flex-col items-center pt-16 pb-8 gap-7 text-white rounded-t-[150px] mx-4">
       <div className="flex gap-16 items-center mobile:flex-col">
         <div dir="rtl" className="flex gap-14 mobile:flex-col">
           <div className="flex flex-col gap-3 text-sm mobile:items-center">

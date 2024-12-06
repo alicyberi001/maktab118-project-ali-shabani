@@ -34,35 +34,43 @@ const slides = [
 export default function Home() {
   return (
     <div className="bg-[#f8f8f8]">
-      <Navbar />
-      <ImageSlider slides={slides} />;
-      <div className="flex p-3 mobile:justify-center text-gray-900 my-10 ">
-        <div className="flex flex-col items-center gap-3">
-          <img
-            src="/asus lap.webp"
-            alt="appleLap"
-            className="w-56 aspect-square rounded-3xl mobile:w-16"
-          />
-          <span className="font-semibold text-lg mobile:text-sm">لپ تاپ ایسوس</span>
+      <div className="container mx-auto">
+        <Navbar />
+        <ImageSlider slides={slides} />
+        <div className="flex justify-center gap-10 text-gray-900 my-10">
+          <div className="flex flex-col items-center gap-3">
+            <img
+              src="/asus lap.webp"
+              alt="asusLap"
+              className="w-56 aspect-square rounded-3xl mobile:w-16"
+            />
+            <span className="font-semibold text-lg mobile:text-sm">
+              لپ تاپ ایسوس
+            </span>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <img
+              src="/apple lap.webp"
+              alt="appleLap"
+              className="w-56 aspect-square rounded-3xl mobile:w-16"
+            />
+            <span className="font-semibold text-lg mobile:text-sm">
+              لپ تاپ اپل
+            </span>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <img
+              src="/lenovo lap.webp"
+              alt="lenovoLap"
+              className="w-56 aspect-square rounded-3xl mobile:w-16"
+            />
+            <span className="font-semibold text-lg mobile:text-sm">
+              لپ تاپ لنوو
+            </span>
+          </div>
         </div>
-        <div className="flex flex-col items-center gap-3">
-          <img
-            src="/apple lap.webp"
-            alt="appleLap"
-            className="w-56 aspect-square rounded-3xl mobile:w-16"
-          />
-          <span className="font-semibold text-lg mobile:text-sm">لپ تاپ اپل</span>
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <img
-            src="/lenovo lap.webp"
-            alt="appleLap"
-            className="w-56 aspect-square rounded-3xl mobile:w-16"
-          />
-          <span className="font-semibold text-lg mobile:text-sm">لپ تاپ لنوو</span>
-        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

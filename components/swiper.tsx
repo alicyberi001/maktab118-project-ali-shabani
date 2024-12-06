@@ -21,7 +21,7 @@ interface ImageSliderProps {
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
   return (
-    <div className="w-full mx-auto py-14">
+    <div className="w-full ">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation={{
@@ -40,10 +40,10 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               <img
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-full object-cover h-[600px] mobile:h-[270px]"
+                className="w-full object-cover h-[700px] mobile:h-[270px]"
               />
 
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-end">
+              <div className="absolute bottom-12 right-3   flex items-center justify-end">
                 <div
                   dir="rtl"
                   className="flex flex-col items-start pr-16 gap-5 mobile:gap-2 mobile:pr-5"

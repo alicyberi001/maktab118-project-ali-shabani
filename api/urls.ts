@@ -12,5 +12,6 @@ export const urls = {
   },
   users: {
     getAll: "/users",
+    ById: (id: string) => `/users/${id}`,
   },
 };

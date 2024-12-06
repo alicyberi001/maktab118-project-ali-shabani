@@ -33,24 +33,25 @@ const AdminLoginForm = () => {
       const { accessToken, refreshToken } = authRes.token;
       sessionStorage.setItem("accessToken", accessToken);
       sessionStorage.setItem("refreshToken", refreshToken);
+      toast.success("وارد شدید");
       setTimeout(() => {
         redirect("/admin_panel/orders");
-      }, 2000); // Redirect after 2 seconds
+      }, 3000); 
     } catch (error: any) {
       toast.error(error);
     }
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-full flex-1 flex-col justify-center py-12 px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-2xl font-bold leading-3 tracking-tight text-white">
           ورود به پنل ادمین
         </h2>
       </div>
 
-      <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <div className="mt-7 mx-auto w-full max-w-[480px]">
+        <div className="bg-white px-6 py-12 shadow rounded-lg">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-6 animate-fade-up animate-ease-in"

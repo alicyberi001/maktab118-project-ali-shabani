@@ -31,11 +31,12 @@ function ProductPage() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
+      <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">افزودن کالا +</button>
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-b-xl">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -86,9 +87,7 @@ function ProductPage() {
         </table>
       </div>
 
-      {/* کامپوننت صفحه‌بندی */}
-      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-11 left-1/2 -translate-x-1/2 mobile:-bottom-20">
-        {/* دکمه قبلی */}
+      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-48 left-1/2 -translate-x-1/2 mobile:-bottom-20">
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
@@ -98,8 +97,6 @@ function ProductPage() {
         >
           قبلی
         </button>
-
-        {/* شماره صفحات */}
         {pagination.map((item) => (
           <button
             key={item}
@@ -114,7 +111,6 @@ function ProductPage() {
           </button>
         ))}
 
-        {/* دکمه بعدی */}
         <button
           disabled={page === totalPages}
           onClick={() => setPage(page + 1)}

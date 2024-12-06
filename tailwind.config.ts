@@ -13,13 +13,13 @@ export default {
         foreground: "var(--foreground)",
       },
     },
-    container : {
-      center : true,
-      padding : {
-      DEFAULT : "1rem",
-      lg : "0.625rem"
-      }
-      },
+    // container : {
+    //   center : true,
+    //   padding : {
+    //   DEFAULT : "1rem",
+    //   lg : "0.625rem"
+    //   }
+    //   },
     screens: {
 			desktop: { max: "1279px" },
 			// => @media (max-width: 1279px) { ... }
