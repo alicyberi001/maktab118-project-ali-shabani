@@ -18,12 +18,12 @@ function ProductPage() {
 
   const totalPages = data?.total_pages || 1;
 
-  // تولید صفحات برای نمایش
+
   const generatePagination = (current: number, total: number) => {
     const pages: number[] = [];
-    if (current > 1) pages.push(current - 1); // صفحه قبل
-    pages.push(current); // صفحه فعلی
-    if (current < total) pages.push(current + 1); // صفحه بعد
+    if (current > 1) pages.push(current - 1); 
+    pages.push(current);
+    if (current < total) pages.push(current + 1); 
     return pages;
   };
 

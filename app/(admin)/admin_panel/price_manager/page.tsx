@@ -1,23 +1,30 @@
-"use client"
+"use client";
 
 import { fetchProductsList } from "@/api/product.service";
 import { fetchUserByIdList, fetchUsersList } from "@/api/users.service";
 import { useQuery } from "@tanstack/react-query";
-
+import { useState } from "react";
 
 function PriceManage() {
+  const [page, setPage] = useState(1);
+  const limit = 6;
 
   const response = useQuery({
-    queryKey: ["products"],
-    queryFn: () => fetchProductsList({ page: 1, limit: 6 }),
+    queryKey: ["products", page],
+    queryFn: () => fetchProductsList({ page, limit }),
   });
 
+  const totalPages = response.data?.total_pages || 1;
 
-  const users = useQuery({
-    queryKey: ["user"],
-    queryFn: () => fetchUserByIdList("67421b000ac89e34f1d7a9ce"),
-  });
+  const generatePagination = (current: number, total: number) => {
+    const pages: number[] = [];
+    if (current > 1) pages.push(current - 1);
+    pages.push(current);
+    if (current < total) pages.push(current + 1);
+    return pages;
+  };
 
+  const pagination = generatePagination(page, totalPages);
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
@@ -58,11 +65,48 @@ function PriceManage() {
           </table>
         </div>
       </div>
+      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-16 left-1/2 -translate-x-1/2 mobile:-bottom-20">
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+              className={`px-4 py-2 rounded-lg ${
+                page === 1
+                  ? "text-gray-500 cursor-not-allowed"
+                  : "text-gray-900"
+              }`}
+            >
+              قبلی
+            </button>
+            {pagination.map((item) => (
+              <button
+                key={item}
+                onClick={() => setPage(item)}
+                className={`w-9 h-9 rounded-lg ${
+                  page === item
+                    ? "bg-gray-800 text-white"
+                    : "border border-gray-800 hover:bg-gray-400"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+
+            <button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+              className={`px-4 py-2 rounded-lg ${
+                page === totalPages
+                  ? "text-gray-500 cursor-not-allowed"
+                  : "text-gray-800"
+              }`}
+            >
+              بعدی
+            </button>
+          </div>
     </div>
   );
 }
 export default PriceManage;
-
 
 // "use client";
 
