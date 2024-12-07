@@ -1,15 +1,16 @@
 "use client";
 
-import { fetchProductsList } from "@/api/product.service";
+import { deleteProductById, fetchProductsList } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
   const limit = 6;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", page],
+    queryKey: ["products", page, ],
     queryFn: () => fetchProductsList({ page, limit }),
   });
 
@@ -29,9 +30,20 @@ function ProductPage() {
 
   const pagination = generatePagination(page, totalPages);
 
+  async function handleDeleteProduct(id: string) {
+    try {
+      const response = await deleteProductById(id)
+      toast.success("کاربر با موفقیت حذف شد")
+    } catch (error) {
+      toast.error("درخواست انجام نشد!")
+    }
+  }
+
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
-      <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">افزودن کالا +</button>
+      <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">
+        افزودن کالا +
+      </button>
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>
@@ -73,7 +85,10 @@ function ProductPage() {
                 <td className="px-6 py-4">{el.subcategory}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-3">
-                    <button className="text-sm text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-gray-900">
+                    <button
+                      onClick={() => handleDeleteProduct(el._id)}
+                      className="text-sm text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-gray-900"
+                    >
                       حذف
                     </button>
                     <button className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900">
