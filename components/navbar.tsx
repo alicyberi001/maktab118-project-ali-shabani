@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     >
       <div className="flex gap-8 items-center mobile:gap-0">
         <a href="/">
-          <img className="w-44 mobile:w-32" src="./logo1b.svg" alt="logo2" />
+          <img className="w-44 mobile:w-32" src="./logo1b.svg" alt="logo1b" />
         </a>
         <div className="relative mobile:hidden">
           <input

@@ -1,5 +1,6 @@
-"use server";
+"use client";
 
+import { fetchProductById } from "@/api/product.service";
 import LoginForm from "@/components/loginForm";
 import {
   ShieldCheckIcon,
@@ -15,17 +16,29 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ShareIcon,
 } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 const ProductPage: React.FC = () => {
+  const { productID } = useParams();
+  if (productID == undefined) return;
+
+  
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => fetchProductById(productID),
+  });
+
   return (
     <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
-      <section className="w-[70%] flex gap-3 rounded-2xl border border-gray-300 shadow-sm py-7 px-9">
+      <section className="w-[70%] flex gap-3 rounded-2xl border border-gray-300 bg-white/50 shadow-sm py-7 px-9">
         <div className="flex-grow h-full  flex flex-col gap-4">
           <p className="text-gray-950 text-lg font-semibold">
-            پایه خنک کننده لپ تاپ کولر مستر مدل NOTEPAL A200
+            {data?.data.product.name}
           </p>
           <p className="text-sm text-gray-700">
-            Cooler Master A200 Laptop Cooler
+            {data?.data.product.description}
           </p>
           <span className="w-fit flex text-sm font-semibold gap-2 border-b border-gray-300 pl-5 py-4">
             <span className="text-zinc-900">نظرات کاربران</span>
@@ -60,25 +73,25 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="w-[40%] h-full bg-slate-400">
+        <div className="w-[40%] h-full flex flex-col items-center gap-7">
           <div className="flex justify-center gap-5 w-full">
-            <span className="p-2 bg-slate-500 rounded-lg">
+            <span className="p-2 border shadow-md rounded-lg hover:cursor-pointer">
               <HeartIcon className="w-5" />
             </span>
-            <span className="p-2 bg-slate-500 rounded-lg">
+            <span className="p-2 border shadow-md rounded-lg hover:cursor-pointer">
               <BellAlertIcon className="w-5" />
             </span>
-            <span className="p-2 bg-slate-500 rounded-lg">
+            <span className="p-2 border shadow-md rounded-lg hover:cursor-pointer">
               <ScaleIcon className="w-5" />
             </span>
-            <span className="p-2 bg-slate-500 rounded-lg">
+            <span className="p-2 border shadow-md rounded-lg hover:cursor-pointer">
               <ChatBubbleBottomCenterTextIcon className="w-5" />
             </span>
-            <span className="p-2 bg-slate-500 rounded-lg">
+            <span className="p-2 border shadow-md rounded-lg hover:cursor-pointer">
               <ShareIcon className="w-5" />
             </span>
           </div>
-          <div></div>
+          <img src={`http://localhost:8000/images/products/images/${data?.data.product.images[0]}`} alt={data?.data.product.name} className="" />
         </div>
       </section>
       <section className="flex flex-col gap-6 w-[380px] ">
@@ -131,14 +144,14 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <div className="w-full h-20 rounded-lg flex flex-col gap-2 items-end">
-            <div className="w-fit text-sm px-4 py-1 bg-blue-600 rounded-full">
+            <div className="w-fit text-sm text-white px-4 py-1 bg-blue-600 rounded-full">
               800,000 تومان تخفیف خرید زودهنگام
             </div>
-            <div className="text-gray-900 text-lg font-semibold">
-              14,590,000 تومان
+            <div className="text-gray-900 text-lg  font-semibold">
+            {data?.data.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان
             </div>
           </div>
-          <button className="w-full h-14 bg-[#202A30] rounded-lg">
+          <button className="w-full h-14 bg-[#202A30] text-white rounded-lg">
             افزودن به سبد خرید
           </button>
         </aside>

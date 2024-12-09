@@ -4,13 +4,15 @@ import { deleteProductById, fetchProductsList } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { EditModal } from "@/components/editProduct.modal";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
+  const [editModalOpen, seteditModalOpen] = useState(false);
   const limit = 6;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", page, ],
+    queryKey: ["products", page],
     queryFn: () => fetchProductsList({ page, limit }),
   });
 
@@ -19,12 +21,11 @@ function ProductPage() {
 
   const totalPages = data?.total_pages || 1;
 
-
   const generatePagination = (current: number, total: number) => {
     const pages: number[] = [];
-    if (current > 1) pages.push(current - 1); 
+    if (current > 1) pages.push(current - 1);
     pages.push(current);
-    if (current < total) pages.push(current + 1); 
+    if (current < total) pages.push(current + 1);
     return pages;
   };
 
@@ -32,10 +33,10 @@ function ProductPage() {
 
   async function handleDeleteProduct(id: string) {
     try {
-      const response = await deleteProductById(id)
-      toast.success("کاربر با موفقیت حذف شد")
+      const response = await deleteProductById(id);
+      toast.success("کاربر با موفقیت حذف شد");
     } catch (error) {
-      toast.error("درخواست انجام نشد!")
+      toast.error("درخواست انجام نشد!");
     }
   }
 
@@ -91,8 +92,11 @@ function ProductPage() {
                     >
                       حذف
                     </button>
-                    <button className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900">
-                      ویرایش
+                    <button
+                      onClick={() => seteditModalOpen(true)}
+                      className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900"
+                    >
+                      <EditModal />
                     </button>
                   </div>
                 </td>

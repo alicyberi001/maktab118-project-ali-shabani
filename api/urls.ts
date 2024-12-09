@@ -6,8 +6,10 @@ export const urls = {
   },
   product: {
     getAll: "/products",
+    getById: (id: string) => `/products/${id}`,
     delete: (id: string) => `/products/${id}`,
     edit: (id: string) => `/products/${id}`,
+    // edit: (id: string) => `/products/${id}`,
   },
   orders: {
     getAll: "/orders",
