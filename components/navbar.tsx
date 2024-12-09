@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       dir="rtl"
-      className=" rounded-2xl py-[10px] fixed right-10 left-10 top-3 z-10 bg-white/60 backdrop-blur-xl flex justify-between items-center px-8 border-b-2 border-black/10 mobile:px-4"
+      className="w-full py-[10px] fixed top-0 z-10 bg-white/60 backdrop-blur-xl flex justify-between items-center px-8 border-b-2 border-black/10 mobile:px-4"
     >
       <div className="flex gap-8 items-center mobile:gap-0">
         <a href="/">

@@ -36,16 +36,21 @@ function AllProductPage() {
   };
 
   return (
-    <div className="w-full gird grid-cols-2 gap-4">
-      {data?.data.products.map((product, index) => (
-        <ProductCard
-          key={index}
-          image={`http://localhost:8000/images/products/images/${product.images[0]}`}
-          title={product.name}
-          price={product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          description={product.description}
-        />
-      ))}
+    <div dir="rtl" className="flex gap-10 pt-24 px-8">
+      <aside className="w-80 h-96 bg-red-500 rounded-xl">sidebar</aside>
+      <div className="w-full grid grid-cols-4 gap-4">
+        {data?.data.products.map((product, index) => (
+          <ProductCard
+            key={index}
+            image={`http://localhost:8000/images/products/images/${product.images[0]}`}
+            title={product.name}
+            price={product.price
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            description={product.description}
+          />
+        ))}
+      </div>
     </div>
   );
 }
