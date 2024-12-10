@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     >
       <img src={image} alt={title} />
       <div className="p-4 flex flex-col">
-        <h2 className="text-lg font-bold text-gray-800 mt-2">{title}</h2>
+        <h2 className="text-base font-bold text-gray-800 mt-2 w-full truncate">{title}</h2>
         <p className="text-sm text-gray-600 truncate mt-1">{description}</p>
         <div className="flex gap-1 items-center text-sky-600 mt-4 text-sm" >
           <CubeIcon className="size-5"/>

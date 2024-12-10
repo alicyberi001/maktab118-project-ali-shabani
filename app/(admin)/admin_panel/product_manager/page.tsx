@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { EditModal } from "@/components/editProduct.modal";
+import FormModal from "@/components/edit.modal";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
@@ -92,12 +93,9 @@ function ProductPage() {
                     >
                       حذف
                     </button>
-                    <button
-                      onClick={() => seteditModalOpen(true)}
-                      className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900"
-                    >
-                      <EditModal />
-                    </button>
+
+                    {/* <EditModal {...el}/>| */}
+                    <FormModal {...el} />
                   </div>
                 </td>
               </tr>
@@ -106,7 +104,7 @@ function ProductPage() {
         </table>
       </div>
 
-      <div className="text-sm flex justify-center mt-4 gap-2 absolute -bottom-48 left-1/2 -translate-x-1/2 mobile:-bottom-20">
+      <div className="text-sm flex justify-center mt-4 gap-2 absolute -z-10 -bottom-48 left-1/2 -translate-x-1/2 mobile:-bottom-20">
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}

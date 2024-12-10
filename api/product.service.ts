@@ -32,17 +32,17 @@ export const deleteProductById: deleteProductById = async (id) => {
   return response.data;
 };
 
-export interface editProductBody {
-  category?: string;
-  subcategory?: string;
-  name?: string;
-  price?: number;
-  quantity?: number;
-  brand?: string;
-  description?: string;
-  thumbnail?: string;
-  images?: string[];
-}
+// export interface editProductBody {
+//   category?: string;
+//   subcategory?: string;
+//   name?: string;
+//   price?: number;
+//   quantity?: number;
+//   brand?: string;
+//   description?: string;
+//   thumbnail?: string;
+//   images?: string[];
+// }
 
 // type editProductById = (
 //   id: string,
@@ -90,7 +90,6 @@ export const fetchEditProducts = async (id: string, data: IAddProduct) => {
   formData.append("subcategory", data.subcategory);
   formData.append("category", data.category);
   formData.append("price", data.price.toString());
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const response = await client.patch(urls.product.edit(id), formData);
   return response.data;
   } catch (error) {

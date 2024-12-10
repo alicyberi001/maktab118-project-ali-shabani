@@ -2,12 +2,13 @@
 
 // import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import DropdownMenu from "./dropdownMenu";
 
 const Navbar: React.FC = () => {
   return (
     <nav
       dir="rtl"
-      className="w-full py-[10px] fixed top-0 z-10 bg-white/60 backdrop-blur-xl flex justify-between items-center px-8 border-b-2 border-black/10 mobile:px-4"
+      className="w-full py-[10px] fixed top-0 z-10 bg-white backdrop-blur-xl flex justify-between items-center px-8 border-b-2 border-black/10 mobile:px-4"
     >
       <div className="flex gap-8 items-center mobile:gap-0">
         <a href="/">
@@ -31,6 +32,7 @@ const Navbar: React.FC = () => {
         <a href="#" className="py-1 px-4 font-bold text-[#202A30] rounded-lg">
           عضویت
         </a>
+        <DropdownMenu/>
       </div>
     </nav>
   );
