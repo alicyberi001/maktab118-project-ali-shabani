@@ -3,27 +3,54 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IProduct } from "@/types/product.api";
+import Editor from "react-simple-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorText } from "./wysiwyg";
+import { EditProducts, IAddProduct } from "@/api/product.service";
 
 const productSchema = z.object({
-  productName: z.string().min(1, "نام کالا الزامی است"),
-  productBrand: z.string().min(1, "برند کالا الزامی است"),
-  productStock: z.number().min(0, "موجودی کالا نمی‌تواند منفی باشد"),
-  productPrice: z.number().min(0, "قیمت کالا نمی‌تواند منفی باشد"),
+  name: z.string().min(1, "نام کالا الزامی است"),
+  brand: z.string().min(1, "برند کالا الزامی است"),
+  quantity: z.number().min(0, "موجودی کالا نمی‌تواند منفی باشد"),
+  price: z.number().min(0, "قیمت کالا نمی‌تواند منفی باشد"),
   category: z.string().min(1, "کتگوری الزامی است"),
-  subCategory: z.string().min(1, "ساب کتگوری الزامی است"),
-  productImage: z.any().optional(),
+  subcategory: z.string().min(1, "ساب کتگوری الزامی است"),
+  //   images: z.any().refine((files) => Array.isArray(files) && files.length > 0, {
+  //     message: "حداقل یک تصویر باید انتخاب شود",
+  //   }),
+  images: z.any(),
+  description: z.string().min(4, "حداقل ۴ کاراکتر"),
 });
 
 type ProductFormValues = z.infer<typeof productSchema>;
 
 const FormModal = (data: IProduct) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [subCategories, setSubCategories] = useState<string[]>([]);
+  const [subCategories, setSubCategories] = useState<
+    { id: string; name: string }[]
+  >([]);
 
-  const categoryOptions = {
-    electronics: ["اپل", "سامسونگ", "شیاومی"],
-    clothing: ["اپل", "ایسوس", "لنوو"],
-    books: ["اپل", "سامسونگ"],
+  //   const optionsCategory = [
+  //     { value: "674c96cd591fa0b7179b5331", label: "قهوه اسپرسو" },
+  //     { value: "674c96e9591fa0b7179b533a", label: "قهوه ترک" },
+  //     { value: "674c96d8591fa0b7179b5335", label: "قهوه فرانسه" },
+  //     ];
+
+  const categoryOptions: Record<string, { id: string; name: string }[]> = {
+    "674c96cd591fa0b7179b5331": [
+      { name: "اپل", id: "674c9b5a591fa0b7179b5341" },
+      { name: "سامسونگ", id: "674c9bce591fa0b7179b5345" },
+      { name: "شیاومی", id: "674c9be0591fa0b7179b5349" },
+    ],
+    "674c96e9591fa0b7179b533a": [
+      { name: "اپل", id: "674d5293d81da64b1430d1c1" },
+      { name: "ایسوس", id: "674c9cd0591fa0b7179b5359" },
+      { name: "لنوو", id: "674ca29d591fa0b7179b535f" },
+    ],
+    "674c96d8591fa0b7179b5335": [
+      { name: "اپل", id: "674c9c3e591fa0b7179b534d" },
+      { name: "سامسونگ", id: "674c9c52591fa0b7179b5351" },
+    ],
   };
 
   const {
@@ -32,7 +59,7 @@ const FormModal = (data: IProduct) => {
     register,
     watch,
     formState: { errors },
-  } = useForm<ProductFormValues>({
+  } = useForm<IAddProduct>({
     resolver: zodResolver(productSchema),
   });
 
@@ -48,9 +75,10 @@ const FormModal = (data: IProduct) => {
     }
   }, [selectedCategory]);
 
-  const onSubmit = (data: ProductFormValues) => {
-    console.log("Submitted Data: ", data);
-    // Call your API function here
+  const onSubmit = async(form: ProductFormValues) => {
+    console.log("Submitted Data: ", form);
+    const res = await EditProducts(data._id, form);
+    console.log(res)
   };
 
   return (
@@ -78,14 +106,14 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">نام کالا</label>
                     <input
-                    defaultValue={data.name}
+                      defaultValue={data.name}
                       type="text"
-                      {...register("productName")}
+                      {...register("name")}
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                     />
-                    {errors.productName && (
+                    {errors.name && (
                       <p className="text-red-500 text-sm">
-                        {errors.productName.message}
+                        {errors.name.message}
                       </p>
                     )}
                   </div>
@@ -93,14 +121,14 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">برند کالا</label>
                     <input
-                    defaultValue={data.brand}
+                      defaultValue={data.brand}
                       type="text"
-                      {...register("productBrand")}
+                      {...register("brand")}
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                     />
-                    {errors.productBrand && (
+                    {errors.brand && (
                       <p className="text-red-500 text-sm">
-                        {errors.productBrand.message}
+                        {errors.brand.message}
                       </p>
                     )}
                   </div>
@@ -110,14 +138,14 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">موجودی کالا</label>
                     <input
-                    defaultValue={data.quantity}
+                      defaultValue={data.quantity}
                       type="number"
-                      {...register("productStock", { valueAsNumber: true })}
+                      {...register("quantity", { valueAsNumber: true })}
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                     />
-                    {errors.productStock && (
+                    {errors.quantity && (
                       <p className="text-red-500 text-sm">
-                        {errors.productStock.message}
+                        {errors.quantity.message}
                       </p>
                     )}
                   </div>
@@ -125,14 +153,14 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">قیمت کالا</label>
                     <input
-                    defaultValue={data.price}
+                      defaultValue={data.price}
                       type="number"
-                      {...register("productPrice", { valueAsNumber: true })}
+                      {...register("price", { valueAsNumber: true })}
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                     />
-                    {errors.productPrice && (
+                    {errors.price && (
                       <p className="text-red-500 text-sm">
-                        {errors.productPrice.message}
+                        {errors.price.message}
                       </p>
                     )}
                   </div>
@@ -146,9 +174,9 @@ const FormModal = (data: IProduct) => {
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                     >
                       <option value="">انتخاب کنید</option>
-                      <option value="electronics">موبایل</option>
-                      <option value="clothing">لپ تاپ</option>
-                      <option value="books">تبلت</option>
+                      <option value="674c96cd591fa0b7179b5331">موبایل</option>
+                      <option value="674c96e9591fa0b7179b533a">لپ تاپ</option>
+                      <option value="674c96d8591fa0b7179b5335">تبلت</option>
                     </select>
                     {errors.category && (
                       <p className="text-red-500 text-sm">
@@ -160,20 +188,20 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className=" text-gray-700">ساب کتگوری</label>
                     <select
-                      {...register("subCategory")}
+                      {...register("subcategory")}
                       className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                       disabled={!selectedCategory}
                     >
                       <option value="">انتخاب کنید</option>
                       {subCategories.map((subCat) => (
-                        <option key={subCat} value={subCat}>
-                          {subCat}
+                        <option key={subCat.id} value={subCat.id}>
+                          {subCat.name}
                         </option>
                       ))}
                     </select>
-                    {errors.subCategory && (
+                    {errors.subcategory && (
                       <p className="text-red-500 text-sm">
-                        {errors.subCategory.message}
+                        {errors.subcategory.message}
                       </p>
                     )}
                   </div>
@@ -183,9 +211,24 @@ const FormModal = (data: IProduct) => {
                   <label className="block text-gray-700">تصویر محصول</label>
                   <input
                     type="file"
-                    {...register("productImage")}
+                    {...register("images")}
                     className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                   />
+                  {/* <EditorText /> */}
+                  <div>
+                    <label className="block text-gray-700">توضیحات کالا</label>
+                    <input
+                      defaultValue={data.description}
+                      type="string"
+                      {...register("description")}
+                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+                    />
+                    {errors.description && (
+                      <p className="text-red-500 text-sm">
+                        {errors.description.message}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <button

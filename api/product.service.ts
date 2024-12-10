@@ -67,19 +67,19 @@ export const deleteProductById: deleteProductById = async (id) => {
 // };
 
 
-interface IAddProduct {
+export interface IAddProduct {
   name: string;
   brand: string;
   description: string;
-  quantity: string;
-  images: File[];
+  quantity: number;
+  images?: File[];
   subcategory: string;
   category: string;
-  price: string;
+  price: number;
   }
 
 
-export const fetchEditProducts = async (id: string, data: IAddProduct) => {
+export const EditProducts = async (id: string, data: IAddProduct) => {
   try {
   const formData = new FormData();
   formData.append("name", data.name);
