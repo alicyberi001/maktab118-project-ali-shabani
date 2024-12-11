@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { EditModal } from "@/components/editProduct.modal";
 import FormModal from "@/components/edit.modal";
+import CreateModalForm from "@/components/createProduct.modal";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
@@ -43,9 +44,10 @@ function ProductPage() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
-      <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">
+      {/* <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">
         افزودن کالا +
-      </button>
+      </button> */}
+      <CreateModalForm />
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>

@@ -5,7 +5,7 @@ import { IProduct } from "@/types/product.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditProducts, IAddProduct } from "@/api/product.service";
+import { createProducts, EditProducts, IAddProduct } from "@/api/product.service";
 import { EditorText } from "./wysiwyg";
 import TemplateDemo from "./fileUploader";
 import Editor from "react-simple-wysiwyg";
@@ -26,7 +26,7 @@ const productSchema = z.object({
 
 type ProductFormValues = z.infer<typeof productSchema>;
 
-const FormModal = (data: IProduct) => {
+const CreateModalForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [subCategories, setSubCategories] = useState<
     { id: string; name: string }[]
@@ -73,13 +73,13 @@ const FormModal = (data: IProduct) => {
 
   const onSubmit = async (form: ProductFormValues) => {
     try {
-      console.log("Submitted Data: ", form);
-      const res = await EditProducts(data._id, form);
+      console.log("created Data: ", form);
+      const res = await createProducts(form);
       console.log(res);
-      toast.success("محصول با موفقیت ویرایش شد");
+      toast.success("محصول با موفقیت اضافه شد");
       setIsOpen(false)
     } catch (error) {
-      toast.error("محصول ویرایش نشد");
+      toast.error("محصول اضافه نشد");
       setIsOpen(false)
     }
   };
@@ -88,9 +88,9 @@ const FormModal = (data: IProduct) => {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-sm text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-gray-900"
+        className="text-[#202A30] text-sm border-2 border-gray-900 rounded-lg px-3 py-1 font-semibold absolute left-0 -top-10 hover:bg-gray-900 hover:text-white"
       >
-        ویرایش
+        افزودن کالا +
       </button>
 
       {isOpen && (
@@ -111,7 +111,6 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">نام کالا</label>
                     <input
-                      defaultValue={data.name}
                       type="text"
                       {...register("name")}
                       className="w-48 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-1 focus:border-black"
@@ -126,7 +125,6 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">برند کالا</label>
                     <input
-                      defaultValue={data.brand}
                       type="text"
                       {...register("brand")}
                       className="w-48 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-1 focus:border-black"
@@ -143,7 +141,6 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">موجودی کالا</label>
                     <input
-                      defaultValue={data.quantity}
                       type="number"
                       {...register("quantity", { valueAsNumber: true })}
                       className="w-48 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-1 focus:border-black"
@@ -158,7 +155,6 @@ const FormModal = (data: IProduct) => {
                   <div>
                     <label className="block text-gray-700">قیمت کالا</label>
                     <input
-                      defaultValue={data.price}
                       type="number"
                       {...register("price", { valueAsNumber: true })}
                       className="w-48 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-1 focus:border-black"
@@ -217,7 +213,6 @@ const FormModal = (data: IProduct) => {
                   <div className="flex flex-col">
                     <label className="block text-gray-700">توضیحات کالا</label>
                     <input
-                      defaultValue={data.description}
                       type="string"
                       {...register("description")}
                       className="w-48 h-24 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
@@ -230,11 +225,6 @@ const FormModal = (data: IProduct) => {
                   </div>
                   <div className="flex flex-col">
                     <label className="block text-gray-700">تصویر محصول</label>
-                    {/* <input
-                      type="file"
-                      {...register("images")}
-                      className="w-48 h-24 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
-                    /> */}
                     <div className="flex items-center justify-center">
                       <label
                         htmlFor="dropzone-file"
@@ -290,4 +280,4 @@ const FormModal = (data: IProduct) => {
   );
 };
 
-export default FormModal;
+export default CreateModalForm;

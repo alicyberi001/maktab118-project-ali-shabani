@@ -24,48 +24,12 @@ export const fetchProductById: fetchProductByIdType = async (id) => {
   return response.data;
 };
 
-
 type deleteProductById = (_: string) => Promise<null>;
 export const deleteProductById: deleteProductById = async (id) => {
   const response = await client.delete(urls.product.delete(id));
   console.log("delete: ", response);
   return response.data;
 };
-
-// export interface editProductBody {
-//   category?: string;
-//   subcategory?: string;
-//   name?: string;
-//   price?: number;
-//   quantity?: number;
-//   brand?: string;
-//   description?: string;
-//   thumbnail?: string;
-//   images?: string[];
-// }
-
-// type editProductById = (
-//   id: string,
-//   _: editProductBody
-// ) => Promise<IEditProductRes>;
-// export const editProductById: editProductById = async (id, body) => {
-//   const response = await client.patch(urls.product.edit(id), {
-//     body: {
-//       name: body?.name,
-//       category: body?.category,
-//       subcategory: body.subcategory,
-//       price: body?.price,
-//       quantity: body?.quantity,
-//       brand: body?.brand,
-//       description: body?.description,
-//       thumbnail: body?.thumbnail,
-//       images: body?.images,
-//     },
-//   });
-//   console.log("edit: ", response);
-//   return response.data;
-// };
-
 
 export interface IAddProduct {
   name: string;
@@ -76,23 +40,46 @@ export interface IAddProduct {
   subcategory: string;
   category: string;
   price: number;
-  }
-
+}
 
 export const EditProducts = async (id: string, data: IAddProduct) => {
   try {
-  const formData = new FormData();
-  formData.append("name", data.name);
-  formData.append("brand", data.brand);
-  formData.append("description", data.description);
-  formData.append("quantity", data.quantity.toString());
-  formData.append("images", data.images[0]);
-  formData.append("subcategory", data.subcategory);
-  formData.append("category", data.category);
-  formData.append("price", data.price.toString());
-  const response = await client.patch(urls.product.edit(id), formData);
-  return response.data;
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("brand", data.brand);
+    formData.append("description", data.description);
+    formData.append("quantity", data.quantity.toString());
+    formData.append("images", data.images[0]);
+    formData.append("subcategory", data.subcategory);
+    formData.append("category", data.category);
+    formData.append("price", data.price.toString());
+    const response = await client.patch(urls.product.edit(id), formData);
+    return response.data;
   } catch (error) {
-  throw error;
+    throw error;
   }
-  };
+};
+
+const token = sessionStorage.getItem("accessToken");
+
+export const createProducts = async (data: IAddProduct) => {
+  try {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("brand", data.brand);
+    formData.append("description", data.description);
+    formData.append("quantity", data.quantity.toString());
+    formData.append("images", data.images[0]);
+    formData.append("subcategory", data.subcategory);
+    formData.append("category", data.category);
+    formData.append("price", data.price.toString());
+    const response = await client.post(urls.product.create, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
