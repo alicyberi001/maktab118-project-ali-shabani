@@ -27,7 +27,7 @@ const ProductPage: React.FC = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
-    queryFn: () => fetchProductById(productID),
+    queryFn: () => fetchProductById(productID as string),
   });
 
   return (

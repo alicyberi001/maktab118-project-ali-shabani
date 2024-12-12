@@ -18,6 +18,24 @@ export const fetchProductsList: fetchProductsListType = async (params) => {
   return response.data;
 };
 
+interface IParams2 {
+  page?: number;
+  limit?: number;
+  categoryID: string;
+}
+
+type fetchProductsByCategoryType = (
+  _: IParams2
+) => Promise<IGlobalRes<{ products: IProduct[] }>>;
+export const fetchProductsByCategory: fetchProductsByCategoryType = async (
+  params
+) => {
+  const response = await client.get(urls.product.getAll, {
+    params: { page: params?.page || 1, limit: params?.limit || 6, category: params.categoryID },
+  });
+  return response.data;
+};
+
 type fetchProductByIdType = (_: string) => Promise<IProductById>;
 export const fetchProductById: fetchProductByIdType = async (id) => {
   const response = await client.get(urls.product.getById(id));
@@ -60,13 +78,12 @@ export const EditProducts = async (id: string, data: IAddProduct) => {
   }
 };
 
-
 export interface IAddProduct2 {
   quantity: string;
   price: string;
 }
 
-export const EditProducts2 = async (id:string , data: IAddProduct2) => {
+export const EditProducts2 = async (id: string, data: IAddProduct2) => {
   try {
     const formData = new FormData();
     formData.append("quantity", data.quantity.toString());
@@ -77,7 +94,6 @@ export const EditProducts2 = async (id:string , data: IAddProduct2) => {
     throw error;
   }
 };
-
 
 const token = sessionStorage.getItem("accessToken");
 
