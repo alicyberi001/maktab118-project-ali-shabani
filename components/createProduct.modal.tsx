@@ -75,7 +75,7 @@ const CreateModalForm = () => {
     try {
       console.log("created Data: ", form);
       const res = await createProducts(form);
-      console.log(res);
+      
       toast.success("محصول با موفقیت اضافه شد");
       setIsOpen(false)
     } catch (error) {

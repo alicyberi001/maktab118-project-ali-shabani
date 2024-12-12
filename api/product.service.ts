@@ -60,6 +60,25 @@ export const EditProducts = async (id: string, data: IAddProduct) => {
   }
 };
 
+
+export interface IAddProduct2 {
+  quantity: string;
+  price: string;
+}
+
+export const EditProducts2 = async (id:string , data: IAddProduct2) => {
+  try {
+    const formData = new FormData();
+    formData.append("quantity", data.quantity.toString());
+    formData.append("price", data.price.toString());
+    const response = await client.patch(urls.product.edit(id), formData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const token = sessionStorage.getItem("accessToken");
 
 export const createProducts = async (data: IAddProduct) => {

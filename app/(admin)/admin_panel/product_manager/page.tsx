@@ -1,6 +1,10 @@
 "use client";
 
-import { deleteProductById, fetchProductsList } from "@/api/product.service";
+import {
+  deleteProductById,
+  EditProducts2,
+  fetchProductsList,
+} from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -18,6 +22,7 @@ function ProductPage() {
     queryFn: () => fetchProductsList({ page, limit }),
   });
 
+  
   if (isLoading) return;
   if (isError) return;
 
