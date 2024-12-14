@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col items-center gap-3">
-          <img src="./logo1.svg" alt="logo1" className="w-36" />
+          <img src="/logo1.svg" alt="logo1" className="w-36" />
           <div className="flex gap-2">
             <img src="./github.svg" alt="" className="w-4" />
             <img src="./linkedin.svg" alt="" className="w-4" />

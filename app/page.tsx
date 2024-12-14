@@ -1,3 +1,5 @@
+// "use client"
+
 import SwiperComp from "@/components/swiper";
 import Image from "next/image";
 
@@ -11,6 +13,10 @@ import "swiper/css/scrollbar";
 import ImageSlider from "@/components/swiper";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import SlideNav from "@/containers/slideNav";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProductsByCategory } from "@/api/product.service";
+import ProductCard from "@/components/productCard";
 
 const slides = [
   {
@@ -32,11 +38,26 @@ const slides = [
 ];
 
 export default function Home() {
+  
   return (
     <div className="bg-[#f8f8f8]">
-      <div className="container mx-auto">
+      <div className="">
         <Navbar />
         <ImageSlider slides={slides} />
+        <SlideNav />
+        {/* <nav className="w-full h-72 border border-gray-800 bg-red-400 rounded-xl overflow-x-scroll">
+          {data?.data.products.map((product, index) => (
+            <ProductCard
+              key={index}
+              image={`http://localhost:8000/images/products/images/${product.images[0]}`}
+              title={product.name}
+              price={product.price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              description={product.description}
+            />
+          ))}
+        </nav> */}
         <div className="flex justify-center gap-10 text-gray-900 my-10">
           <div className="flex flex-col items-center gap-3">
             <img

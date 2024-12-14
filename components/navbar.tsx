@@ -2,7 +2,9 @@
 
 // import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import DropdownMenu from "./dropdownMenu";
+import CartDropdown from "./cartDropdown";
+import ProfileDropdown from "./profileDropdown";
+
 
 const Navbar: React.FC = () => {
   return (
@@ -12,7 +14,7 @@ const Navbar: React.FC = () => {
     >
       <div className="flex gap-8 items-center mobile:gap-0">
         <a href="/">
-          <img className="w-44 mobile:w-32" src="./logo1b.svg" alt="logo1b" />
+          <img className="w-44 mobile:w-32" src="/logo1b.svg" alt="logo1b" />
         </a>
         <div className="relative mobile:hidden">
           <input
@@ -22,17 +24,9 @@ const Navbar: React.FC = () => {
           <MagnifyingGlassIcon className="w-6 absolute right-3 top-3 text-slate-400" />
         </div>
       </div>
-      <div className="flex gap-[1px]">
-        <a
-          href="#"
-          className="py-1 px-4 border-[2px] border-[#202A30] font-bold text-[#202A30] rounded-lg hover:bg-[#202A30] hover:text-white"
-        >
-          ورود
-        </a>
-        <a href="#" className="py-1 px-4 font-bold text-[#202A30] rounded-lg">
-          عضویت
-        </a>
-        <DropdownMenu/>
+      <div className="flex">
+      <ProfileDropdown />
+      <CartDropdown />
       </div>
     </nav>
   );

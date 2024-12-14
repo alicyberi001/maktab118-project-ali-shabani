@@ -21,7 +21,7 @@ function AllProductPage() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", page],
-    queryFn: () => fetchProductsByCategory({ page, limit, categoryID }),
+    queryFn: () => fetchProductsByCategory({ page, limit, categoryID: categoryID as string }),
   });
 
   if (isLoading) return;

@@ -28,7 +28,7 @@ const editProducts = async (
 };
 
 function PriceManage() {
-  const queryClient = useQueryClient(); // برای مدیریت کش کوئری‌ها
+  const queryClient = useQueryClient(); 
   const [editableCells, setEditableCells] = useState<{
     [id: string]: IEditProductData;
   }>({});
@@ -65,7 +65,7 @@ function PriceManage() {
       ...prev,
       [id]: {
         ...prev[id],
-        [field]: prev[id]?.[field] || initialValue, // مقدار اولیه فقط یک بار تنظیم می‌شود
+        [field]: prev[id]?.[field] || initialValue, 
       },
     }));
   };
@@ -77,7 +77,6 @@ function PriceManage() {
     }));
     await editProducts(updates);
     setEditableCells({});
-    // بازخوانی کوئری‌ها
     queryClient.invalidateQueries({ queryKey: ["products"] });
   };
 

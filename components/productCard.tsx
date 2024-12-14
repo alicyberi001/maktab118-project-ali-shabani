@@ -19,9 +19,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div
       dir="rtl"
-      className="max-w-xs h-[395px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3"
+      className="w-[260px] h-[395px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3"
     >
-      <img src={image} alt={title} />
+      <img src={image} alt={title} className="w-[225px] h-[150px]"/>
       <div className="p-4 flex flex-col">
         <h2 className="text-base font-bold text-gray-800 mt-2 w-full truncate">{title}</h2>
         <p className="text-sm text-gray-600 truncate mt-1">{description}</p>
