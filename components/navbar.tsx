@@ -6,6 +6,9 @@ import CartDropdown from "./cartDropdown";
 import ProfileDropdown from "./profileDropdown";
 
 
+
+
+
 const Navbar: React.FC = () => {
   return (
     <nav

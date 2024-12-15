@@ -3,6 +3,10 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
+import { auth_user_signup } from "@/api/adminLogin.service";
+import { IAuth_user_signup } from "@/types/auth.api";
 
 const signupSchema = z
   .object({
@@ -35,9 +39,38 @@ export default function SignupForm() {
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (data: SignupFormValues) => {
-    console.log(data);
-    alert("فرم با موفقیت ارسال شد!");
+  const onSubmit = async (
+    // data: SignupFormValues,
+    { username, password, address, firstname, lastname, phoneNumber }: IAuth_user_signup
+  ) => {
+    try {
+      // const authRes = await auth_user_signup({
+      //   firstname: data.firstName,
+      //   lastname: data.lastName,
+      //   username: data.email,
+      //   password: data.password,
+      //   phoneNumber: data.phone,
+      //   address: data.address,
+      // });
+      const authRes = await auth_user_signup({
+        firstname,
+        lastname,
+        username,
+        password,
+        phoneNumber,
+        address,
+      });
+      console.log(authRes);
+      const { accessToken, refreshToken } = authRes.token;
+      sessionStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("refreshToken", refreshToken);
+      toast.success("ثبت نام با موفقیت انجام شد");
+      // setTimeout(() => {
+      //   redirect("/");
+      // }, 3000);
+    } catch (error: any) {
+      toast.error(error);
+    }
   };
 
   return (

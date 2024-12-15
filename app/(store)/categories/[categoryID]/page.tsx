@@ -21,7 +21,12 @@ function AllProductPage() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", page],
-    queryFn: () => fetchProductsByCategory({ page, limit, categoryID: categoryID as string }),
+    queryFn: () =>
+      fetchProductsByCategory({
+        page,
+        limit,
+        categoryID: categoryID as string,
+      }),
   });
 
   if (isLoading) return;
@@ -53,10 +58,11 @@ function AllProductPage() {
               key={index}
               image={`http://localhost:8000/images/products/images/${product.images[0]}`}
               title={product.name}
+              description={product.description}
+              id={product._id}
               price={product.price
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              description={product.description}
             />
           ))}
         </div>

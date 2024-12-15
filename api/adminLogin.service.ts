@@ -1,4 +1,9 @@
-import { IAuth_admin_login, IAuth_admin_login_Res } from "@/types/auth.api";
+import {
+  IAuth_admin_login,
+  IAuth_admin_login_Res,
+  IAuth_user_signup,
+  IAuth_user_signup_Res,
+} from "@/types/auth.api";
 import { urls } from "./urls";
 import { client } from "./client";
 
@@ -12,6 +17,31 @@ export const auth_admin_login: auth_admin_login_type = async ({
   const response = await client.post<IAuth_admin_login_Res>(
     urls.auth.admin.login,
     { username, password }
+  );
+  return response.data;
+};
+
+type auth_user_signup_type = (
+  _: IAuth_user_signup
+) => Promise<IAuth_user_signup_Res>;
+export const auth_user_signup: auth_user_signup_type = async ({
+  firstname,
+  lastname,
+  username,
+  password,
+  phoneNumber,
+  address,
+}) => {
+  const response = await client.post<IAuth_user_signup_Res>(
+    urls.auth.user.signup,
+    { 
+      firstname, 
+      lastname, 
+      username, 
+      password, 
+      phoneNumber, 
+      address, 
+    }
   );
   return response.data;
 };

@@ -26,3 +26,36 @@ export interface IAuth_admin_login_Res {
     };
   };
 }
+
+export interface IAuth_user_signup {
+  firstname: string;
+  lastname: string;
+  username: string;
+  password: string;
+  phoneNumber: string;
+  address: string;
+}
+
+export interface IAuth_user_signup_Res {
+  status: string;
+  token: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  data: {
+    user: {
+      firstname: string;
+      lastname: string;
+      username: string;
+      password: string;
+      phoneNumber: string;
+      address: string;
+      role: string;
+      _id: string;
+      createdAt: string;
+      updatedAt: string;
+      __v: number;
+      refreshToken: string;
+    };
+  };
+}

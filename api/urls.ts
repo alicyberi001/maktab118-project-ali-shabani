@@ -3,6 +3,9 @@ export const urls = {
     admin: {
       login: "/auth/login",
     },
+    user: {
+      signup: "/auth/signup",
+    },
   },
   product: {
     getAll: "/products",
