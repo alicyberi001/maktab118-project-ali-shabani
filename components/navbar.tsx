@@ -4,6 +4,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import CartDropdown from "./cartDropdown";
 import ProfileDropdown from "./profileDropdown";
+import Link from "next/link";
 
 
 

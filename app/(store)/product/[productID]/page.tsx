@@ -2,6 +2,7 @@
 
 import { fetchProductById } from "@/api/product.service";
 import LoginForm from "@/components/loginForm";
+import useCartStore, { Product } from "@/zustand/cart.store";
 import {
   ShieldCheckIcon,
   ChevronLeftIcon,
@@ -18,17 +19,32 @@ import {
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ProductPage: React.FC = () => {
+  const { addToCart } = useCartStore();
   const { productID } = useParams();
   if (productID == undefined) return;
-
-  
 
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: () => fetchProductById(productID as string),
   });
+
+  if (data === undefined) return;
+
+  const handleAddToCart = () => {
+    const product: Product = {
+      _id: data.data.product._id,
+      name: data.data.product.name,
+      price: data.data.product.price,
+      quantity: 1, // به طور پیش‌فرض یک عدد اضافه شود
+      image: data.data.product.images,
+      description: data.data.product.description,
+    };
+
+    addToCart(product);
+  };
 
   return (
     <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
@@ -91,7 +107,11 @@ const ProductPage: React.FC = () => {
               <ShareIcon className="w-5" />
             </span>
           </div>
-          <img src={`http://localhost:8000/images/products/images/${data?.data.product.images[0]}`} alt={data?.data.product.name} className="" />
+          <img
+            src={`http://localhost:8000/images/products/images/${data?.data.product.images[0]}`}
+            alt={data?.data.product.name}
+            className=""
+          />
         </div>
       </section>
       <section className="flex flex-col gap-6 w-[380px] ">
@@ -148,10 +168,16 @@ const ProductPage: React.FC = () => {
               800,000 تومان تخفیف خرید زودهنگام
             </div>
             <div className="text-gray-900 text-lg  font-semibold">
-            {data?.data.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان
+              {data?.data.product.price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+              تومان
             </div>
           </div>
-          <button className="w-full h-14 bg-[#202A30] text-white rounded-lg">
+          <button
+            onClick={handleAddToCart}
+            className="w-full h-14 bg-[#202A30] text-white rounded-lg"
+          >
             افزودن به سبد خرید
           </button>
         </aside>

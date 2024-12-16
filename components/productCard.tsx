@@ -1,9 +1,10 @@
 "use client";
 
 import { CubeIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface ProductCardProps {
-  id: string;
+  id?: string;
   image: string;
   title: string;
   price: string;
@@ -19,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const test = "12000000";
   return (
-    <a
+    <Link
       href={`/product/${id}`}
       dir="rtl"
       className="w-[260px] h-[395px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3"
@@ -45,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </del>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
