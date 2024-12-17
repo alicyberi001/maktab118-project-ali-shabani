@@ -2,7 +2,7 @@
 
 import { fetchProductById } from "@/api/product.service";
 import LoginForm from "@/components/loginForm";
-import useCartStore from "@/zustand/cart.store";
+import useCartStore, { Product } from "@/zustand/cart.store";
 import {
   ShieldCheckIcon,
   ChevronLeftIcon,
@@ -22,19 +22,24 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
 const ProductPage: React.FC = () => {
-  const { cart, removeFromCart, clearCart, totalAmount } = useCartStore();
-  console.log(cart)
+  const { cart, decreaseQuantity, clearCart, totalAmount, addToCart, totalProducts } = useCartStore();
+  console.log(cart);
 
-  const handleDelete = (id: string) => {
-    removeFromCart(id);
-    };
+  const handleDecreaseQuantity = (id: string) => {
+    decreaseQuantity(id);
+  };
+
+ const handleAddToCart = (product: Product) => {
+     addToCart(product);
+   };
+ 
 
   // const { data, isLoading } = useQuery({
   //   queryKey: ["products"],
   //   queryFn: () => fetchProductById(productID as string),
   // });
 
-  const price = "۲۹۳۰۰۰۰۰";
+
 
   return (
     <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
@@ -50,9 +55,7 @@ const ProductPage: React.FC = () => {
                 <p className="text-gray-950 text-lg font-semibold">
                   {product.name}
                 </p>
-                <p className="text-sm text-gray-700">
-                  {product.description}
-                </p>
+                <p className="text-sm text-gray-700">{product.description}</p>
                 <span className="w-fit flex flex-col text-sm font-semibold gap-2 border-t border-gray-300 pl-5 pt-3">
                   <span className="flex gap-2 ">
                     <BuildingStorefrontIcon className="w-5 text-gray-700" />
@@ -70,9 +73,12 @@ const ProductPage: React.FC = () => {
                   </div>
                 </span>
                 <div className="flex items-center gap-4">
-                  <PlusIcon className="text-gray-900 w-5" />
-                  <span>0</span>
-                  <TrashIcon onClick={ () => handleDelete(product._id)} className="text-red-700 w-5" />
+                  <PlusIcon onClick={ () => handleAddToCart(product)} className="text-gray-900 w-5 hover:cursor-pointer" />
+                  <span>{product.quantity}</span>
+                  <TrashIcon
+                    onClick={() => handleDecreaseQuantity(product._id)}
+                    className="text-red-700 w-5 hover:cursor-pointer"
+                  />
                 </div>
               </div>
               <div className="flex flex-col justify-between w-[40%]">
@@ -98,17 +104,23 @@ const ProductPage: React.FC = () => {
             <div className="flex justify-between">
               <span>قیمت محصولات:</span>
               <span>
-                {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان
+                {totalAmount()
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                تومان
               </span>
             </div>
             <div className="flex justify-between">
               <span>تعداد محصولات:</span>
-              <span>۳ عدد</span>
+              <span>{totalProducts()}</span>
             </div>
             <div className="flex justify-between font-semibold">
               <span>جمع کل:</span>
               <span>
-                {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان
+                {totalAmount()
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                تومان
               </span>
             </div>
           </div>

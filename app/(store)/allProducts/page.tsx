@@ -39,7 +39,7 @@ function AllProductPage() {
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
       <aside className="w-80 h-96 bg-red-500 rounded-xl">sidebar</aside>
       <div className="flex flex-col items-center">
-        <div className="w-full grid grid-cols-4 gap-4">
+        <div className="w-full grid grid-cols-4 gap-7">
           {data?.data.products.map((product, index) => (
             <ProductCard
               key={index}

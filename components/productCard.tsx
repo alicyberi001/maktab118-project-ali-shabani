@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <Link
       href={`/product/${id}`}
       dir="rtl"
-      className="w-[260px] h-[395px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3"
+      className="min-w-[240px] max-w-[240px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3 "
     >
       <img src={image} alt={title} className="w-[225px] h-[150px]" />
       <div className="p-4 flex flex-col">
