@@ -5,7 +5,7 @@ import { ShoppingCartIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, useRef } from "react";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
-import useCartStore, { Product } from "@/zustand/cart.store";
+import useCartStore, { Product } from "@/lib/zustand/cart.store";
 import {
   BuildingStorefrontIcon,
   CheckBadgeIcon,

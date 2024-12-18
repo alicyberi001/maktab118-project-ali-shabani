@@ -49,9 +49,6 @@ function ProductPage() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
-      {/* <button className="text-[#202A30] border-2 border-gray-900 rounded-lg px-4 py-2 font-semibold absolute left-0 -top-12">
-        افزودن کالا +
-      </button> */}
       <CreateModalForm />
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها

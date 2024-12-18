@@ -9,6 +9,7 @@ import { createProducts, EditProducts, IAddProduct } from "@/api/product.service
 import { EditorText } from "./wysiwyg";
 import TemplateDemo from "./fileUploader";
 import Editor from "react-simple-wysiwyg";
+import { queryClient } from "@/providers/tanstak.provider";
 
 const productSchema = z.object({
   name: z.string().min(1, "نام کالا الزامی است"),
@@ -77,6 +78,7 @@ const CreateModalForm = () => {
       const res = await createProducts(form);
       
       toast.success("محصول با موفقیت اضافه شد");
+      // queryClient.invalidateQueries({ queryKey: ["products"] })
       setIsOpen(false)
     } catch (error) {
       toast.error("محصول اضافه نشد");

@@ -2,7 +2,7 @@
 
 import { fetchProductById } from "@/api/product.service";
 import LoginForm from "@/components/loginForm";
-import useCartStore, { Product } from "@/zustand/cart.store";
+import useCartStore, { Product } from "@/lib/zustand/cart.store";
 import {
   ShieldCheckIcon,
   ChevronLeftIcon,
