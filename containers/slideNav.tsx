@@ -34,19 +34,17 @@ const SlideNav = () => {
   };
 
   return (
-    <div dir="rtl" className="relative my-8">
-      {/* Left Arrow */}
+    <div dir="rtl" className="relative my-14 mx-8">
+      <span className="absolute -top-10 text-xl font-semibold ">جدیدترین محصولات</span>
       <button
         onClick={scrollLeft}
         className="absolute left-8 top-1/2 -translate-y-1/2 z-10 bg-white text-gray-600 px-2 py-1 rounded-lg shadow-md hover:shadow"
       >
         <ArrowLeftIcon className="size-4"/>
       </button>
-
-      {/* Navigation bar */}
       <nav
         ref={navRef}
-        className="h-fit mx-10 bg-slate-100 border border-gray-800  rounded-xl overflow-x-scroll scrollbar-hide flex flex-nowrap gap-3 px-3 py-5"
+        className="h-fit bg-gray-900 border border-gray-800  rounded-xl overflow-x-scroll scrollbar-hide flex flex-nowrap gap-3 px-3 py-5"
       >
         {data?.data.products.map((product, index) => (
           <ProductCard
@@ -60,8 +58,6 @@ const SlideNav = () => {
           />
         ))}
       </nav>
-
-      {/* Right Arrow */}
       <button
         onClick={scrollRight}
         className="absolute right-8 top-1/2 -translate-y-1/2 z-10 bg-white text-gray-600 px-2 py-1 rounded-lg shadow-md hover:shadow"

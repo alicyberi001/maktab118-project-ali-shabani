@@ -15,7 +15,6 @@ const LoginPage: React.FC = () => {
         >
           <source src="./motion.mp4" type="video/mp4" />
         </video>
-        {/* <img src="./logo2b.svg" alt="logo2b" className="w-56 h-16"/> */}
         <LoginForm />
       </div>
     </div>

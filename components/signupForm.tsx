@@ -5,8 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { auth_user_signup } from "@/api/adminLogin.service";
+import { auth_user_signup } from "@/api/auth.service";
 import { IAuth_user_signup } from "@/types/auth.api";
+import { setSessionToken } from "@/lib/session_manager";
 
 const signupSchema = z
   .object({
@@ -62,14 +63,13 @@ export default function SignupForm() {
       });
       console.log(authRes);
       const { accessToken, refreshToken } = authRes.token;
-      sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("refreshToken", refreshToken);
+      setSessionToken(accessToken, refreshToken)
       toast.success("ثبت نام با موفقیت انجام شد");
       // setTimeout(() => {
       //   redirect("/");
       // }, 3000);
     } catch (error: any) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 

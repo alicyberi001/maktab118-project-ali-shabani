@@ -34,14 +34,28 @@ export const auth_user_signup: auth_user_signup_type = async ({
 }) => {
   const response = await client.post<IAuth_user_signup_Res>(
     urls.auth.user.signup,
-    { 
-      firstname, 
-      lastname, 
-      username, 
-      password, 
-      phoneNumber, 
-      address, 
+    {
+      firstname,
+      lastname,
+      username,
+      password,
+      phoneNumber,
+      address,
     }
   );
+  return response.data;
+};
+
+
+interface ITokenRes {
+  status: string;
+  token: {
+    accessToken: string;
+  };
+}
+
+type auth_token = (_: string) => Promise<ITokenRes>;
+export const generateToken: auth_token = async (refreshToken) => {
+  const response = await client.post(urls.auth.token, { refreshToken });
   return response.data;
 };

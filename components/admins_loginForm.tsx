@@ -3,11 +3,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { auth_admin_login } from "@/api/adminLogin.service";
+import { auth_admin_login } from "@/api/auth.service";
 import { IAuth_admin_login, IAuth_admin_login_Res } from "@/types/auth.api";
 import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { AxiosError } from "axios";
+import { setSessionToken } from "@/lib/session_manager";
 
 const validationSchema = z.object({
   username: z.string(),
@@ -31,14 +32,13 @@ const AdminLoginForm = () => {
       const authRes = await auth_admin_login({ username, password });
       console.log(authRes);
       const { accessToken, refreshToken } = authRes.token;
-      sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("refreshToken", refreshToken);
+      setSessionToken(accessToken, refreshToken)
       toast.success("وارد شدید");
       setTimeout(() => {
         redirect("/admin_panel/orders");
       }, 3000); 
     } catch (error: any) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 

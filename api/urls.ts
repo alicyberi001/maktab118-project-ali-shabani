@@ -6,6 +6,7 @@ export const urls = {
     user: {
       signup: "/auth/signup",
     },
+    token: "/auth/token"
   },
   product: {
     getAll: "/products",
