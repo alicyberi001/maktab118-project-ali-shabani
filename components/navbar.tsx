@@ -5,10 +5,9 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import CartDropdown from "./cartDropdown";
 import ProfileDropdown from "./profileDropdown";
 import Link from "next/link";
-
-
-
-
+import DropdownMenu from "./dropdownMenu";
+import useUserStore from "@/lib/zustand/users.store";
+import NavbarItems from "./navbarItems";
 
 const Navbar: React.FC = () => {
   return (
@@ -28,10 +27,7 @@ const Navbar: React.FC = () => {
           <MagnifyingGlassIcon className="w-6 absolute right-3 top-3 text-slate-400" />
         </div>
       </div>
-      <div className="flex">
-      <ProfileDropdown />
-      <CartDropdown />
-      </div>
+      <NavbarItems />
     </nav>
   );
 };

@@ -6,6 +6,9 @@ import { urls } from "./urls";
 interface IParams {
   page?: number;
   limit?: number;
+  categoryID?: string;
+  subCategoryID?: string;
+  sort?: string;
 }
 
 type fetchProductsListType = (
@@ -13,26 +16,22 @@ type fetchProductsListType = (
 ) => Promise<IGlobalRes<{ products: IProduct[] }>>;
 export const fetchProductsList: fetchProductsListType = async (params) => {
   const response = await client.get(urls.product.getAll, {
-    params: { page: params?.page || 1, limit: params?.limit || 6 },
+    params: {
+      page: params?.page || 1,
+      limit: params?.limit || 6,
+      category: params?.categoryID,
+      subcategory: params?.subCategoryID,
+      sort: params.sort,
+    },
   });
   return response.data;
 };
 
-interface IParams2 {
-  page?: number;
-  limit?: number;
-  categoryID: string;
-}
+type fetchSubcategoriesType = () => Promise<IGlobalRes<ISubcategories>>;
+export const fetchSubcategories: fetchSubcategoriesType = async () => {
+  const response = await client.get(urls.subcatrgories.getAll);
+  console.log(response.data);
 
-type fetchProductsByCategoryType = (
-  _: IParams2
-) => Promise<IGlobalRes<{ products: IProduct[] }>>;
-export const fetchProductsByCategory: fetchProductsByCategoryType = async (
-  params
-) => {
-  const response = await client.get(urls.product.getAll, {
-    params: { page: params?.page || 1, limit: params?.limit || 6, category: params.categoryID },
-  });
   return response.data;
 };
 

@@ -15,8 +15,10 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SlideNav from "@/containers/slideNav";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProductsByCategory } from "@/api/product.service";
+// import { fetchProductsByCategory } from "@/api/product.service";
 import ProductCard from "@/components/productCard";
+import Link from "next/link";
+import Categories from "@/containers/mainCategories";
 
 const slides = [
   {
@@ -38,14 +40,14 @@ const slides = [
 ];
 
 export default function Home() {
-  
   return (
     <div className="bg-[#f8f8f8]">
       <div className="">
         <Navbar />
         <ImageSlider slides={slides} />
+        <Categories />
         <SlideNav />
-        <div className="bg-blue-500 w-full h-96" >aaa</div>
+        <div className="bg-blue-500 w-full h-96">aaa</div>
         <div className="flex justify-center gap-10 text-gray-900 my-10">
           <div className="flex flex-col items-center gap-3">
             <img

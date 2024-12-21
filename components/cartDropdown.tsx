@@ -49,7 +49,7 @@ const handleAddToCart = (product: Product) => {
       {/* Trigger Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center relative px-3 py-3 text-sm font-medium rounded-md border-r border-gray-200  hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-700"
+        className="flex items-center relative px-3 py-3 text-sm font-medium rounded-l-md border-r border-gray-200  hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-700"
       >
         <span className="absolute top-1.5 right-1 size-[14px] text-xs rounded-full bg-cyan-600 text-white">{ProductsCounter()}</span>
         <ShoppingCartIcon className="size-5 text-gray-800 " />

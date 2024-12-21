@@ -1,36 +1,41 @@
 "use client";
 
-import {
-  deleteProductById,
-  fetchProductsByCategory,
-  fetchProductsList,
-} from "@/api/product.service";
+import { fetchProductsList, fetchSubcategories } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { EditModal } from "@/components/editProduct.modal";
 import ProductCard from "@/components/productCard";
 import { useParams } from "next/navigation";
-import { string } from "zod";
+import FilterComponent from "@/containers/collapse";
 
 function AllProductPage() {
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<string | undefined>(undefined);
   const limit = 16;
   const { categoryID } = useParams();
+
   if (categoryID == undefined) return;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", page],
+    queryKey: ["products", page, sort],
     queryFn: () =>
-      fetchProductsByCategory({
+      fetchProductsList({
         page,
         limit,
         categoryID: categoryID as string,
+        sort,
       }),
   });
 
-  if (isLoading) return;
-  if (isError) return;
+  const categoriesData = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => fetchSubcategories(),
+  });
+
+  const subcategoriesArray = categoriesData.data?.data.subcategories.filter( (el) => el.category == categoryID )
+  
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading products</div>;
 
   const totalPages = data?.total_pages || 1;
 
@@ -44,13 +49,30 @@ function AllProductPage() {
 
   const pagination = generatePagination(page, totalPages);
 
-  const handleAddToCart = () => {
-    alert("محصول به سبد خرید اضافه شد!");
-  };
-
   return (
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
-      <aside className="w-64 h-96 bg-cyan-500 rounded-xl">sidebar</aside>
+      <aside className="w-64 h-auto bg-cyan-500 rounded-xl p-4">
+        <h3 className="text-lg font-bold mb-4">فیلترها</h3>
+        <div className="flex flex-col gap-2">
+          <button
+            onClick={() => setSort("price")}
+            className={`px-4 py-2 rounded-lg ${
+              sort === "price" ? "bg-gray-800 text-white" : "bg-white"
+            }`}
+          >
+            قیمت صعودی
+          </button>
+          <button
+            onClick={() => setSort("-price")}
+            className={`px-4 py-2 rounded-lg ${
+              sort === "-price" ? "bg-gray-800 text-white" : "bg-white"
+            }`}
+          >
+            قیمت نزولی
+          </button>
+        </div>
+        <FilterComponent subcategoriesArray = {subcategoriesArray || []}/>
+      </aside>
       <div className="flex flex-col items-center">
         <div className="w-full grid grid-cols-4 gap-4">
           {data?.data.products.map((product, index) => (

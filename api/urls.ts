@@ -6,7 +6,7 @@ export const urls = {
     user: {
       signup: "/auth/signup",
     },
-    token: "/auth/token"
+    token: "/auth/token",
   },
   product: {
     getAll: "/products",
@@ -14,7 +14,6 @@ export const urls = {
     getById: (id: string) => `/products/${id}`,
     delete: (id: string) => `/products/${id}`,
     edit: (id: string) => `/products/${id}`,
-    // edit: (id: string) => `/products/${id}`,
   },
   orders: {
     getAll: "/orders",
@@ -22,5 +21,8 @@ export const urls = {
   users: {
     getAll: "/users",
     ById: (id: string) => `/users/${id}`,
+  },
+  subcatrgories: {
+    getAll: "/subcategories",
   },
 };

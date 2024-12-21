@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { AxiosError } from "axios";
 import { setSessionToken } from "@/lib/session_manager";
 import { errorHandler } from "@/lib/errorHandling";
+import useUserStore from "@/lib/zustand/users.store";
 
 const validationSchema = z.object({
   username: z.string().min(3, "نام کاربری باید حداقل ۳ کاراکتر باشد"),
@@ -20,6 +21,7 @@ const validationSchema = z.object({
 type FormValues = z.infer<typeof validationSchema>;
 
 const AdminLoginForm = () => {
+  const { addUser, removeUser } = useUserStore();
   const {
     register,
     handleSubmit,
@@ -31,19 +33,26 @@ const AdminLoginForm = () => {
   const onSubmit = async ({ username, password }: IAuth_admin_login) => {
     try {
       const authRes = await auth_admin_login({ username, password });
-      console.log(authRes);
       const { accessToken, refreshToken } = authRes.token;
-      setSessionToken(accessToken, refreshToken)
+      setSessionToken(accessToken, refreshToken);
+      addUser({
+        _id: authRes.data.user._id,
+        firstname: authRes.data.user.firstname,
+        lastname: authRes.data.user.lastname,
+        username: authRes.data.user.username,
+        phoneNumber: authRes.data.user.phoneNumber,
+        address: authRes.data.user.address,
+        role: authRes.data.user.role,
+      });
       toast.success("وارد شدید");
-      setTimeout(() => { 
+      setTimeout(() => {
         redirect("/");
-      }, 3000); 
+      }, 3000);
     } catch (error: any) {
-      errorHandler(error)
+      errorHandler(error);
     }
   };
- 
-  
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

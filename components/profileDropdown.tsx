@@ -36,7 +36,7 @@ const ProfileDropdown = () => {
       {/* Trigger Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center px-3 py-3 text-sm font-medium rounded-md border-l border-gray-200  hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-700"
+        className="flex items-center px-3 py-3 text-sm font-medium rounded-r-md border-l border-gray-200  hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-700"
       >
         <UserIcon className="size-5 text-gray-800" />
       </button>

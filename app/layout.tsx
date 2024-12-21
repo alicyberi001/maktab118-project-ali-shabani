@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scrollbar-thin scrollbar-track-slate-300  scrollbar-thumb-gray-800 scrollbar-thumb-rounded">
+    <html lang="en" dir="rtl" className="scrollbar-thin scrollbar-track-slate-300  scrollbar-thumb-gray-800 scrollbar-thumb-rounded">
       <body className={`${myFont.className} antialiased`}>
         <TanstackProvider>
           <Toaster position="top-center" reverseOrder={false} />

@@ -38,7 +38,7 @@ const ProductPage: React.FC = () => {
       _id: data.data.product._id,
       name: data.data.product.name,
       price: data.data.product.price,
-      quantity: 1, // به طور پیش‌فرض یک عدد اضافه شود
+      quantity: 1, 
       image: data.data.product.images,
       description: data.data.product.description,
     };
