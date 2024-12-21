@@ -51,7 +51,7 @@ function AllProductPage() {
 
   return (
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
-      <aside className="w-64 h-auto bg-cyan-500 rounded-xl p-4">
+      <aside className="w-64 h-auto border border-gray-300 shadow rounded-xl p-4">
         <h3 className="text-lg font-bold mb-4">فیلترها</h3>
         <div className="flex flex-col gap-2">
           <button
@@ -77,7 +77,7 @@ function AllProductPage() {
         <div className="w-full grid grid-cols-4 gap-4">
           {data?.data.products.map((product, index) => (
             <ProductCard
-              key={index}
+              key={product._id}
               image={`http://localhost:8000/images/products/images/${product.images[0]}`}
               title={product.name}
               description={product.description}

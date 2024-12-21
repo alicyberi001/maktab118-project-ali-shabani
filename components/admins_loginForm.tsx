@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { AxiosError } from "axios";
 import { setSessionToken } from "@/lib/session_manager";
+import useUserStore from "@/lib/zustand/users.store";
 
 const validationSchema = z.object({
   username: z.string(),
@@ -19,6 +20,7 @@ const validationSchema = z.object({
 type FormValues = z.infer<typeof validationSchema>;
 
 const AdminLoginForm = () => {
+  const { addUser, removeUser } = useUserStore();
   const {
     register,
     handleSubmit,
@@ -32,11 +34,20 @@ const AdminLoginForm = () => {
       const authRes = await auth_admin_login({ username, password });
       console.log(authRes);
       const { accessToken, refreshToken } = authRes.token;
-      setSessionToken(accessToken, refreshToken)
+      setSessionToken(accessToken, refreshToken);
+      addUser({
+        _id: authRes.data.user._id,
+        firstname: authRes.data.user.firstname,
+        lastname: authRes.data.user.lastname,
+        username: authRes.data.user.username,
+        phoneNumber: authRes.data.user.phoneNumber,
+        address: authRes.data.user.address,
+        role: authRes.data.user.role,
+      });
       toast.success("وارد شدید");
       setTimeout(() => {
         redirect("/admin_panel/orders");
-      }, 3000); 
+      }, 3000);
     } catch (error: any) {
       toast.error(error.message);
     }

@@ -20,10 +20,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const test = "12000000";
   return (
-    <Link
+    <a
       href={`/product/${id}`}
       dir="rtl"
-      className="min-w-[240px] max-w-[240px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow duration-200 px-4 py-3 "
+      className="min-w-[240px] max-w-[240px] flex flex-col bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl transition-shadow "
     >
       <img src={image} alt={title} className="size-40 mx-auto" />
       <div className="p-4 flex flex-col">
@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </del>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

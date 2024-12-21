@@ -59,17 +59,18 @@ const FilterComponent: React.FC<FilterComponentProps> = ({subcategoriesArray}) =
             enter="transition-all duration-300 ease-in-out"
             enterFrom="h-0 opacity-0"
             enterTo="h-auto opacity-100"
-            leave="transition-all duration-300 ease-in-out"
+            leave="transition-all duration-100 ease-in-out"
             leaveFrom="h-auto opacity-100"
             leaveTo="h-0 opacity-0"
           >
             <div className="mt-2 px-4">
               {filter.options.map((option, index) => (
                 <div key={index} className="py-1">
-                  <label className="flex items-center space-x-2">
+                  <label className="flex items-center space-x-2" >
                     <input
-                      type="checkbox"
-                      className="form-checkbox h-4 w-4 outline-none text-gray-800 border-gray-300 rounded focus:border-transparent focus:ring-0"
+                      name="subcategory"
+                      type="radio"
+                      className="form-radio h-4 w-4 outline-none text-gray-800 border-gray-300 rounded focus:border-transparent focus:ring-0"
                     />
                     <span className="text-gray-700">{option}</span>
                   </label>

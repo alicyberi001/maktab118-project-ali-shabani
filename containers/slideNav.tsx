@@ -8,6 +8,7 @@ import {
 import ProductCard from "@/components/productCard";
 import { useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
+import ProductCard2 from "@/components/productCard2";
 
 const SlideNav = () => {
   const { data, isLoading, isError } = useQuery({
@@ -43,7 +44,7 @@ const SlideNav = () => {
       </span>
       <button
         onClick={scrollLeft}
-        className="absolute left-8 top-1/2 -translate-y-1/2 z-10 bg-white text-gray-600 px-2 py-1 rounded-lg shadow-md hover:shadow"
+        className="flex items-center justify-center absolute left-8 top-1/2 -translate-y-1/2 z-10 border bg-gray-100 text-gray-900 size-7 rounded-full shadow-lg hover:shadow"
       >
         <ArrowLeftIcon className="size-4" />
       </button>
@@ -52,20 +53,18 @@ const SlideNav = () => {
         className="h-fit bg-gray-900 border border-gray-800  rounded-xl overflow-x-scroll scrollbar-hide flex flex-nowrap gap-3 px-3 py-5"
       >
         {data?.data.products.map((product, index) => (
-          <ProductCard
+          <ProductCard2
             key={index}
             image={`http://localhost:8000/images/products/images/${product.images[0]}`}
             title={product.name}
-            price={product.price
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            price={product.price}
             description={product.description}
           />
         ))}
       </nav>
       <button
         onClick={scrollRight}
-        className="absolute right-8 top-1/2 -translate-y-1/2 z-10 bg-white text-gray-600 px-2 py-1 rounded-lg shadow-md hover:shadow"
+        className="flex items-center justify-center absolute right-8 top-1/2 -translate-y-1/2 z-10 border bg-gray-100 text-gray-900 size-7 rounded-full shadow-lg hover:shadow"
       >
         <ArrowRightIcon className="size-4" />
       </button>
