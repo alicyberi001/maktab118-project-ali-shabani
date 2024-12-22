@@ -4,7 +4,7 @@ import { client } from "@/api/client";
 import { fetchProductsList } from "@/api/product.service";
 import { urls } from "@/api/urls";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IEditProductData {
   quantity?: string;
@@ -89,6 +89,8 @@ function PriceManage() {
   };
 
   const pagination = generatePagination(page, totalPages);
+
+  
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">

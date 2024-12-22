@@ -16,34 +16,42 @@ import {
   ScaleIcon,
   ChatBubbleBottomCenterTextIcon,
   ShareIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const ProductPage: React.FC = () => {
-  const { addToCart } = useCartStore();
+  const { addToCart, cart, decreaseQuantity } = useCartStore();
   const { productID } = useParams();
   if (productID == undefined) return;
 
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: () => fetchProductById(productID as string),
+    enabled: !!productID, //
   });
 
   if (data === undefined) return;
 
-  const handleAddToCart = () => {
-    const product: Product = {
-      _id: data.data.product._id,
-      name: data.data.product.name,
-      price: data.data.product.price,
-      quantity: 1, 
-      image: data.data.product.images,
-      description: data.data.product.description,
-    };
+  const productInCart = cart.find((item) => item._id === data.data.product._id);
 
-    addToCart(product);
+  const handleAddToCart = () => {
+    if (!productInCart) {
+      const product: Product = {
+        _id: data.data.product._id,
+        name: data.data.product.name,
+        price: data.data.product.price,
+        quantity: 1,
+        image: data.data.product.images,
+        description: data.data.product.description,
+      };
+      addToCart(product);
+    } else {
+      redirect("/cart");
+    }
   };
 
   return (
@@ -72,19 +80,19 @@ const ProductPage: React.FC = () => {
             <div className="w-3/4 h-56 bg-white/80 border border-gray-400 rounded-2xl flex flex-col px-4 shadow-sm">
               <div className="w-full h-1/4 border-b border-dashed border-gray-400 flex items-center gap-2">
                 <span className="text-gray-700">جنس بدنه:</span>
-                <span>-</span>
+                <span>آلومینیوم</span>
               </div>
               <div className="w-full h-1/4 border-b border-dashed border-gray-400 flex items-center gap-2">
                 <span className="text-gray-700">پردازنده:</span>
-                <span>-</span>
+                <span>snapdragon zx-110</span>
               </div>
               <div className="w-full h-1/4 border-b border-dashed border-gray-400 flex items-center gap-2">
                 <span className="text-gray-700">رم:</span>
-                <span>-</span>
+                <span>16 گیگابایت</span>
               </div>
               <div className="w-full h-1/4  flex items-center gap-2">
                 <span className="text-gray-700">مناسب برای:</span>
-                <span>-</span>
+                <span>کاربری عمومی</span>
               </div>
             </div>
           </div>
@@ -164,7 +172,7 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <div className="w-full h-20 rounded-lg flex flex-col gap-2 items-end">
-            <div className="w-fit text-sm text-white px-4 py-1 bg-blue-600 rounded-full">
+            <div className="w-fit text-sm text-white px-4 py-1 bg-sky-500 rounded-full">
               800,000 تومان تخفیف خرید زودهنگام
             </div>
             <div className="text-gray-900 text-lg  font-semibold">
@@ -174,12 +182,28 @@ const ProductPage: React.FC = () => {
               تومان
             </div>
           </div>
-          <button
-            onClick={handleAddToCart}
-            className="w-full h-14 bg-[#202A30] text-white rounded-lg"
-          >
-            افزودن به سبد خرید
-          </button>
+          <div className="flex gap-4 items-center justify-center">
+            <button
+              onClick={handleAddToCart}
+              className={`h-14 rounded-lg transition-all duration-300 border-2 border-gray-800 font-semibold ${
+                productInCart
+                  ? "bg-white text-gray-900  w-2/3"
+                  : "bg-gray-800 text-white w-full"
+              }`}
+            >
+              {productInCart ? "مشاهده سبد خرید" : "افزودن به سبد خرید"}
+            </button>
+            {productInCart && (
+              <button
+                onClick={() => decreaseQuantity(data.data.product._id)}
+                className={
+                  "flex justify-center items-center size-14 rounded-lg transition-all duration-300 bg-white text-gray-900 font-semibold border-2 border-gray-800 "
+                }
+              >
+                <TrashIcon className="size-6 text-gray-950" />
+              </button>
+            )}
+          </div>
         </aside>
         <aside className="w-full h-44 flex flex-col bg-white border border-gray-300 shadow-xl text-slate-800 rounded-2xl px-4 py-3">
           <div className="flex justify-between px-4 py-3">

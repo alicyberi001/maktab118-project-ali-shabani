@@ -22,32 +22,40 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
 const ProductPage: React.FC = () => {
-  const { cart, decreaseQuantity, clearCart, totalAmount, addToCart, totalProducts } = useCartStore();
+  const {
+    cart,
+    decreaseQuantity,
+    clearCart,
+    totalAmount,
+    addToCart,
+    totalProducts,
+  } = useCartStore();
   console.log(cart);
 
   const handleDecreaseQuantity = (id: string) => {
     decreaseQuantity(id);
   };
 
- const handleAddToCart = (product: Product) => {
-     addToCart(product);
-   };
- 
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+  };
 
   // const { data, isLoading } = useQuery({
   //   queryKey: ["products"],
   //   queryFn: () => fetchProductById(productID as string),
   // });
 
-
-
   return (
     <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
       <div className="w-[70%] flex flex-col gap-8">
         {cart.length === 0 ? (
-          <h2 className="h-80 flex gap-3 rounded-2xl border bg-white/50 shadow-sm py-7 px-9">
-            your cart is empty!
-          </h2>
+          <div className="h-96 w-full bg-white border border-gray-300 rounded-xl shadow flex flex-col justify-center items-center ">
+            <img src="/empty-cart.svg" alt="emptyCart" className="size-48" />
+            <h2 className="font-semibold">سبد خرید شما خالی است</h2>
+            <h2 className="text-gray-600">
+              میتوانید برای انتخاب محصول به صفحه اصلی برگردید
+            </h2>
+          </div>
         ) : (
           cart.map((product) => (
             <section className=" h-80 flex gap-3 rounded-2xl border border-gray-300 bg-white/50 shadow-sm py-7 px-9">
@@ -73,7 +81,10 @@ const ProductPage: React.FC = () => {
                   </div>
                 </span>
                 <div className="flex items-center gap-4">
-                  <PlusIcon onClick={ () => handleAddToCart(product)} className="text-gray-900 w-5 hover:cursor-pointer" />
+                  <PlusIcon
+                    onClick={() => handleAddToCart(product)}
+                    className="text-gray-900 w-5 hover:cursor-pointer"
+                  />
                   <span>{product.quantity}</span>
                   <TrashIcon
                     onClick={() => handleDecreaseQuantity(product._id)}
@@ -124,7 +135,12 @@ const ProductPage: React.FC = () => {
               </span>
             </div>
           </div>
-          <button className="w-full h-14 bg-[#202A30] text-white rounded-lg">
+          <button
+            disabled={cart.length == 0}
+            className={`w-full h-14 bg-[#202A30] text-white rounded-lg ${
+              cart.length == 0 ? "bg-[#a8a8a9]" : "bg-[#202A30]"
+            }`}
+          >
             ادامه خرید
           </button>
         </aside>

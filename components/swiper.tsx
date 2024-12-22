@@ -36,11 +36,11 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="relative">
             <div className="relative">
-              <div className="w-full   bg-gradient-to-l from-slate-950/80 from-25% to-transparent to-85% h-full absolute right-0"></div>
+              <div className="w-full bg-gradient-to-l from-slate-950/80 from-25% to-transparent to-85% h-full absolute right-0"></div>
               <img
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-full object-cover h-[600px] mobile:h-[270px]"
+                className="w-full object-cover h-[500px] mobile:h-[270px]"
               />
 
               <div className="absolute bottom-12 right-3   flex items-center justify-end">

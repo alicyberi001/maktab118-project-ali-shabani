@@ -14,7 +14,14 @@ import {
 import { PlusIcon, TrashIcon } from "lucide-react";
 
 const CartDropdown = () => {
-  const { cart, totalAmount, decreaseQuantity, addToCart, ProductsCounter } = useCartStore();
+  const {
+    cart,
+    totalAmount,
+    decreaseQuantity,
+    addToCart,
+    ProductsCounter,
+    totalProducts,
+  } = useCartStore();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -28,10 +35,9 @@ const CartDropdown = () => {
     }
   };
 
-const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product);
   };
-
 
   const handleDelete = (id: string) => {
     decreaseQuantity(id);
@@ -51,7 +57,9 @@ const handleAddToCart = (product: Product) => {
         onClick={toggleDropdown}
         className="flex items-center relative px-3 py-3 text-sm font-medium rounded-l-md border-r border-gray-200  hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-700"
       >
-        <span className="absolute top-1.5 right-1 size-[14px] text-xs rounded-full bg-cyan-600 text-white">{ProductsCounter()}</span>
+        <span className="absolute top-1.5 right-1 size-[14px] text-xs rounded-full bg-cyan-600 text-white">
+          {ProductsCounter()}
+        </span>
         <ShoppingCartIcon className="size-5 text-gray-800 " />
       </button>
 
@@ -65,19 +73,22 @@ const handleAddToCart = (product: Product) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div className="absolute left-1 mt-2 w-96 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-1 mt-2 w-[400px] origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="p-4">
-            <h3 className="text-lg font-semibold text-gray-700">
-              سبد خرید شما
+            <h3 className="flex items-center justify-between text-sm bg-slate-200 rounded-md px-5 py-2 text-gray-800 mx-4">
+              <span>سبد خرید شما</span>
+              <span className="text-gray-600 text-sm">
+                {totalProducts()} عدد
+              </span>
             </h3>
             <ul
               dir="rtl"
-              className="mt-2 space-y-2 max-h-[330px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500"
+              className="mt-2 space-y-2 max-h-[330px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400"
             >
               {cart.map((product) => (
-                <li className="">
+                <li className="mx-4 my-2" key={product._id}>
                   <section className="flex gap-3 rounded-2xl border border-gray-300 bg-white/50 shadow-sm py-4 px-5">
-                    <div className="flex-grow h-full flex flex-col gap-2">
+                    <div className="flex-grow h-full flex flex-col gap-2 mt-2">
                       <p className="text-gray-950 text-sm text-right font-semibold w-52 truncate">
                         {product.name}
                       </p>
@@ -85,13 +96,16 @@ const handleAddToCart = (product: Product) => {
                         {product.description}
                       </p>
                       <span className="w-fit flex flex-col text-sm font-semibold gap-2 border-t border-gray-300 pl-5 pt-1">
-                        <div className="flex gap-2 items-center py-2 text-blue-600">
+                        <div className="flex gap-2 items-center py-2 text-sky-600">
                           <CheckBadgeIcon className="w-5" />
                           <span className="text-xs ">18 ماه گارانتی شرکتی</span>
                         </div>
                       </span>
                       <div className="flex items-center gap-4">
-                        <PlusIcon onClick={ () => handleAddToCart(product)} className="text-gray-900 w-5 hover:cursor-pointer" />
+                        <PlusIcon
+                          onClick={() => handleAddToCart(product)}
+                          className="text-gray-900 w-5 hover:cursor-pointer"
+                        />
                         <span>{product.quantity}</span>
                         <TrashIcon
                           onClick={() => handleDelete(product._id)}
@@ -103,7 +117,7 @@ const handleAddToCart = (product: Product) => {
                       <img
                         src={`http://localhost:8000/images/products/images/${product.image[0]}`}
                         alt={product.name}
-                        className="h-11 w-20"
+                        className=""
                       />
                       <span className="text-left font-medium">
                         {product.price
@@ -116,18 +130,14 @@ const handleAddToCart = (product: Product) => {
                 </li>
               ))}
             </ul>
-            <div className="mt-4 border-t border-gray-200 pt-4">
-              <div className="flex justify-between text-gray-800 font-semibold">
-                <span>جمع کل</span>
-                <span>
-                  {totalAmount()
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                </span>
-              </div>
+            <div className=" border-t border-gray-200 pt-4">
               <Link href={"/cart"}>
-                <button className="w-full mt-3 px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
-                  مشاهده سبد خرید
+                <button className="flex justify-center gap-5 w-full mt-2 px-2 py-3 text-base font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none">
+                  <span>ثبت سفارش</span>
+                  <span>|</span>
+                  <span>{totalAmount()
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</span>
                 </button>
               </Link>
             </div>
