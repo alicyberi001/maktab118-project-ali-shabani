@@ -19,6 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/productCard";
 import Link from "next/link";
 import Categories from "@/containers/mainCategories";
+import InfoCards from "@/containers/infoCart";
 
 const slides = [
   {
@@ -47,7 +48,7 @@ export default function Home() {
         <ImageSlider slides={slides} />
         <Categories />
         <SlideNav />
-        <div className="bg-blue-500 w-full h-96">aaa</div>
+        <InfoCards />
         <div className="flex justify-center gap-10 text-gray-900 my-10">
           <div className="flex flex-col items-center gap-3">
             <img

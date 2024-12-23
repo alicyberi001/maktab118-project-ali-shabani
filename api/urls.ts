@@ -17,6 +17,8 @@ export const urls = {
   },
   orders: {
     getAll: "/orders",
+    create: "/orders",
+    edit: (id: string) => `/orders/${id}`,
   },
   users: {
     getAll: "/users",

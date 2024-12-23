@@ -12,12 +12,18 @@ export default {
   	extend: {
 		animation: {
 			fadeIn: "fadeIn 0.3s ease-out forwards",
+			gradient: 'gradient 3s ease infinite',
 		  },
 		  keyframes: {
 			fadeIn: {
 			  "0%": { opacity: '0', transform: "scale(0.95)" },
 			  "100%": { opacity: '1', transform: "scale(1)" },
 			},
+			gradient: {
+				'0%': { backgroundPosition: '0% 50%' },
+				'50%': { backgroundPosition: '100% 50%' },
+				'100%': { backgroundPosition: '0% 50%' },
+			  },
 		  },
   		colors: {
   			background: 'var(--background)',

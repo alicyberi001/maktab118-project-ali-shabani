@@ -40,11 +40,6 @@ const ProductPage: React.FC = () => {
     addToCart(product);
   };
 
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["products"],
-  //   queryFn: () => fetchProductById(productID as string),
-  // });
-
   return (
     <article dir="rtl" className="flex gap-6 justify-center py-32 px-14">
       <div className="w-[70%] flex flex-col gap-8">

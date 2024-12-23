@@ -178,7 +178,7 @@ export default function AdminLayout() {
             <div className="flex h-16 shrink-0 items-center">
               <Image
                 className=""
-                src="/logo1.svg"
+                src="/logo.svg"
                 alt="Your Company"
                 width={200}
                 height={45}
@@ -216,7 +216,7 @@ export default function AdminLayout() {
                   >
                     <img
                       className="h-8 w-8 rounded-full bg-gray-800"
-                      src="./logo1.svg"
+                      src="./logo.svg"
                       alt="aaa"
                     />
                     <span className="sr-only">Your profile</span>

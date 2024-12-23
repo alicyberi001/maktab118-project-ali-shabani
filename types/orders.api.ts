@@ -23,3 +23,40 @@ export interface IOrders {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ICreateOrdersRes {
+  status: string;
+  data: {
+    order: {
+      user: string;
+      products: [
+        {
+          product: {
+            _id: string;
+            price: number;
+          };
+          count: number;
+          _id: string;
+        }
+      ];
+      totalPrice: number;
+      deliveryDate: string;
+      deliveryStatus: boolean;
+      _id: string;
+      createdAt: string;
+      updatedAt: string;
+      __v: number;
+    };
+  };
+}
+
+export interface ICReateOrderBody {
+  user: string;
+  products: [
+    {
+      product: string;
+      count: number;
+    }
+  ];
+  deliveryStatus: boolean;
+}
