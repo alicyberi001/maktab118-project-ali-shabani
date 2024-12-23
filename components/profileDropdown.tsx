@@ -9,10 +9,12 @@ import {
 
 import { useState, useEffect, useRef } from "react";
 import { Transition } from "@headlessui/react";
+import useUserStore from "@/lib/zustand/users.store";
 
 const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const {users} = useUserStore()
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -57,7 +59,7 @@ const ProfileDropdown = () => {
         >
           <div className="p-4 flex flex-col gap-3">
             <h3 className="text-lg text-right font-semibold text-gray-700">
-              علی شعبانی ثانی
+              {`${users[0].firstname} ${users[0].lastname}`}
             </h3>
             <ul className="mt-2 space-y-3">
               <li className=" text-gray-600">

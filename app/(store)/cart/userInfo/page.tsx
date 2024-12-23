@@ -26,14 +26,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useUserStore from "@/lib/zustand/users.store";
 
 const customerSchema = z.object({
-  firstName: z.string().min(1, "نام الزامی است."),
-  lastName: z.string().min(1, "نام خانوادگی الزامی است."),
+  firstName: z.string().min(3, "نام الزامی است."),
+  lastName: z.string().min(3, "نام خانوادگی الزامی است."),
   phoneNumber: z
     .string()
     .regex(/^09\d{9}$/, "شماره همراه باید با فرمت صحیح باشد."),
-  address: z.string().min(1, "آدرس الزامی است."),
+  address: z.string().min(3, "آدرس الزامی است."),
   deliveryDate: z.date({ required_error: "تاریخ تحویل الزامی است." }),
 });
 
@@ -48,6 +49,8 @@ const UserInfo: React.FC = () => {
     addToCart,
     totalProducts,
   } = useCartStore();
+
+  const {users} = useUserStore()
 
   const {
     register,
@@ -80,6 +83,7 @@ const UserInfo: React.FC = () => {
                 نام
               </label>
               <input
+              defaultValue={users[0].firstname}
                 type="text"
                 id="firstName"
                 {...register("firstName")}
@@ -97,6 +101,7 @@ const UserInfo: React.FC = () => {
                 نام خانوادگی
               </label>
               <input
+              defaultValue={users[0].lastname}
                 type="text"
                 id="lastName"
                 {...register("lastName")}
@@ -119,10 +124,13 @@ const UserInfo: React.FC = () => {
                 شماره همراه
               </label>
               <input
+              readOnly
+              disabled
+              defaultValue={users[0].phoneNumber}
                 type="text"
                 id="phoneNumber"
                 {...register("phoneNumber")}
-                className="mt-1 block w-80 border border-gray-300 shadow rounded-xl h-12 px-3 py-2 focus:outline-none focus:ring-0 focus:border-sky-500 transition-colors delay-150 duration-300 ease-in-out"
+                className="mt-1 block w-80 border bg-slate-100 text-gray-500 border-gray-300 shadow rounded-xl h-12 px-3 py-2 focus:outline-none focus:ring-0 focus:border-sky-500 transition-colors delay-150 duration-300 ease-in-out"
               />
               {errors.phoneNumber && (
                 <p className="text-red-500 text-sm mt-1">
@@ -165,6 +173,7 @@ const UserInfo: React.FC = () => {
               آدرس
             </label>
             <textarea
+            defaultValue={users[0].address}
               id="address"
               {...register("address")}
               className="mt-1 block w-80 border border-gray-300 shadow rounded-xl  px-3 py-2 focus:outline-none focus:ring-0 focus:border-sky-500 transition-colors delay-150 duration-300 ease-in-out"
