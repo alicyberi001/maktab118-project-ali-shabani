@@ -11,8 +11,8 @@ import { redirect, useRouter } from "next/navigation";
 
 const Orders: React.FC = () => {
   const router = useRouter();
-  const { users } = useUserStore();
   const [filter, setFilter] = useState("all");
+  const { users } = useUserStore();
 
   useEffect(() => {
     if (users.every((el) => el.role === "USER") || users.length == 0) {

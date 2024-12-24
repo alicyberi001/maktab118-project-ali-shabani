@@ -3,7 +3,9 @@
 import { client } from "@/api/client";
 import { fetchProductsList } from "@/api/product.service";
 import { urls } from "@/api/urls";
+import useUserStore from "@/lib/zustand/users.store";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IEditProductData {
@@ -28,6 +30,13 @@ const editProducts = async (
 };
 
 function PriceManage() {
+  const { users } = useUserStore();
+
+  useEffect(() => {
+    if (users.every((el) => el.role === "USER") || users.length == 0) {
+      redirect("/");
+    }
+  }, []);
   const queryClient = useQueryClient(); 
   const [editableCells, setEditableCells] = useState<{
     [id: string]: IEditProductData;

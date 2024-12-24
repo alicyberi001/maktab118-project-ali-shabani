@@ -7,9 +7,11 @@ interface IParams {
   page?: number;
   limit?: number;
   categoryID?: string;
-  subCategoryID?: string;
+  subCategoryID?: string | undefined;
   sort?: string;
 }
+
+
 
 type fetchProductsListType = (
   _: IParams

@@ -5,17 +5,27 @@ import {
   EditProducts2,
   fetchProductsList,
 } from "@/api/product.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { EditModal } from "@/components/editProduct.modal";
 import FormModal from "@/components/edit.modal";
 import CreateModalForm from "@/components/createProduct.modal";
+import { redirect, useRouter } from "next/navigation";
+import useUserStore from "@/lib/zustand/users.store";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
   const [editModalOpen, seteditModalOpen] = useState(false);
   const limit = 6;
+  const { users } = useUserStore();
+
+  useEffect(() => {
+    if (users.every((el) => el.role === "USER") || users.length == 0) {
+      redirect("/");
+    }
+  }, []);
+
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", page],
@@ -60,7 +70,7 @@ function ProductPage() {
               <th scope="col" className="px-6 py-3">
                 تصویر
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 w-44">
                 نام کالا
               </th>
               <th scope="col" className="px-6 py-3">
@@ -74,7 +84,7 @@ function ProductPage() {
           <tbody>
             {data?.data.products.map((el, index) => (
               <tr
-                key={index}
+                key={el._id}
                 className=" odd:bg-gray-900  even:bg-gray-800 border-b border-gray-700"
               >
                 <td
@@ -87,7 +97,7 @@ function ProductPage() {
                     alt={el.name}
                   />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">{el.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap w-20 truncate">{el.name}</td>
                 <td className="px-6 py-4">{el.subcategory}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-3">

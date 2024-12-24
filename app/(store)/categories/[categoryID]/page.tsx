@@ -10,19 +10,42 @@ import FilterComponent from "@/containers/collapse";
 function AllProductPage() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<string | undefined>(undefined);
+  // const [selectedId, setSelectedId] = useState<string | null>(null);
   const limit = 16;
   const { categoryID } = useParams();
+
+  // const handleSelectedId = (id: string) => {
+  //   setSelectedId(id);
+  //   console.log("Selected ID:", id); 
+  // };
+
+  const [selectedFilters, setSelectedFilters] = useState<{
+    subcategory?: string;
+    price?: string;
+  }>({});
+
+  const handleFilterChange = (filterType: string, value: string) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterType]: value,
+    }));
+    console.log("Selected Filters:", {
+      ...selectedFilters,
+      [filterType]: value,
+    });
+  };
 
   if (categoryID == undefined) return;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", page, sort],
-    queryFn: () =>
-      fetchProductsList({
+    queryKey: ["products", page, sort, selectedFilters],
+    queryFn: async() =>
+      await fetchProductsList({
         page,
         limit,
-        categoryID: categoryID as string,
         sort,
+        categoryID: categoryID as string,
+        subCategoryID: selectedFilters.subcategory || undefined,
       }),
   });
 
@@ -31,8 +54,9 @@ function AllProductPage() {
     queryFn: () => fetchSubcategories(),
   });
 
-  const subcategoriesArray = categoriesData.data?.data.subcategories.filter( (el) => el.category == categoryID )
-  
+  const subcategoriesArray = categoriesData.data?.data.subcategories.filter(
+    (el) => el.category == categoryID
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading products</div>;
@@ -71,11 +95,14 @@ function AllProductPage() {
             قیمت نزولی
           </button>
         </div>
-        <FilterComponent subcategoriesArray = {subcategoriesArray || []}/>
+        <FilterComponent
+          subcategoriesArray={subcategoriesArray}
+          onFilterChange={handleFilterChange}
+        />
       </aside>
       <div className="flex flex-col items-center">
         <div className="w-full grid grid-cols-4 gap-4">
-          {data?.data.products.map((product, index) => (
+          {data?.data.products.map((product) => (
             <ProductCard
               key={product._id}
               image={`http://localhost:8000/images/products/images/${product.images[0]}`}

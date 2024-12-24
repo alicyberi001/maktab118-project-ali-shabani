@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
 
-
 interface FilterComponentProps {
-    subcategoriesArray: Icategory[];
-  }
+  subcategoriesArray: Icategory[] | undefined;
+  onFilterChange: (filterType: keyof SelectedFilters, value: string) => void;
+}
 
 interface Icategory {
   _id: string;
@@ -15,16 +15,36 @@ interface Icategory {
   slugname: string;
 }
 
-const FilterComponent: React.FC<FilterComponentProps> = ({subcategoriesArray}) => {
+interface SelectedFilters {
+  subcategory?: string;
+  price?: string;
+}
+
+const FilterComponent: React.FC<FilterComponentProps> = ({
+  subcategoriesArray,
+  onFilterChange,
+}) => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({});
 
   const toggleFilter = (filterName: string) => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
+  const handleSelection = (
+    filterType: keyof SelectedFilters,
+    value: string
+  ) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterType]: value,
+    }));
+    onFilterChange(filterType, value); // اطلاع‌رسانی به والد
+  };
+
   const filters = [
-    { name: "زیردسته بندی", options: subcategoriesArray.map((item) => item.name) },
-    { name: "قیمت", options: ["صعودی", "نزولی"] },
+    { name: "زیردسته بندی", type: "subcategory", options: subcategoriesArray },
+    { name: "قیمت", type: "price", options: ["asc", "desc"] },
   ];
 
   return (
@@ -64,15 +84,28 @@ const FilterComponent: React.FC<FilterComponentProps> = ({subcategoriesArray}) =
             leaveTo="h-0 opacity-0"
           >
             <div className="mt-2 px-4">
-              {filter.options.map((option, index) => (
+              {filter?.options?.map((option, index) => (
                 <div key={index} className="py-1">
-                  <label className="flex items-center space-x-2" >
+                  <label className="flex items-center space-x-2">
                     <input
-                      name="subcategory"
+                      name={filter.type}
                       type="radio"
                       className="form-radio h-4 w-4 outline-none text-gray-800 border-gray-300 rounded focus:border-transparent focus:ring-0"
+                      onChange={() =>
+                        handleSelection(
+                          filter.type as keyof SelectedFilters,
+                          typeof option === "string" ? option : option._id
+                        )
+                      }
+                      checked={
+                        selectedFilters[
+                          filter.type as keyof SelectedFilters
+                        ] === (typeof option === "string" ? option : option._id)
+                      }
                     />
-                    <span className="text-gray-700">{option}</span>
+                    <span className="text-gray-700">
+                      {typeof option === "string" ? option : option.name}
+                    </span>
                   </label>
                 </div>
               ))}

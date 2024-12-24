@@ -78,11 +78,11 @@ const FormModal = (data: IProduct) => {
       const res = await EditProducts(data._id, form);
       console.log(res);
       toast.success("محصول با موفقیت ویرایش شد");
-      queryClient.invalidateQueries({ queryKey: ["products"] })
-      setIsOpen(false)
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      setIsOpen(false);
     } catch (error) {
       toast.error("محصول ویرایش نشد");
-      setIsOpen(false)
+      setIsOpen(false);
     }
   };
 
@@ -264,10 +264,10 @@ const FormModal = (data: IProduct) => {
                             </span>{" "}
                             or drag and drop
                           </p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400"></p>
                         </div>
                         <input
+                          // defaultValue={data.images[0]}
                           id="dropzone-file"
                           type="file"
                           {...register("images")}
