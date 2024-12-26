@@ -19,8 +19,8 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
-import React from "react";
+import { redirect, useParams } from "next/navigation";
+import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,6 +51,12 @@ const UserInfo: React.FC = () => {
   } = useCartStore();
 
   const {users} = useUserStore()
+
+  useEffect(() => {
+    if (users.length == 0) {
+      redirect("/");
+    }
+  }, []);
 
   const {
     register,

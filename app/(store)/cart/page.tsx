@@ -3,6 +3,7 @@
 import { fetchProductById } from "@/api/product.service";
 import LoginForm from "@/components/loginForm";
 import useCartStore, { Product } from "@/lib/zustand/cart.store";
+import useUserStore from "@/lib/zustand/users.store";
 import {
   ShieldCheckIcon,
   ChevronLeftIcon,
@@ -17,6 +18,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ShareIcon,
   TrashIcon,
+  MinusIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
@@ -31,6 +33,8 @@ const ProductPage: React.FC = () => {
     totalProducts,
   } = useCartStore();
   console.log(cart);
+
+  const { users } = useUserStore();
 
   const handleDecreaseQuantity = (id: string) => {
     decreaseQuantity(id);
@@ -53,7 +57,10 @@ const ProductPage: React.FC = () => {
           </div>
         ) : (
           cart.map((product) => (
-            <section className=" h-80 flex gap-3 rounded-2xl border border-gray-300 bg-white/50 shadow-sm py-7 px-9">
+            <section
+              key={product._id}
+              className=" h-80 flex gap-3 rounded-2xl border border-gray-300 bg-white/50 shadow-sm py-7 px-9"
+            >
               <div className="flex-grow h-full  flex flex-col gap-4">
                 <p className="text-gray-950 text-lg font-semibold">
                   {product.name}
@@ -75,23 +82,30 @@ const ProductPage: React.FC = () => {
                     <span className="text-xs ">18 ماه گارانتی شرکتی</span>
                   </div>
                 </span>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
                   <PlusIcon
                     onClick={() => handleAddToCart(product)}
                     className="text-gray-900 w-5 hover:cursor-pointer"
                   />
-                  <span>{product.quantity}</span>
-                  <TrashIcon
-                    onClick={() => handleDecreaseQuantity(product._id)}
-                    className="text-red-700 w-5 hover:cursor-pointer"
-                  />
+                  <span className="w-6 text-center">{product.quantity}</span>
+                  {product.quantity == 1 ? (
+                    <TrashIcon
+                      onClick={() => handleDecreaseQuantity(product._id)}
+                      className="text-red-700 w-5 hover:cursor-pointer"
+                    />
+                  ) : (
+                    <MinusIcon
+                      onClick={() => handleDecreaseQuantity(product._id)}
+                      className="text-gray-900 w-5 hover:cursor-pointer"
+                    />
+                  )}
                 </div>
               </div>
               <div className="flex flex-col justify-between w-[40%]">
                 <img
                   src={`http://localhost:8000/images/products/images/${product.image[0]}`}
                   alt={product.name}
-                  className=" h-48"
+                  className="size-48 mx-auto"
                 />
                 <span className="text-left font-semibold">
                   {product.price
@@ -131,9 +145,11 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <button
-            disabled={cart.length == 0}
+            disabled={cart.length == 0 || users.length == 0}
             className={`w-full h-14 bg-[#202A30] text-white rounded-lg ${
-              cart.length == 0 ? "bg-[#a8a8a9]" : "bg-[#202A30]"
+              cart.length == 0 || users.length == 0
+                ? "bg-[#a8a8a9]"
+                : "bg-[#202A30]"
             }`}
           >
             ادامه خرید

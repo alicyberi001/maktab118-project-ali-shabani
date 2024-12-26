@@ -44,7 +44,7 @@ const SlideNav = () => {
       </span>
       <button
         onClick={scrollLeft}
-        className="flex items-center justify-center absolute left-8 top-1/2 -translate-y-1/2 z-5 border bg-gray-100 text-gray-900 size-7 rounded-full shadow-lg hover:shadow"
+        className="flex items-center justify-center absolute left-8 top-1/2 -translate-y-1/2 z-10 border bg-gray-100 text-gray-900 size-7 rounded-full shadow-lg hover:shadow"
       >
         <ArrowLeftIcon className="size-4" />
       </button>

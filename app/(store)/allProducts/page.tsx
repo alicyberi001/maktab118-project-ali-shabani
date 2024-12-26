@@ -1,23 +1,58 @@
 "use client";
 
-import { deleteProductById, fetchProductsList } from "@/api/product.service";
+import { fetchProductsList, fetchSubcategories } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { EditModal } from "@/components/editProduct.modal";
 import ProductCard from "@/components/productCard";
+import { useParams } from "next/navigation";
+import FilterComponent from "@/containers/collapse";
+import FilterComponent2 from "@/containers/collapse2";
 
 function AllProductPage() {
   const [page, setPage] = useState(1);
-  const limit = 15;
+  const [sort, setSort] = useState<string | undefined>(undefined);
+  const [selectedFilters, setSelectedFilters] = useState<{
+    subcategory?: string;
+    price?: string;
+  }>({});
+
+  const limit = 16;
+
+  const handleFilterChange = (filterType: string, value: string) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterType]: value,
+    }));
+    setSort(selectedFilters.price)
+    console.log("Selected Filters:", {
+      ...selectedFilters,
+      [filterType]: value,
+    });
+  };
+
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", page],
-    queryFn: () => fetchProductsList({ page, limit }),
+    queryKey: ["products", page, sort, selectedFilters],
+    queryFn: async() =>
+      await fetchProductsList({
+        page,
+        limit,
+        sort,
+        subCategoryID: selectedFilters.subcategory || undefined,
+      }),
   });
 
-  if (isLoading) return;
-  if (isError) return;
+  const categoriesData = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => fetchSubcategories(),
+  });
+
+  // const subcategoriesArray = categoriesData.data?.data.subcategories.filter(
+  //   (el) => el.category == categoryID
+  // );
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading products</div>;
 
   const totalPages = data?.total_pages || 1;
 
@@ -31,18 +66,20 @@ function AllProductPage() {
 
   const pagination = generatePagination(page, totalPages);
 
-  const handleAddToCart = () => {
-    alert("محصول به سبد خرید اضافه شد!");
-  };
-
   return (
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
-      <aside className="w-80 h-96 bg-red-500 rounded-xl">sidebar</aside>
+      <aside className="w-64 h-96 border bg-white border-gray-300 shadow rounded-xl p-4">
+        <h3 className="text-lg font-bold mb-4">فیلترها</h3>
+        <FilterComponent2
+          // subcategoriesArray={subcategoriesArray} 
+          onFilterChange={handleFilterChange}
+        />
+      </aside>
       <div className="flex flex-col items-center">
-        <div className="w-full grid grid-cols-4 gap-7">
-          {data?.data.products.map((product, index) => (
+        <div className="w-full grid grid-cols-4 gap-4">
+          {data?.data.products.map((product) => (
             <ProductCard
-              key={index}
+              key={product._id}
               image={`http://localhost:8000/images/products/images/${product.images[0]}`}
               title={product.name}
               description={product.description}

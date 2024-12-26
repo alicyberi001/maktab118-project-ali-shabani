@@ -34,7 +34,7 @@ const ProductPage: React.FC = () => {
     enabled: !!productID, //
   });
 
-  if (data === undefined) return;
+  if (data?.data?.product === undefined) return;
 
   const productInCart = cart.find((item) => item._id === data.data.product._id);
 

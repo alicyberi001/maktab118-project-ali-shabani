@@ -10,25 +10,20 @@ import FilterComponent from "@/containers/collapse";
 function AllProductPage() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<string | undefined>(undefined);
-  // const [selectedId, setSelectedId] = useState<string | null>(null);
-  const limit = 16;
-  const { categoryID } = useParams();
-
-  // const handleSelectedId = (id: string) => {
-  //   setSelectedId(id);
-  //   console.log("Selected ID:", id); 
-  // };
-
   const [selectedFilters, setSelectedFilters] = useState<{
     subcategory?: string;
     price?: string;
   }>({});
+
+  const limit = 16;
+  const { categoryID } = useParams();
 
   const handleFilterChange = (filterType: string, value: string) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [filterType]: value,
     }));
+    setSort(selectedFilters.price)
     console.log("Selected Filters:", {
       ...selectedFilters,
       [filterType]: value,
@@ -75,26 +70,8 @@ function AllProductPage() {
 
   return (
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
-      <aside className="w-64 h-auto border border-gray-300 shadow rounded-xl p-4">
+      <aside className="w-64 h-96 border bg-white border-gray-300 shadow rounded-xl p-4">
         <h3 className="text-lg font-bold mb-4">فیلترها</h3>
-        <div className="flex flex-col gap-2">
-          <button
-            onClick={() => setSort("price")}
-            className={`px-4 py-2 rounded-lg ${
-              sort === "price" ? "bg-gray-800 text-white" : "bg-white"
-            }`}
-          >
-            قیمت صعودی
-          </button>
-          <button
-            onClick={() => setSort("-price")}
-            className={`px-4 py-2 rounded-lg ${
-              sort === "-price" ? "bg-gray-800 text-white" : "bg-white"
-            }`}
-          >
-            قیمت نزولی
-          </button>
-        </div>
         <FilterComponent
           subcategoriesArray={subcategoriesArray}
           onFilterChange={handleFilterChange}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Transition } from "@headlessui/react";
 
 interface FilterComponentProps {
-  subcategoriesArray: Icategory[] | undefined;
+  // subcategoriesArray: Icategory[] | undefined;
   onFilterChange: (filterType: keyof SelectedFilters, value: string) => void;
 }
 
@@ -20,7 +20,7 @@ interface SelectedFilters {
   price?: string;
 }
 
-const FilterComponent: React.FC<FilterComponentProps> = ({
+const FilterComponent2: React.FC<FilterComponentProps> = ({
   subcategoriesArray,
   onFilterChange,
 }) => {
@@ -117,4 +117,4 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
   );
 };
 
-export default FilterComponent;
+export default FilterComponent2;
