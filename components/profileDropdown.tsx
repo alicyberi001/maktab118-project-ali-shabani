@@ -10,11 +10,13 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { Transition } from "@headlessui/react";
 import useUserStore from "@/lib/zustand/users.store";
+import { logout } from "@/api/auth.service";
+import toast from "react-hot-toast";
 
 const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const {users} = useUserStore()
+  const { users, removeUser } = useUserStore();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -24,6 +26,12 @@ const ProfileDropdown = () => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false);
     }
+  };
+
+  const handleLogout = (id: string) => {
+    logout();
+    removeUser(id);
+    toast.success("خروج موفقیت آمیز بود")
   };
 
   useEffect(() => {
@@ -75,10 +83,13 @@ const ProfileDropdown = () => {
                 </a>
               </li>
               <li className=" text-gray-600">
-                <a href="" className="flex items-center gap-1">
+                <button
+                  onClick={() => handleLogout(users[0]._id)}
+                  className="flex items-center gap-1"
+                >
                   <ArrowLeftStartOnRectangleIcon className="size-6" />
                   <span>خروج</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>

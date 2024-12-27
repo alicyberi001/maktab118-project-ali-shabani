@@ -8,12 +8,13 @@ import { redirect } from "next/navigation";
 import { auth_user_signup } from "@/api/auth.service";
 import { IAuth_user_signup } from "@/types/auth.api";
 import { setSessionToken } from "@/lib/session_manager";
+import useUserStore from "@/lib/zustand/users.store";
 
 const signupSchema = z
   .object({
     firstName: z.string().nonempty("نام الزامی است."),
     lastName: z.string().nonempty("نام خانوادگی الزامی است."),
-    email: z.string().email("ایمیل معتبر نیست."),
+    email: z.string().min(3,"معتبر نیست."),
     phone: z
       .string()
       .regex(/^09\d{9}$/, "شماره تلفن باید با 09 شروع شود و 11 رقم باشد."),
@@ -32,6 +33,7 @@ const signupSchema = z
 type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
+  const {addUser} = useUserStore()
   const {
     register,
     handleSubmit,
@@ -41,25 +43,27 @@ export default function SignupForm() {
   });
 
   const onSubmit = async (
-    // data: SignupFormValues,
-    { username, password, address, firstname, lastname, phoneNumber }: IAuth_user_signup
+    data: SignupFormValues,
   ) => {
+    console.log(data);
+    
     try {
-      // const authRes = await auth_user_signup({
-      //   firstname: data.firstName,
-      //   lastname: data.lastName,
-      //   username: data.email,
-      //   password: data.password,
-      //   phoneNumber: data.phone,
-      //   address: data.address,
-      // });
       const authRes = await auth_user_signup({
-        firstname,
-        lastname,
-        username,
-        password,
-        phoneNumber,
-        address,
+        firstname: data.firstName,
+        lastname: data.lastName,
+        username: data.email,
+        phoneNumber: data.phone,
+        address: data.address,
+        password: data.password, // اگر رمز عبور لازم باشد
+      });
+      addUser({
+        _id: authRes.data.user._id,
+        firstname: authRes.data.user.firstname,
+        lastname: authRes.data.user.lastname,
+        username: authRes.data.user.username,
+        phoneNumber: authRes.data.user.phoneNumber,
+        address: authRes.data.user.address,
+        role: authRes.data.user.role,
       });
       console.log(authRes);
       const { accessToken, refreshToken } = authRes.token;

@@ -21,7 +21,7 @@ import {
   MinusIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 
 const ProductPage: React.FC = () => {
   const {
@@ -42,6 +42,14 @@ const ProductPage: React.FC = () => {
 
   const handleAddToCart = (product: Product) => {
     addToCart(product);
+  };
+
+  const handleRedirect = () => {
+    if (users.length == 0) {
+      redirect("/login")
+    } else {
+      redirect("/cart/userInfo")
+    }
   };
 
   return (
@@ -145,6 +153,7 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <button
+            onClick={handleRedirect}
             disabled={cart.length == 0 || users.length == 0}
             className={`w-full h-14 bg-[#202A30] text-white rounded-lg ${
               cart.length == 0 || users.length == 0

@@ -6,6 +6,9 @@ import {
 } from "@/types/auth.api";
 import { urls } from "./urls";
 import { client } from "./client";
+import { removeSessionToken } from "@/lib/session_manager";
+import useUserStore from "@/lib/zustand/users.store";
+
 
 type auth_admin_login_type = (
   _: IAuth_admin_login
@@ -46,7 +49,6 @@ export const auth_user_signup: auth_user_signup_type = async ({
   return response.data;
 };
 
-
 interface ITokenRes {
   status: string;
   token: {
@@ -57,5 +59,17 @@ interface ITokenRes {
 type auth_token = (_: string) => Promise<ITokenRes>;
 export const generateToken: auth_token = async (refreshToken) => {
   const response = await client.post(urls.auth.token, { refreshToken });
+  return response.data;
+};
+
+export const logout = async () => {
+  const token = sessionStorage.getItem("accessToken");
+  const response = await client.get(urls.auth.logout, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  removeSessionToken()
+  console.log(response.data);
   return response.data;
 };
