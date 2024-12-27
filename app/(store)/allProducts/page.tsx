@@ -68,14 +68,19 @@ function AllProductPage() {
 
   return (
     <div dir="rtl" className="flex gap-10 pt-24 px-8">
-      <aside className="w-64 h-96 border bg-white border-gray-300 shadow rounded-xl p-4">
+      <aside className="w-64 h-96 border bg-white border-gray-300 shadow rounded-xl p-4 mt-48">
         <h3 className="text-lg font-bold mb-4">فیلترها</h3>
         <FilterComponent2
           // subcategoriesArray={subcategoriesArray} 
           onFilterChange={handleFilterChange}
         />
       </aside>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-5">
+        <div className="flex gap-5">
+          <a href="/categories/674c96e9591fa0b7179b533a"><img className="w-64 h-44" src="/allposters/laptop.webp" alt="" /></a>
+          <a href="/categories/674c96cd591fa0b7179b5331"><img className="w-64 h-44" src="/allposters/mobile.webp" alt="" /></a>
+          <a href="/categories/674c96d8591fa0b7179b5335"><img className="w-64 h-44" src="/allposters/tablet.webp" alt="" /></a>
+        </div>
         <div className="w-full grid grid-cols-4 gap-4">
           {data?.data.products.map((product) => (
             <ProductCard

@@ -89,7 +89,7 @@ const UserInfo: React.FC = () => {
                 نام
               </label>
               <input
-              defaultValue={users[0].firstname}
+              defaultValue={users[0]?.firstname}
                 type="text"
                 id="firstName"
                 {...register("firstName")}
@@ -107,7 +107,7 @@ const UserInfo: React.FC = () => {
                 نام خانوادگی
               </label>
               <input
-              defaultValue={users[0].lastname}
+              defaultValue={users[0]?.lastname}
                 type="text"
                 id="lastName"
                 {...register("lastName")}
@@ -132,7 +132,7 @@ const UserInfo: React.FC = () => {
               <input
               readOnly
               disabled
-              defaultValue={users[0].phoneNumber}
+              defaultValue={users[0]?.phoneNumber}
                 type="text"
                 id="phoneNumber"
                 {...register("phoneNumber")}
@@ -179,7 +179,7 @@ const UserInfo: React.FC = () => {
               آدرس
             </label>
             <textarea
-            defaultValue={users[0].address}
+            defaultValue={users[0]?.address}
               id="address"
               {...register("address")}
               className="mt-1 block w-80 border border-gray-300 shadow rounded-xl  px-3 py-2 focus:outline-none focus:ring-0 focus:border-sky-500 transition-colors delay-150 duration-300 ease-in-out"
