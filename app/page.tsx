@@ -20,6 +20,8 @@ import ProductCard from "@/components/productCard";
 import Link from "next/link";
 import Categories from "@/containers/mainCategories";
 import InfoCards from "@/containers/infoCart";
+import MainPoster2 from "@/containers/mainPoster2";
+import Testi from "@/components/swiper_test";
 
 const slides = [
   {
@@ -46,10 +48,12 @@ export default function Home() {
       <div className="">
         <Navbar />
         <ImageSlider slides={slides} />
+        {/* <Testi /> */}
         <Categories />
         <SlideNav />
         <InfoCards />
-        <div className="flex justify-center gap-10 text-gray-900 my-10">
+        <MainPoster2 />
+        {/* <div className="flex justify-center gap-10 text-gray-900 my-10">
           <div className="flex flex-col items-center gap-3">
             <img
               src="/asus lap.webp"
@@ -80,7 +84,7 @@ export default function Home() {
               لپ تاپ لنوو
             </span>
           </div>
-        </div>
+        </div> */}
         <Footer />
       </div>
     </div>

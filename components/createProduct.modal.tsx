@@ -18,9 +18,9 @@ const productSchema = z.object({
   price: z.number().min(0, "قیمت کالا نمی‌تواند منفی باشد"),
   category: z.string().min(1, "کتگوری الزامی است"),
   subcategory: z.string().min(1, "ساب کتگوری الزامی است"),
-  //   images: z.any().refine((files) => Array.isArray(files) && files.length > 0, {
-  //     message: "حداقل یک تصویر باید انتخاب شود",
-  //   }),
+    // images: z.any().refine((files) => Array.isArray(files) && files.length > 0, {
+    //   message: "حداقل یک تصویر باید انتخاب شود",
+    // }),
   images: z.any(),
   description: z.string().min(4, "حداقل ۴ کاراکتر"),
 });
@@ -78,7 +78,7 @@ const CreateModalForm = () => {
       const res = await createProducts(form);
       
       toast.success("محصول با موفقیت اضافه شد");
-      // queryClient.invalidateQueries({ queryKey: ["products"] })
+      queryClient.invalidateQueries({ queryKey: ["products"] })
       setIsOpen(false)
     } catch (error) {
       toast.error("محصول اضافه نشد");

@@ -11,6 +11,7 @@ import { AxiosError } from "axios";
 import { setSessionToken } from "@/lib/session_manager";
 import { errorHandler } from "@/lib/errorHandling";
 import useUserStore from "@/lib/zustand/users.store";
+import useCartStore from "@/lib/zustand/cart.store";
 
 const validationSchema = z.object({
   username: z.string().min(3, "نام کاربری باید حداقل ۳ کاراکتر باشد"),
@@ -22,6 +23,7 @@ type FormValues = z.infer<typeof validationSchema>;
 
 const AdminLoginForm = () => {
   const { addUser, removeUser } = useUserStore();
+  const { mergeGuestCart } = useCartStore();
   const {
     register,
     handleSubmit,
@@ -35,6 +37,7 @@ const AdminLoginForm = () => {
       const authRes = await auth_admin_login({ username, password });
       const { accessToken, refreshToken } = authRes.token;
       setSessionToken(accessToken, refreshToken);
+      mergeGuestCart();
       addUser({
         _id: authRes.data.user._id,
         firstname: authRes.data.user.firstname,

@@ -1,7 +1,12 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const ToastifyProvider: React.FC<IChildren> = ({ children }) => {
+
+interface TanstackProviderProps {
+  children: React.ReactNode;
+}
+
+export const ToastifyProvider: React.FC<TanstackProviderProps> = ({ children }) => {
   return (
     <>
       {children}

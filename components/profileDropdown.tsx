@@ -15,15 +15,18 @@ import toast from "react-hot-toast";
 
 const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { users, removeUser } = useUserStore();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickOutside = (event: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsOpen(false);
     }
   };
@@ -31,7 +34,7 @@ const ProfileDropdown = () => {
   const handleLogout = (id: string) => {
     logout();
     removeUser(id);
-    toast.success("خروج موفقیت آمیز بود")
+    toast.success("خروج موفقیت آمیز بود");
   };
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Transition } from "@headlessui/react";
 
 interface FilterComponentProps {
-  // subcategoriesArray: Icategory[] | undefined;
+  subcategoriesArray: [];
   onFilterChange: (filterType: keyof SelectedFilters, value: string) => void;
 }
 
@@ -21,7 +21,7 @@ interface SelectedFilters {
 }
 
 const FilterComponent2: React.FC<FilterComponentProps> = ({
-  subcategoriesArray,
+  subcategoriesArray = [],
   onFilterChange,
 }) => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
@@ -94,17 +94,17 @@ const FilterComponent2: React.FC<FilterComponentProps> = ({
                       onChange={() =>
                         handleSelection(
                           filter.type as keyof SelectedFilters,
-                          typeof option === "string" ? option : option._id
+                          typeof option === "string" ? option : option
                         )
                       }
                       checked={
                         selectedFilters[
                           filter.type as keyof SelectedFilters
-                        ] === (typeof option === "string" ? option : option._id)
+                        ] === (typeof option === "string" ? option : option)
                       }
                     />
                     <span className="text-gray-700">
-                      {typeof option === "string" ? option : option.name}
+                      {typeof option === "string" ? option : option}
                     </span>
                   </label>
                 </div>

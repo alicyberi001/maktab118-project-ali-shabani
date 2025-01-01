@@ -55,7 +55,7 @@ export interface IAddProduct {
   brand: string;
   description: string;
   quantity: number;
-  images?: File[];
+  images: File[];
   subcategory: string;
   category: string;
   price: number;

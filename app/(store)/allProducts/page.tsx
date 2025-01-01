@@ -71,7 +71,7 @@ function AllProductPage() {
       <aside className="w-64 h-96 border bg-white border-gray-300 shadow rounded-xl p-4 mt-48">
         <h3 className="text-lg font-bold mb-4">فیلترها</h3>
         <FilterComponent2
-          // subcategoriesArray={subcategoriesArray} 
+          subcategoriesArray={[]} 
           onFilterChange={handleFilterChange}
         />
       </aside>

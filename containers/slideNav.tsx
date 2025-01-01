@@ -21,10 +21,10 @@ const SlideNav = () => {
       }),
   });
 
-  // Reference to the navigation bar
+
   const navRef = useRef<HTMLDivElement>(null);
 
-  // Function to handle horizontal scroll
+
   const scrollLeft = () => {
     if (navRef.current) {
       navRef.current.scrollBy({ left: -300, behavior: "smooth" });

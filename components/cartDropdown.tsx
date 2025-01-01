@@ -21,16 +21,25 @@ const CartDropdown = () => {
     addToCart,
     ProductsCounter,
     totalProducts,
+    fetchCart
   } = useCartStore();
+
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
+
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickOutside = (event: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsOpen(false);
     }
   };
@@ -76,7 +85,11 @@ const CartDropdown = () => {
         <div className="absolute left-1 mt-2 w-[400px] origin-top-right bg-white border border-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {cart.length == 0 ? (
             <div className="h-64 w-full flex flex-col justify-center items-center ">
-              <img src="/static_emptyBasket.webp" alt="emptyCart" className="size-40" />
+              <img
+                src="/static_emptyBasket.webp"
+                alt="emptyCart"
+                className="size-40"
+              />
               <h2 className="font-semibold mt-1">سبد خرید شما خالی است</h2>
               <h2 className="text-gray-600 text-sm mb-6">
                 میتوانید برای انتخاب محصول به صفحه محصولات برگردید

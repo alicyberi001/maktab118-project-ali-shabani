@@ -27,6 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useUserStore from "@/lib/zustand/users.store";
+// import { Calendar, DatePicker } from 'react-persian-datepicker';
 
 const customerSchema = z.object({
   firstName: z.string().min(3, "نام الزامی است."),

@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import { redirect, useParams } from "next/navigation";
+import { useEffect } from "react";
 
 const ProductPage: React.FC = () => {
   const {
@@ -31,8 +32,12 @@ const ProductPage: React.FC = () => {
     totalAmount,
     addToCart,
     totalProducts,
+    fetchCart
   } = useCartStore();
-  console.log(cart);
+
+   useEffect(() => {
+      fetchCart();
+    }, [fetchCart]);
 
   const { users } = useUserStore();
 
@@ -154,7 +159,7 @@ const ProductPage: React.FC = () => {
           </div>
           <button
             onClick={handleRedirect}
-            disabled={cart.length == 0 || users.length == 0}
+            // disabled={cart.length == 0 || users.length == 0}
             className={`w-full h-14 bg-[#202A30] text-white rounded-lg ${
               cart.length == 0 || users.length == 0
                 ? "bg-[#a8a8a9]"
