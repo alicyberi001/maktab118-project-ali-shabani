@@ -37,7 +37,6 @@ const AdminLoginForm = () => {
       const authRes = await auth_admin_login({ username, password });
       const { accessToken, refreshToken } = authRes.token;
       setSessionToken(accessToken, refreshToken);
-      mergeGuestCart();
       addUser({
         _id: authRes.data.user._id,
         firstname: authRes.data.user.firstname,
@@ -47,6 +46,7 @@ const AdminLoginForm = () => {
         address: authRes.data.user.address,
         role: authRes.data.user.role,
       });
+      await mergeGuestCart();
       toast.success("وارد شدید");
       setTimeout(() => {
         redirect("/");
