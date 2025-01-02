@@ -147,10 +147,7 @@
 
 // export default useCartStore;
 
-
-
-
-
+"use client";
 
 import { create } from "zustand";
 import useUserStore from "./users.store";
@@ -181,44 +178,68 @@ const useCartStore = create<CartState>((set, get) => ({
 
   fetchCart: async () => {
     const user = useUserStore.getState().users[0]; // فرض می‌کنیم کاربر لاگین شده اولین کاربر است
-    if (!user) return;
+    const headers = user ? { "x-user-id": user._id } : undefined;
 
-    const res = await fetch("/api/cart", {
-      headers: { "x-user-id": user._id },
-    });
+    const res = await fetch("/api/cart", { headers });
     const data: Product[] = await res.json();
     set({ cart: data });
   },
 
   addToCart: async (product) => {
     const user = useUserStore.getState().users[0];
+    
+    // تعریف نوع برای headers به صورت Record<string, string>
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    
+    // افزودن هدر در صورت وجود یوزر
+    if (user) {
+      headers["x-user-id"] = user._id;
+    }
+  
     await fetch("/api/cart", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-user-id": user?._id || "" },
+      headers,
       body: JSON.stringify(product),
     });
+  
     get().fetchCart();
   },
+  
 
   decreaseQuantity: async (id) => {
     const user = useUserStore.getState().users[0];
+  
+    // تعریف headers با نوع Record<string, string>
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+  
+    // افزودن هدر `x-user-id` در صورت وجود کاربر
+    if (user) {
+      headers["x-user-id"] = user._id;
+    }
+  
+    // پیدا کردن محصول مورد نظر
     const product = get().cart.find((item) => item._id === id);
     if (product) {
       const newQuantity = product.quantity - 1;
+  
       await fetch("/api/cart", {
         method: "PUT",
-        headers: { "Content-Type": "application/json", "x-user-id": user?._id || "" },
+        headers,
         body: JSON.stringify({ id, quantity: newQuantity }),
       });
+  
       get().fetchCart();
     }
   },
+  
 
   clearCart: async () => {
     const user = useUserStore.getState().users[0];
+    const headers = user ? { "x-user-id": user._id } : undefined;
+
     await fetch("/api/cart", {
       method: "DELETE",
-      headers: { "x-user-id": user?._id || "" },
+      headers,
     });
     set({ cart: [] });
   },
@@ -236,6 +257,7 @@ const useCartStore = create<CartState>((set, get) => ({
         body: JSON.stringify(product),
       });
     }
+
     get().fetchCart();
   },
 
