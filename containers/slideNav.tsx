@@ -1,11 +1,7 @@
 "use client";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import {
-  // fetchProductsByCategory,
-  fetchProductsList,
-} from "@/api/product.service";
-import ProductCard from "@/components/productCard";
+import { fetchProductsList } from "@/api/product.service";
 import { useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
 import ProductCard2 from "@/components/productCard2";
@@ -21,9 +17,7 @@ const SlideNav = () => {
       }),
   });
 
-
   const navRef = useRef<HTMLDivElement>(null);
-
 
   const scrollLeft = () => {
     if (navRef.current) {
@@ -54,11 +48,12 @@ const SlideNav = () => {
       >
         {data?.data.products.map((product, index) => (
           <ProductCard2
-            key={index}
+            key={product._id}
             image={`http://localhost:8000/images/products/images/${product.images[0]}`}
             title={product.name}
             price={product.price}
             description={product.description}
+            id={product._id}
           />
         ))}
       </nav>

@@ -7,16 +7,16 @@ export interface IOrdersRes {
   data: { Orders: IOrders[] };
 }
 
+interface ITest {
+  product: boolean;
+  count: number;
+  _id: string;
+}
+
 export interface IOrders {
   _id: string;
   user: string;
-  products: [
-    {
-      product: string;
-      count: number;
-      _id: string;
-    }
-  ];
+  products: ITest[];
   totalPrice: number;
   deliveryDate: string;
   deliveryStatus: boolean;
@@ -50,13 +50,43 @@ export interface ICreateOrdersRes {
   };
 }
 
+interface product {
+  product: string;
+  count: number;
+}
+
 export interface ICReateOrderBody {
   user: string;
-  products: [
-    {
-      product: string;
-      count: number;
-    }
-  ];
+  products: product[];
   deliveryStatus: boolean;
+}
+
+
+
+export interface IGetOrderRes {
+  status: string;
+  data: {
+    order: {
+      _id: string;
+      user: {
+        _id: string;
+        firstname: string;
+        lastname: string;
+        username: string;
+        phoneNumber: number;
+        address: string;
+        role: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+      };
+      products: ITest[];
+      totalPrice: number;
+      deliveryDate: string;
+      deliveryStatus: boolean;
+      createdAt: string;
+      updatedAt: string;
+      __v: number;
+    };
+  };
 }

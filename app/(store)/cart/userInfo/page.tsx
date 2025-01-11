@@ -27,14 +27,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useUserStore from "@/lib/zustand/users.store";
-// import { Calendar, DatePicker } from 'react-persian-datepicker';
+
+
 
 const customerSchema = z.object({
   firstName: z.string().min(3, "نام الزامی است."),
   lastName: z.string().min(3, "نام خانوادگی الزامی است."),
-  phoneNumber: z
-    .string()
-    .regex(/^09\d{9}$/, "شماره همراه باید با فرمت صحیح باشد."),
+  phoneNumber: z.any(),
   address: z.string().min(3, "آدرس الزامی است."),
   deliveryDate: z.date({ required_error: "تاریخ تحویل الزامی است." }),
 });
@@ -51,7 +50,7 @@ const UserInfo: React.FC = () => {
     totalProducts,
   } = useCartStore();
 
-  const {users} = useUserStore()
+  const { users } = useUserStore();
 
   useEffect(() => {
     if (users.length == 0) {
@@ -69,7 +68,7 @@ const UserInfo: React.FC = () => {
   });
 
   const onSubmit = (data: CustomerFormValues) => {
-    console.log("Submitted Data:", data);
+    redirect("/payment")
   };
 
   return (
@@ -86,11 +85,14 @@ const UserInfo: React.FC = () => {
         <section className="h-96 w-full bg-white border border-gray-300 rounded-xl shadow flex flex-col gap-4 justify-center items-center">
           <div className="w-full flex gap-10 justify-center">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-800">
+              <label
+                htmlFor="firstName"
+                className="block text-sm font-medium text-gray-800"
+              >
                 نام
               </label>
               <input
-              defaultValue={users[0]?.firstname}
+                defaultValue={users[0]?.firstname}
                 type="text"
                 id="firstName"
                 {...register("firstName")}
@@ -104,11 +106,14 @@ const UserInfo: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-800">
+              <label
+                htmlFor="lastName"
+                className="block text-sm font-medium text-gray-800"
+              >
                 نام خانوادگی
               </label>
               <input
-              defaultValue={users[0]?.lastname}
+                defaultValue={users[0]?.lastname}
                 type="text"
                 id="lastName"
                 {...register("lastName")}
@@ -131,9 +136,9 @@ const UserInfo: React.FC = () => {
                 شماره همراه
               </label>
               <input
-              readOnly
-              disabled
-              defaultValue={users[0]?.phoneNumber}
+                readOnly
+                disabled
+                defaultValue={users[0]?.phoneNumber}
                 type="text"
                 id="phoneNumber"
                 {...register("phoneNumber")}
@@ -141,7 +146,7 @@ const UserInfo: React.FC = () => {
               />
               {errors.phoneNumber && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.phoneNumber.message}
+                  {/* {errors.phoneNumber.message} */}
                 </p>
               )}
             </div>
@@ -176,11 +181,14 @@ const UserInfo: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-800">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-800"
+            >
               آدرس
             </label>
             <textarea
-            defaultValue={users[0]?.address}
+              defaultValue={users[0]?.address}
               id="address"
               {...register("address")}
               className="mt-1 block w-80 border border-gray-300 shadow rounded-xl  px-3 py-2 focus:outline-none focus:ring-0 focus:border-sky-500 transition-colors delay-150 duration-300 ease-in-out"

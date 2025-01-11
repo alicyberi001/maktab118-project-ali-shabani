@@ -19,7 +19,7 @@ const NavbarItems = () => {
         <div className="flex">
           <Link
             href={"/login"}
-            className="flex gap-1 items-center border border-gray-600 px-3 py-2 text-sm rounded-md font-semibold hover:text-white hover:bg-slate-900 ml-4"
+            className="flex gap-1 items-center border border-gray-600 px-3 py-2 text-sm rounded-md hover:text-white hover:bg-slate-900 hover:border-gray-900 ml-4"
           >
             <ArrowRightStartOnRectangleIcon className="size-6" />
             <span>ورود | ثبت نام</span>

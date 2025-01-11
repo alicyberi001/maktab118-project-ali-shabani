@@ -25,16 +25,19 @@ import Testi from "@/components/swiper_test";
 
 const slides = [
   {
+    id: "831",
     image: "./Apple-Watch-Series-10.webp",
     caption: "اپل واچ های سری ۱۰",
     caption2: "کاوش در اعماق اقیانوس ها",
   },
   {
+    id: "832",
     image: "./iPhone-16-colors-all-the-official-shades.jpg",
     caption: "آیفون های سری۱۶",
     caption2: "بی رقیب و متمایز از رقبا",
   },
   {
+    id: "833",
     image:
       "./samsung-galaxy-s24-ultra-JW-AP-cameras-bokeh-IMG_20240115_145323.webp",
     caption: "سامسونگ اس۲۴ اولترا",
@@ -44,47 +47,14 @@ const slides = [
 
 export default function Home() {
   return (
-    <div className="bg-[#f8f8f8]">
+    <div className="bg-[#f8f8f8] container">
       <div className="">
         <Navbar />
         <ImageSlider slides={slides} />
-        {/* <Testi /> */}
         <Categories />
         <SlideNav />
         <InfoCards />
         <MainPoster2 />
-        {/* <div className="flex justify-center gap-10 text-gray-900 my-10">
-          <div className="flex flex-col items-center gap-3">
-            <img
-              src="/asus lap.webp"
-              alt="asusLap"
-              className="w-56 aspect-square rounded-3xl mobile:w-16"
-            />
-            <span className="font-semibold text-lg mobile:text-sm">
-              لپ تاپ ایسوس
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <img
-              src="/apple lap.webp"
-              alt="appleLap"
-              className="w-56 aspect-square rounded-3xl mobile:w-16"
-            />
-            <span className="font-semibold text-lg mobile:text-sm">
-              لپ تاپ اپل
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <img
-              src="/lenovo lap.webp"
-              alt="lenovoLap"
-              className="w-56 aspect-square rounded-3xl mobile:w-16"
-            />
-            <span className="font-semibold text-lg mobile:text-sm">
-              لپ تاپ لنوو
-            </span>
-          </div>
-        </div> */}
         <Footer />
       </div>
     </div>

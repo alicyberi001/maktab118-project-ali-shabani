@@ -59,7 +59,7 @@ function ProductPage() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
-      <CreateModalForm />
+      {/* <CreateModalForm /> */}
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>
@@ -107,9 +107,7 @@ function ProductPage() {
                     >
                       حذف
                     </button>
-
-                    {/* <EditModal {...el}/>| */}
-                    <FormModal {...el} />
+                    {/* <FormModal {...el} /> */}
                   </div>
                 </td>
               </tr>

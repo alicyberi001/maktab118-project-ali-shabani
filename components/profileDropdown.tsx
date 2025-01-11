@@ -12,11 +12,13 @@ import { Transition } from "@headlessui/react";
 import useUserStore from "@/lib/zustand/users.store";
 import { logout } from "@/api/auth.service";
 import toast from "react-hot-toast";
+import useCartStore from "@/lib/zustand/cart.store";
 
 const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { users, removeUser } = useUserStore();
+  const { fetchCart } = useCartStore();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -34,6 +36,7 @@ const ProfileDropdown = () => {
   const handleLogout = (id: string) => {
     logout();
     removeUser(id);
+    fetchCart()
     toast.success("خروج موفقیت آمیز بود");
   };
 

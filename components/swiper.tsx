@@ -1,14 +1,14 @@
 "use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, Scrollbar } from "swiper/modules";
-import { log } from "console";
 
 interface Slide {
+  id: string;
   image: string;
   caption: string;
   caption2: string;
@@ -33,7 +33,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
         className=""
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="relative">
+          <SwiperSlide key={slide.id} className="relative">
             <div className="relative">
               <div className="w-full bg-gradient-to-l from-slate-950/80 from-25% to-transparent to-85% h-full absolute right-0"></div>
               <img
@@ -42,7 +42,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
                 className="w-full object-cover h-[500px] mobile:h-[270px]"
               />
 
-              <div className="absolute bottom-12 right-3   flex items-center justify-end">
+              <div className="absolute bottom-12 right-3 flex items-center justify-end">
                 <div
                   dir="rtl"
                   className="flex flex-col items-start pr-16 gap-5 mobile:gap-2 mobile:pr-5"
@@ -58,7 +58,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
                       خرید
                     </button>
                   </div>
-                  <a href="#" className="px-6 text-white mobile:text-[10px]">اطلاعات بیشتر</a>
+                  <a href="#" className="px-6 text-white mobile:text-[10px]">
+                    اطلاعات بیشتر
+                  </a>
                 </div>
               </div>
             </div>
@@ -68,7 +70,5 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
     </div>
   );
 };
-
-  
 
 export default ImageSlider;

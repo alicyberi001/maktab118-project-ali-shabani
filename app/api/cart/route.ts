@@ -57,22 +57,21 @@ interface UserCart {
 }
 
 let carts: UserCart[] = [];
-let guestCart: CartItem[] = []; // سبد خرید مهمان
+let guestCart: CartItem[] = []; 
 
 export async function GET(req: Request) {
-  const userId = req.headers.get("x-user-id");
+  const userId = req.headers.get("user-id");
 
   if (userId) {
     const userCart = carts.find((cart) => cart.userId === userId);
     return NextResponse.json(userCart ? userCart.cart : []);
   }
 
-  // اگر یوزری وجود نداشت، سبد خرید مهمان را برگرداند
   return NextResponse.json(guestCart);
 }
 
 export async function POST(req: Request) {
-  const userId = req.headers.get("x-user-id");
+  const userId = req.headers.get("user-id");
   const cartItem: CartItem = await req.json();
 
   if (userId) {
@@ -92,7 +91,6 @@ export async function POST(req: Request) {
     return NextResponse.json(userCart.cart);
   }
 
-  // مدیریت سبد خرید مهمان
   const existingGuestItem = guestCart.find((item) => item._id === cartItem._id);
   if (existingGuestItem) {
     existingGuestItem.quantity += cartItem.quantity || 1;
@@ -104,7 +102,7 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  const userId = req.headers.get("x-user-id");
+  const userId = req.headers.get("user-id");
   const { id, quantity }: { id: string; quantity: number } = await req.json();
 
   if (userId) {
@@ -118,7 +116,6 @@ export async function PUT(req: Request) {
     return NextResponse.json(userCart?.cart || []);
   }
 
-  // مدیریت سبد خرید مهمان
   guestCart = guestCart
     .map((item) => (item._id === id ? { ...item, quantity } : item))
     .filter((item) => item.quantity > 0);
@@ -127,7 +124,7 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const userId = req.headers.get("x-user-id");
+  const userId = req.headers.get("user-id");
 
   if (userId) {
     const userCart = carts.find((cart) => cart.userId === userId);
@@ -138,7 +135,6 @@ export async function DELETE(req: Request) {
     return NextResponse.json([]);
   }
 
-  // پاک کردن سبد خرید مهمان
   guestCart = [];
   return NextResponse.json([]);
 }

@@ -20,6 +20,7 @@ export const urls = {
     getAll: "/orders",
     create: "/orders",
     edit: (id: string) => `/orders/${id}`,
+    getByID: (id: string) => `/orders/${id}`,
   },
   users: {
     getAll: "/users",

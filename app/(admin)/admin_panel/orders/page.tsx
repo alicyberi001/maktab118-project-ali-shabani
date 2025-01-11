@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import useUserStore from "@/lib/zustand/users.store";
 import { Router } from "next/router";
 import { redirect, useRouter } from "next/navigation";
+import { CheckOrderModal } from "@/components/orderCheck.modal";
 
 const Orders: React.FC = () => {
   const router = useRouter();
@@ -102,7 +103,7 @@ const Orders: React.FC = () => {
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11 mobile:-top-24">
         مدیریت سفارش ها
       </span>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-x-auto rounded-b-2xl shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -123,7 +124,7 @@ const Orders: React.FC = () => {
           <tbody>
             {filteredOrders?.map((el, index) => (
               <tr
-                key={index}
+                key={el._id}
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
                 <th
@@ -136,12 +137,7 @@ const Orders: React.FC = () => {
                 <td className="px-6 py-4">{el.totalPrice}</td>
                 <td className="px-6 py-4">{formattedDate(el.deliveryDate)}</td>
                 <td className="px-6 py-4">
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    بررسی سفارش
-                  </a>
+                  <CheckOrderModal orderID = {el._id}/>
                 </td>
               </tr>
             ))}

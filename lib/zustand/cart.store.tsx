@@ -78,7 +78,6 @@
 
 // export default useCartStore;
 
-
 import { create } from "zustand";
 import useUserStore from "./users.store";
 
@@ -106,23 +105,23 @@ export interface CartState {
 const useCartStore = create<CartState>((set, get) => ({
   cart: [],
 
-  // بارگذاری سبد خرید
   fetchCart: async () => {
     const user = useUserStore.getState().users[0];
-    const headers = user ? { "x-user-id": user._id } : undefined;
+    const headers = user ? { "user-id": user._id } : undefined;
 
     const res = await fetch("/api/cart", { headers });
     const data: Product[] = await res.json();
     set({ cart: data });
   },
 
-  // افزودن محصول به سبد خرید
   addToCart: async (product) => {
     const user = useUserStore.getState().users[0];
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
 
     if (user) {
-      headers["x-user-id"] = user._id;
+      headers["user-id"] = user._id;
       await fetch("/api/cart", {
         method: "POST",
         headers,
@@ -130,11 +129,13 @@ const useCartStore = create<CartState>((set, get) => ({
       });
       get().fetchCart();
     } else {
-      // ذخیره محصول در سبد خرید مهمان
+
       const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
-      const existingProduct = guestCart.find((item: Product) => item._id === product._id);
+      const existingProduct = guestCart.find(
+        (item: Product) => item._id === product._id
+      );
       if (existingProduct) {
-        existingProduct.quantity += product.quantity || 1;
+        existingProduct.quantity++;
       } else {
         guestCart.push({ ...product, quantity: product.quantity || 1 });
       }
@@ -143,13 +144,15 @@ const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  // کاهش تعداد محصول
+
   decreaseQuantity: async (id) => {
     const user = useUserStore.getState().users[0];
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
 
     if (user) {
-      headers["x-user-id"] = user._id;
+      headers["user-id"] = user._id;
       const product = get().cart.find((item) => item._id === id);
       if (product) {
         const newQuantity = product.quantity - 1;
@@ -172,11 +175,11 @@ const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  // پاک کردن سبد خرید
+
   clearCart: async () => {
     const user = useUserStore.getState().users[0];
     if (user) {
-      const headers = { "x-user-id": user._id };
+      const headers = { "user-id": user._id };
       await fetch("/api/cart", {
         method: "DELETE",
         headers,
@@ -188,7 +191,7 @@ const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  // ادغام سبد خرید مهمان با یوزر
+
   mergeGuestCart: async () => {
     const user = useUserStore.getState().users[0];
     if (!user) return;
@@ -200,14 +203,14 @@ const useCartStore = create<CartState>((set, get) => ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-user-id": user._id,
+          "user-id": user._id,
         },
         body: JSON.stringify(product),
       });
     }
 
-    localStorage.removeItem("guestCart"); // پاک کردن سبد خرید مهمان
-    get().fetchCart(); // بارگذاری سبد خرید یوزر
+    localStorage.removeItem("guestCart"); 
+    get().fetchCart();
   },
 
   totalAmount: () =>

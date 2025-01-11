@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 
+
 interface ProductCardProps {
   id?: string;
   image: string;
@@ -18,7 +19,7 @@ const ProductCard2: React.FC<ProductCardProps> = ({
   id,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const offer = price * 0.7;
+  const offer = Math.ceil(price * 0.7);
 
   return (
     <a

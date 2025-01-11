@@ -1,6 +1,7 @@
 import {
   ICReateOrderBody,
   ICreateOrdersRes,
+  IGetOrderRes,
   IOrders,
 } from "@/types/orders.api";
 import { IGlobalRes } from "@/types/global";
@@ -25,5 +26,11 @@ type editOrdersType = (
 ) => Promise<ICreateOrdersRes>;
 export const editOrders: editOrdersType = async (id, body) => {
   const response = await client.patch(urls.orders.edit(id), body);
+  return response.data;
+};
+
+type getOrderByIDType = (id: string) => Promise<IGetOrderRes>;
+export const getOrderByID: getOrderByIDType = async (id) => {
+  const response = await client.get(urls.orders.getByID(id));
   return response.data;
 };
