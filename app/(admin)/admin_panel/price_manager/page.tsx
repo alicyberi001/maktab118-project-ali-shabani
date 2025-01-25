@@ -5,7 +5,7 @@ import { fetchProductsList } from "@/api/product.service";
 import { urls } from "@/api/urls";
 import useUserStore from "@/lib/zustand/users.store";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IEditProductData {
@@ -37,7 +37,17 @@ function PriceManage() {
       redirect("/");
     }
   }, []);
-  const queryClient = useQueryClient(); 
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     if (users.every((el) => el.role === "USER") || users.length === 0) {
+  //       console.log("Window:", typeof window !== "undefined");
+  //       console.log("Users:", users);
+  //       redirect("/");
+  //     }
+  //   }
+  // }, []);
+  const queryClient = useQueryClient();
   const [editableCells, setEditableCells] = useState<{
     [id: string]: IEditProductData;
   }>({});
@@ -74,7 +84,7 @@ function PriceManage() {
       ...prev,
       [id]: {
         ...prev[id],
-        [field]: prev[id]?.[field] || initialValue, 
+        [field]: prev[id]?.[field] || initialValue,
       },
     }));
   };
@@ -98,8 +108,6 @@ function PriceManage() {
   };
 
   const pagination = generatePagination(page, totalPages);
-
-  
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">

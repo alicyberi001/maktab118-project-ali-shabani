@@ -7,6 +7,7 @@ import {
 import { urls } from "./urls";
 import { client } from "./client";
 import { removeSessionToken } from "@/lib/session_manager";
+import Cookies from "js-cookie";
 import useUserStore from "@/lib/zustand/users.store";
 
 
@@ -63,7 +64,7 @@ export const generateToken: auth_token = async (refreshToken) => {
 };
 
 export const logout = async () => {
-  const token = sessionStorage.getItem("accessToken");
+  const token = Cookies.get("accessToken");
   const response = await client.get(urls.auth.logout, {
     headers: {
       Authorization: `Bearer ${token}`,

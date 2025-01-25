@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
-import { getSessionToken, removeSessionToken, setSessionToken } from "./session_manager";
-import { redirect } from "next/navigation"; 
+import { getSessionToken, setSessionToken } from "./session_manager";
 import { generateToken } from "@/api/auth.service";
 
 

@@ -1,13 +1,12 @@
 "use client";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { auth_admin_login } from "@/api/auth.service";
-import { IAuth_admin_login, IAuth_admin_login_Res } from "@/types/auth.api";
+import { IAuth_admin_login } from "@/types/auth.api";
 import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { AxiosError } from "axios";
 import { setSessionToken } from "@/lib/session_manager";
 import useUserStore from "@/lib/zustand/users.store";
 
@@ -20,7 +19,7 @@ const validationSchema = z.object({
 type FormValues = z.infer<typeof validationSchema>;
 
 const AdminLoginForm = () => {
-  const { addUser, removeUser } = useUserStore();
+  const { addUser } = useUserStore();
   const {
     register,
     handleSubmit,

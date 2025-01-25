@@ -1,23 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   ChartBarSquareIcon,
-  Cog6ToothIcon,
   FolderIcon,
-  GlobeAltIcon,
-  ServerIcon,
-  SignalIcon,
   XMarkIcon,
   ArrowLeftStartOnRectangleIcon,
   FunnelIcon,
 } from "@heroicons/react/24/outline";
 import {
   Bars3Icon,
-  ChevronRightIcon,
-  ChevronUpDownIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
 

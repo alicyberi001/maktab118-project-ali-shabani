@@ -1,11 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { fetchProductsList, fetchSubcategories } from "@/api/product.service";
+import { fetchProductsList } from "@/api/product.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/productCard";
-import { useParams } from "next/navigation";
-import FilterComponent from "@/containers/collapse";
 import FilterComponent2 from "@/containers/collapse2";
 
 function AllProductPage() {
@@ -42,10 +41,10 @@ function AllProductPage() {
       }),
   });
 
-  const categoriesData = useQuery({
-    queryKey: ["categories"],
-    queryFn: () => fetchSubcategories(),
-  });
+  // const categoriesData = useQuery({
+  //   queryKey: ["categories"],
+  //   queryFn: () => fetchSubcategories(),
+  // });
 
   // const subcategoriesArray = categoriesData.data?.data.subcategories.filter(
   //   (el) => el.category == categoryID

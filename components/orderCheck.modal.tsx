@@ -1,11 +1,9 @@
 "use client";
 
-import { IEditProductRes, IProduct, IProductById } from "@/types/product.api";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,

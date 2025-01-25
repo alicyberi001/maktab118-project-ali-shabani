@@ -4,9 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { redirect } from "next/navigation";
 import { auth_user_signup } from "@/api/auth.service";
-import { IAuth_user_signup } from "@/types/auth.api";
 import { setSessionToken } from "@/lib/session_manager";
 import useUserStore from "@/lib/zustand/users.store";
 

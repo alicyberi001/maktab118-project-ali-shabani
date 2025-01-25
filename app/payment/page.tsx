@@ -1,30 +1,8 @@
 "use client";
 
-import { fetchProductById } from "@/api/product.service";
-import LoginForm from "@/components/loginForm";
-import useCartStore, { Product } from "@/lib/zustand/cart.store";
-import {
-  ShieldCheckIcon,
-  ChevronLeftIcon,
-  PlusIcon,
-  BuildingStorefrontIcon,
-  InboxStackIcon,
-  Cog6ToothIcon,
-  CheckBadgeIcon,
-  HeartIcon,
-  BellAlertIcon,
-  ScaleIcon,
-  ChatBubbleBottomCenterTextIcon,
-  ShareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
-import { useQuery } from "@tanstack/react-query";
-import { redirect, useParams } from "next/navigation";
+import useCartStore from "@/lib/zustand/cart.store";
+import { redirect } from "next/navigation";
 import React, { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useUserStore from "@/lib/zustand/users.store";
 import { createOrders } from "@/api/orders.service";
@@ -33,11 +11,7 @@ import toast from "react-hot-toast";
 const UserInfo: React.FC = () => {
   const {
     cart,
-    decreaseQuantity,
     clearCart,
-    totalAmount,
-    addToCart,
-    totalProducts,
     fetchCart,
   } = useCartStore();
 
@@ -60,7 +34,7 @@ const UserInfo: React.FC = () => {
       };
       console.log(body);
 
-      const res = await createOrders({
+        await createOrders({
         user: body.user,
         products: body.products,
         deliveryStatus: body.deliveryStatus,

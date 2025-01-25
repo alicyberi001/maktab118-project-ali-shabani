@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCartIcon, UserIcon } from "@heroicons/react/24/solid";
+import { UserIcon } from "@heroicons/react/24/solid";
 import {
   UserCircleIcon,
   WalletIcon,

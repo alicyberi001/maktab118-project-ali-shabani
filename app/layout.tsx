@@ -1,10 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { Toaster } from "react-hot-toast";
-import { Poppins } from "next/font/google";
 import { TanstackProvider } from "@/providers/tanstak.provider";
 
 export const metadata: Metadata = {

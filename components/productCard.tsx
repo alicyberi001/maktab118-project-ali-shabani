@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { CubeIcon } from "@heroicons/react/24/outline";

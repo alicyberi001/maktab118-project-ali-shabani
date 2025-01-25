@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import "swiper/css";
@@ -5,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, Scrollbar } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 interface Slide {
   id: string;

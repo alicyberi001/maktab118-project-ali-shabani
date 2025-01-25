@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use server";
 
 import NavbarItems from "./navbarItems";

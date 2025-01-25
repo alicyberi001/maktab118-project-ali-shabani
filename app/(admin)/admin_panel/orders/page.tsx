@@ -1,17 +1,15 @@
 "use client";
 
-import { fetchUserByIdList, fetchUsersList } from "@/api/users.service";
+import { fetchUserByIdList } from "@/api/users.service";
 import { fetchOrdersList } from "@/api/orders.service";
 import { useQuery } from "@tanstack/react-query";
 import { toJalaali } from "jalaali-js";
 import { useEffect, useState } from "react";
 import useUserStore from "@/lib/zustand/users.store";
-import { Router } from "next/router";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { CheckOrderModal } from "@/components/orderCheck.modal";
 
 const Orders: React.FC = () => {
-  const router = useRouter();
   const [filter, setFilter] = useState("all");
   const { users } = useUserStore();
 
@@ -20,6 +18,14 @@ const Orders: React.FC = () => {
       redirect("/");
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //   if (users.every((el) => el.role === "USER") || users.length === 0) {
+  //   redirect("/");
+  //   }
+  //   }
+  //   }, []);
 
   const {
     data: ordersData,
@@ -38,7 +44,6 @@ const Orders: React.FC = () => {
       const userPromises = userIds.map((id) => fetchUserByIdList(id));
       console.log(userPromises);
       const users = await Promise.all(userPromises);
-      // console.log(users)
       return users;
     },
     enabled: userIds.length > 0,
@@ -122,7 +127,7 @@ const Orders: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredOrders?.map((el, index) => (
+            {filteredOrders?.map((el) => (
               <tr
                 key={el._id}
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"

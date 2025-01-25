@@ -1,6 +1,6 @@
 "use client";
 
-import { IEditProductRes, IProduct, IProductById } from "@/types/product.api";
+import { IProduct } from "@/types/product.api";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,12 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -35,7 +33,6 @@ type ProductFormValues = z.infer<typeof productSchema>;
 export function EditModal(data: IProduct) {
   const {
     handleSubmit,
-    control,
     register,
     formState: { errors },
   } = useForm<ProductFormValues>({

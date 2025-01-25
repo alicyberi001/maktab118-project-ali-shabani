@@ -2,6 +2,7 @@ import { IEditProductRes, IProduct, IProductById } from "@/types/product.api";
 import { IGlobalRes } from "@/types/global";
 import { client } from "./client";
 import { urls } from "./urls";
+import Cookies from "js-cookie";
 
 interface IParams {
   page?: number;
@@ -96,7 +97,7 @@ export const EditProducts2 = async (id: string, data: IAddProduct2) => {
   }
 };
 
-const token = sessionStorage.getItem("accessToken");
+const token = Cookies.get("accessToken");
 
 export const createProducts = async (data: IAddProduct) => {
   try {

@@ -1,22 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import {
   deleteProductById,
-  EditProducts2,
   fetchProductsList,
 } from "@/api/product.service";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { EditModal } from "@/components/editProduct.modal";
+// import { EditModal } from "@/components/editProduct.modal";
 import FormModal from "@/components/edit.modal";
 import CreateModalForm from "@/components/createProduct.modal";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import useUserStore from "@/lib/zustand/users.store";
 
 function ProductPage() {
   const [page, setPage] = useState(1);
-  const [editModalOpen, seteditModalOpen] = useState(false);
+  // const [editModalOpen, seteditModalOpen] = useState(false);
   const limit = 6;
   const { users } = useUserStore();
 
@@ -26,6 +26,13 @@ function ProductPage() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //   if (users.every((el) => el.role === "USER") || users.length === 0) {
+  //   redirect("/");
+  //   }
+  //   }
+  //   }, []);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", page],
@@ -50,7 +57,7 @@ function ProductPage() {
 
   async function handleDeleteProduct(id: string) {
     try {
-      const response = await deleteProductById(id);
+      await deleteProductById(id);
       toast.success("کاربر با موفقیت حذف شد");
     } catch (error) {
       toast.error("درخواست انجام نشد!");
@@ -59,7 +66,7 @@ function ProductPage() {
 
   return (
     <div className="w-2/3 bg-slate-600 h-96 mr-96 rounded-3xl relative mobile:mx-auto mobile:mt-36">
-      {/* <CreateModalForm /> */}
+      <CreateModalForm />
       <span className="text-[#202A30] text-2xl font-semibold absolute -top-11">
         مدیریت کالاها
       </span>
@@ -82,7 +89,7 @@ function ProductPage() {
             </tr>
           </thead>
           <tbody>
-            {data?.data.products.map((el, index) => (
+            {data?.data.products.map((el) => (
               <tr
                 key={el._id}
                 className=" odd:bg-gray-900  even:bg-gray-800 border-b border-gray-700"
@@ -107,7 +114,7 @@ function ProductPage() {
                     >
                       حذف
                     </button>
-                    {/* <FormModal {...el} /> */}
+                    <FormModal {...el} />
                   </div>
                 </td>
               </tr>

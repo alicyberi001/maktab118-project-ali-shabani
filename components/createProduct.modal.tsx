@@ -1,14 +1,10 @@
 import { z } from "zod";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { IProduct } from "@/types/product.api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { createProducts, EditProducts, IAddProduct } from "@/api/product.service";
-import { EditorText } from "./wysiwyg";
-import TemplateDemo from "./fileUploader";
-import Editor from "react-simple-wysiwyg";
+import { createProducts, IAddProduct } from "@/api/product.service";
 import { queryClient } from "@/providers/tanstak.provider";
 
 const productSchema = z.object({
@@ -52,7 +48,6 @@ const CreateModalForm = () => {
 
   const {
     handleSubmit,
-    control,
     register,
     watch,
     formState: { errors },

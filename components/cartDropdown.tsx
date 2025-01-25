@@ -1,15 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { ShoppingCartIcon, UserIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 import { useState, useEffect, useRef } from "react";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import useCartStore, { Product } from "@/lib/zustand/cart.store";
 import {
-  BuildingStorefrontIcon,
   CheckBadgeIcon,
-  InboxStackIcon,
 } from "@heroicons/react/24/outline";
 import { PlusIcon, TrashIcon } from "lucide-react";
 

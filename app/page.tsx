@@ -1,11 +1,5 @@
 // "use client"
 
-import SwiperComp from "@/components/swiper";
-import Image from "next/image";
-
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,14 +8,10 @@ import ImageSlider from "@/components/swiper";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SlideNav from "@/containers/slideNav";
-import { useQuery } from "@tanstack/react-query";
-// import { fetchProductsByCategory } from "@/api/product.service";
-import ProductCard from "@/components/productCard";
-import Link from "next/link";
 import Categories from "@/containers/mainCategories";
 import InfoCards from "@/containers/infoCart";
 import MainPoster2 from "@/containers/mainPoster2";
-import Testi from "@/components/swiper_test";
+
 
 const slides = [
   {

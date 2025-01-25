@@ -56,12 +56,12 @@ interface UserCart {
   cart: CartItem[];
 }
 
-let carts: UserCart[] = [];
+const carts: UserCart[] = [];
 let guestCart: CartItem[] = []; 
 
 export async function GET(req: Request) {
   const userId = req.headers.get("user-id");
-
+  
   if (userId) {
     const userCart = carts.find((cart) => cart.userId === userId);
     return NextResponse.json(userCart ? userCart.cart : []);

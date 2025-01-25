@@ -1,34 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { fetchProductById } from "@/api/product.service";
-import LoginForm from "@/components/loginForm";
 import useCartStore, { Product } from "@/lib/zustand/cart.store";
 import useUserStore from "@/lib/zustand/users.store";
 import {
-  ShieldCheckIcon,
-  ChevronLeftIcon,
   PlusIcon,
   BuildingStorefrontIcon,
   InboxStackIcon,
-  Cog6ToothIcon,
   CheckBadgeIcon,
-  HeartIcon,
-  BellAlertIcon,
-  ScaleIcon,
-  ChatBubbleBottomCenterTextIcon,
-  ShareIcon,
   TrashIcon,
   MinusIcon,
 } from "@heroicons/react/24/outline";
-import { useQuery } from "@tanstack/react-query";
-import { redirect, useParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 const ProductPage: React.FC = () => {
   const {
     cart,
     decreaseQuantity,
-    clearCart,
     totalAmount,
     addToCart,
     totalProducts,

@@ -2,8 +2,9 @@ import { IUsers, IUsersById } from "@/types/users.api";
 import { IGlobalRes } from "@/types/global";
 import { client } from "./client";
 import { urls } from "./urls";
+import Cookies from "js-cookie";
 
-const token = sessionStorage.getItem("accessToken");
+const token = Cookies.get("accessToken");
 
 type fetchUsersListType = () => Promise<IGlobalRes<{ users: IUsers[] }>>;
 export const fetchUsersList: fetchUsersListType = async () => {

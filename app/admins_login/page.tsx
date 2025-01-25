@@ -1,7 +1,7 @@
 "use server";
 
 import AdminLoginForm from "@/components/admins_loginForm";
-import LoginForm from "@/components/loginForm";
+
 
 const LoginPage: React.FC = () => {
   return (

@@ -1,9 +1,4 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 // import "./globals.css";
-import { Poppins } from "next/font/google";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import AdminLayout from "@/components/adminLayout";
 
 export default function ADMINLayout({
